@@ -8,9 +8,14 @@ import os
 
 import httpx
 import pytest
-from dotenv import load_dotenv
+from dotenv import dotenv_values
 
-load_dotenv()
+# Like load_dotenv(), but also fills variables that exist yet are EMPTY in the OS
+# environment (e.g. a blank ANTHROPIC_API_KEY in Windows user settings), which
+# load_dotenv() would skip. Non-empty OS values (CI secrets) still win.
+for _key, _value in dotenv_values().items():
+    if _value and not os.environ.get(_key):
+        os.environ[_key] = _value
 
 BASE = os.getenv("ONIX_BASE_URL", "https://openapi-test.onixwork.com")
 VERIFY_TLS = os.getenv("ONIX_VERIFY_TLS", "true").lower() != "false"
@@ -30,6 +35,13 @@ def get_onix_token(username: str | None = None, password: str | None = None) -> 
 @pytest.fixture(scope="session")
 def onix_token() -> str:
     return get_onix_token()
+
+
+@pytest.fixture(scope="session")
+def onix_anon_client():
+    """httpx client with base URL but no token, for login and auth-error tests."""
+    with httpx.Client(base_url=BASE, verify=VERIFY_TLS, timeout=30) as client:
+        yield client
 
 
 @pytest.fixture(scope="session")
