@@ -1,0 +1,11 @@
+# Prose and data are edited by hand; only code is formatted.
+**/*.md
+docs/
+data/
+assets/
+experiments/runs/
+notebooks/
+playwright-report/
+test-results/
+package-lock.json
+.venv/

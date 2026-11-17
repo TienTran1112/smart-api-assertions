@@ -71,6 +71,33 @@ validation messages, status explanations.
   `title: "Bad Request"` (no explanation text). Empty fields return 400 with
   `errors.Username` / `errors.Password` messages such as "The Username field is required."
   These validation messages are server-written text, the kind this project needs.
+- **Contract of `POST /v1/Account/token`, checked live on 2026-11-16.** Swagger documents only
+  the request (`AccountItemDto`: `username` max 100, `password` max 500, both required) and a
+  200 with no schema; every row below the first comes from live calls. **The 200 body depends
+  on `Accept`** (checked 2026-11-17): with `Accept: application/json` (what
+  `playwright.api.config.ts` sends) it is a JSON string `"eyJ…"` (294 chars with quotes); with
+  no `Accept`, `*/*` or `text/plain` it is a bare `text/plain` token (292 chars). `getToken()`
+  must not rely on the config default: send `Accept: application/json` on this call, or accept
+  both forms. The error responses do not change with `Accept`.
+
+  | Request | Status | Content type | Body |
+  |---|---|---|---|
+  | Valid account (the `.env` account works again) | 200 | `application/json` | A **JSON string** `"eyJ…"`: a JWT with claims `username`, `contactId`, `companyId`, `exp`, `iss`, `aud` (no `iat`) |
+  | Wrong password / unknown user | 400 | `application/problem+json` | `{ type, title: "Bad Request", status, traceId }` |
+  | Extra property (`additionalProperties: false`) | 400 | `application/problem+json` | Same as wrong password: no validation message |
+  | `{}`, `""` or `null` for both fields | 400 | `application/problem+json` | `{ type, title: "One or more validation errors occurred.", status, errors: { Password: [...], Username: [...] }, traceId }` |
+  | Username of 101 chars | 400 | `application/problem+json` | `errors.Username: ["The field Username must be a string with a maximum length of 100."]` |
+  | JSON content type, empty body | 400 | `application/problem+json` | `errors: { "": ["A non-empty request body is required."], data: ["The data field is required."] }` |
+  | Malformed JSON | 400 | `application/problem+json` | `errors["$.username"]` holds the JSON parser's message with `LineNumber` / `BytePositionInLine`: **internal detail in a user-facing message, a real FAIL case for a "no internal details" criterion** |
+  | Form content type | 415 | — | empty |
+  | `GET` | 405 | — | empty |
+
+  The short-lived token works as `Authorization: Bearer <token>` (document-types returns 200).
+  The same token with `Key` returns 401, as does no header; a 401 has **no body and no content
+  type**. `Key` needs the long-lived token issued in Onix Work settings (Swagger security
+  scheme `OnixToken`). The `errors` keys are not stable field names (`""`, `data`,
+  `$.username`), so a deterministic check should look for `Username` / `Password` only where
+  the case is a field validation.
 - The public API has a second error format: `GET v1/company/document-types?languageCode=2`
   returns 400 `application/json` with `{ memberNames: ["languageCode"], errorMessage: "2 invalid
   language" }`. This is also server-written text. The public API accepts
@@ -337,8 +364,8 @@ its own third state.
 | File | Replaces | Action |
 |---|---|---|
 | `package.json`, `tsconfig.json`, `playwright.unit.config.ts`, `playwright.api.config.ts`, `.prettierrc` | pytest settings in `pyproject.toml` | New. The api config sets `extraHTTPHeaders: { Accept: 'application/json' }` and `ignoreHTTPSErrors` from `runtimeConfig.verifyTls` |
-| `src/framework/api/request-handler.ts`, `request-handler.factory.ts`, `base-api.client.ts`, `api-result.ts` | `httpx` calls in `conftest.py` | New. `failOnStatusCode: false`, one `test.step` per request, reset after each call |
-| `src/framework/api/api-logger.ts`, `src/framework/fixtures/api-logger.fixture.ts` | new | New. Attaches redacted request/response logs to failed tests |
+| `src/framework/api/request-handler.ts`, `request-handler.factory.ts`, `base-api.client.ts`, `api-result.ts` | `httpx` calls in `conftest.py` | New. `failOnStatusCode: false`, one `test.step` per request, reset after each call. `body()` takes `unknown`: an object is sent as JSON, a `string` is sent as-is with the `Content-Type` the test sets, so negative tests can send malformed JSON or an empty JSON body (both give server-written messages, section 2). Parse the body with `JSON.parse` and fall back to text; an empty body (401, 405, 415) becomes `undefined` |
+| `src/framework/api/api-logger.ts`, `src/framework/fixtures/api-logger.fixture.ts` | new | New. Attaches redacted request/response logs to failed tests. Redact by key (`authorization`, `password`, `token`, …) **and** redact any string value that looks like a JWT (`xxx.yyy.zzz`, base64url). The login response is a bare JSON string with no key, so key-based redaction alone would put the token, and its `username` / `contactId` / `companyId` claims, into the report |
 | `src/framework/api/auth/api-authentication.ts`, `api-key-authentication.ts` | new | New (`Authorization: Key <apiKey>`) |
 | `src/framework/api/auth/bearer-token-authentication.ts` | the `Authorization: Bearer` header in `conftest.py` | New, same interface. Takes a token getter, so the token is fetched lazily |
 | `src/framework/config/environment/environment.loader.ts`, `environment-variable.ts`, `runtime.config.ts` | the `.env` loader in `conftest.py` | New: one `.env` file (only the Onix test environment). Keep the Python rule: also fill variables that exist but are **empty** in Windows (the blank `ANTHROPIC_API_KEY` problem). `runtimeConfig` exposes `onixWorkApiBaseUrl`, `verifyTls`, `judgeModel` |
@@ -348,10 +375,10 @@ its own third state.
 | File | Replaces | Action |
 |---|---|---|
 | `api/auth/onix-work-credentials.ts` | `os.environ["ONIX_USERNAME"]` | Reads `ONIX_WORK_USERNAME` / `ONIX_WORK_PASSWORD` with `requireEnvironmentVariable` |
-| `api/auth/onix-work-token.provider.ts` | `get_onix_token()` + session fixture `onix_token` | Calls `AccountPublicApiClient.getToken()` once and caches the token for the worker |
-| `api/public/clients/account/account-public-api.client.ts` | the login call in `conftest.py` | `getTokenResponse<T>(credentials)` (negative tests) and `getToken()` (setup; throws if not 200). The body is a bare `text/plain` token |
-| `api/public/models/account/token.request.ts`, `models/errors/*.response.ts` | new | `TokenRequest`; `ProblemDetailsResponse` (`title`, `status`); `ValidationProblemDetailsResponse` (+ `errors: Record<string, string[]>`); `ApiValidationErrorResponse` (`memberNames`, `errorMessage`) |
-| `api/public/onix-work-public-api.provider.ts` | fixtures `onix_client` / `onix_anon_client` | `anonymous()`, `withAccount()` (Bearer) and `withApiKey(company)` (only if the Onix owner gives a key). Each returns `{ clients }`, cached per identity |
+| `api/auth/onix-work-token.provider.ts` | `get_onix_token()` + session fixture `onix_token` | Calls `AccountPublicApiClient.getToken()` once and caches the token for the worker. Read `exp` from the JWT and fetch a new token when less than 5 minutes are left (Swagger says 60 minutes; the token has no `iat`, so do not assume it) |
+| `api/public/clients/account/account-public-api.client.ts` | the login call in `conftest.py` | `getTokenResponse<T>(request: TokenRequest \| string)` (negative tests; a string is sent raw for the malformed-JSON case) and `getToken()` (setup; throws if not 200). getToken() sets `Accept: application/json` itself, so the 200 body is a JSON **string** and the request handler's `JSON.parse` returns the token as `string` (without that header the server sends bare `text/plain`, section 2); `getToken()` checks it is a non-empty string with 3 JWT parts |
+| `api/public/models/account/token.request.ts`, `models/errors/*.response.ts` | new | `TokenRequest` (`username`, `password`); `ProblemDetailsResponse` (`type`, `title`, `status`, `traceId`); `ValidationProblemDetailsResponse` (+ `errors: Record<string, string[]>`); `ApiValidationErrorResponse` (`memberNames`, `errorMessage`, the other error format). Exact-shape checks use `traceId: expect.any(String)` |
+| `api/public/onix-work-public-api.provider.ts` | fixtures `onix_client` / `onix_anon_client` | `anonymous()`, `withAccount()` (Bearer, short-lived token from login) and `withApiKey()` (`Key`, only with a long-lived token from Onix Work settings in `ONIX_WORK_API_KEY`; the short-lived token returns 401 with `Key`). Each returns `{ clients }`, cached per identity |
 | `api/public/clients/<area>/…` + `models/<area>/…` | new (W9) | One client per endpoint group chosen at the feasibility gate. Add a `services/` class only for multi-step setup |
 | `fixtures/onix-work-api.fixture.ts` | `conftest.py` | `test = base.extend({ api })` on top of the api-logger fixture; `export { expect } from '@smart-assert/playwright/matchers'` (Playwright's `expect` plus `toMeetCriteria`) |
 
@@ -649,8 +676,7 @@ before they go into the thesis. Do the same for every number and API fact you qu
       no browser is needed
 - [ ] Copy `.env.example` to `.env`, fill in the Onix test account (`ONIX_WORK_*` names, and the
       old `ONIX_*` names until the Python tests are deleted) and set `ONIX_VERIFY_TLS=false`.
-      **Fix the Onix account first: on 2026-11-10 the login with the `.env` values returned
-      400 Bad Request**
+      The `.env` account works again (200 on 2026-11-16; it returned 400 on 2026-11-10)
 - [ ] Do the Playwright "Writing tests" and "API testing" pages of the official docs (about 3 hours)
 - [ ] Create `tsconfig.json` (path aliases), `playwright.unit.config.ts`,
       `playwright.api.config.ts`, npm scripts
@@ -660,8 +686,8 @@ before they go into the thesis. Do the same for every number and API fact you qu
       `onix-work-api.fixture.ts`
 - [ ] Port `login.spec.ts`, `login-errors.spec.ts`, `login.test-data.ts`
 - [ ] `npm run typecheck` → no errors
-- [ ] `npm run test:api` → the two login-error tests pass (deterministic checks);
-      the login test passes once the account is fixed
+- [ ] `npm run test:api` → the login test and the two login-error tests pass (deterministic
+      checks)
 - [ ] Keep the Python tests until the W2 comparison is done
 - [ ] Import Onix Swagger into Postman; start the text-field table
 - [ ] Send the data-permission email
