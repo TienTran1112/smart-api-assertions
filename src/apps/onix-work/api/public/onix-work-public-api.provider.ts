@@ -9,10 +9,13 @@ import { runtimeConfig } from '@framework/config/runtime.config';
 import { getOnixWorkCredentials } from '../auth/onix-work-credentials';
 import { OnixWorkTokenProvider } from '../auth/onix-work-token.provider';
 import { AccountPublicApiClient } from './clients/account/account-public-api.client';
+import { ProbePublicApiClient } from './clients/probe/probe-public-api.client';
 import type { TokenRequest } from './models/account/token.request';
 
 export interface OnixWorkPublicApiClients {
   account: AccountPublicApiClient;
+  /** Generic request client for the capture spec only. */
+  probe: ProbePublicApiClient;
 }
 
 export interface OnixWorkPublicApi {
@@ -69,7 +72,12 @@ export class OnixWorkPublicApiProvider {
         this.logger,
         createAuthentication(),
       );
-      api = { clients: { account: new AccountPublicApiClient(factory) } };
+      api = {
+        clients: {
+          account: new AccountPublicApiClient(factory),
+          probe: new ProbePublicApiClient(factory),
+        },
+      };
       this.cache.set(identity, api);
     }
     return api;

@@ -1,32 +1,15 @@
+# Python is used only for analysis (plan 3.6): family split, kappa, embedding baseline and the
+# statistics notebook. The tests and the judge are TypeScript (package.json).
 [project]
-name = "smart-assert"
+name = "smart-assert-analysis"
 version = "0.1.0"
-description = "LLM-as-a-judge semantic assertions for API testing (Master's capstone)"
-readme = "README.md"
+description = "Analysis scripts and notebook for the smart-assert capstone"
 requires-python = ">=3.12"
 dependencies = [
-    "anthropic>=2.3,<3",
-    "pydantic>=2",
-    "pytest>=8",
-    "httpx>=0.27",
-    "python-dotenv>=1",
+    "pandas>=2",
+    "scikit-learn>=1.5",
+    "statsmodels>=0.14",
+    "matplotlib>=3.9",
+    "sentence-transformers>=3",
+    "jupyter>=1",
 ]
-
-[project.optional-dependencies]
-dev = [
-    "pytest-html>=4",
-]
-
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
-[tool.hatch.build.targets.wheel]
-packages = ["smart_assert"]
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-markers = [
-    "live: calls the real API under test and the real LLM (costs money; needs VPN + ANTHROPIC_API_KEY)",
-]
-addopts = "-m 'not live'"

@@ -14,6 +14,16 @@ export const EMPTY_CREDENTIALS: TokenRequest = {
   password: '',
 };
 
-// W2: add the criteria for the semantic checks here (a rubric is test data, not code), e.g.
-// WRONG_PASSWORD_CRITERIA: must not reveal whether the username exists; no internal details.
-// EMPTY_FIELDS_CRITERIA: says the username is required; says the password is required.
+/** Rubrics for the semantic checks (a rubric is test data, not code). Same text as the Python prototype. */
+export const WRONG_PASSWORD_CRITERIA = {
+  criteria:
+    'MUST NOT reveal whether the username exists. ' +
+    'MUST NOT include stack traces or internal error details.',
+  context: 'Error title returned by a login endpoint after a wrong password.',
+};
+
+export const EMPTY_FIELDS_CRITERIA = {
+  criteria:
+    'Tells the user that the username is required. Tells the user that the password is required.',
+  context: 'Validation messages returned by a login endpoint when both fields are empty.',
+};

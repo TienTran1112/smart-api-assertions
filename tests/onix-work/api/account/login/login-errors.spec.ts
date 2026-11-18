@@ -1,14 +1,24 @@
 import type { ProblemDetailsResponse } from '@onix-work/api/public/models/errors/problem-details.response';
 import type { ValidationProblemDetailsResponse } from '@onix-work/api/public/models/errors/validation-problem-details.response';
 import { expect, test } from '@onix-work/fixtures/onix-work-api.fixture';
-import { EMPTY_CREDENTIALS, PROBLEM_JSON, UNKNOWN_USER_CREDENTIALS } from './login.test-data';
+import { runtimeConfig } from '@framework/config/runtime.config';
+import { assertSemantic, ClaudeJudge } from '@smart-assert/index';
+import {
+  EMPTY_CREDENTIALS,
+  EMPTY_FIELDS_CRITERIA,
+  PROBLEM_JSON,
+  UNKNOWN_USER_CREDENTIALS,
+  WRONG_PASSWORD_CRITERIA,
+} from './login.test-data';
 
 /**
  * Real behavior (checked live 2026-11-10 and 2026-11-16):
  * - wrong password / unknown user → 400 problem+json, title "Bad Request", no message text
  * - empty fields → 400 problem+json, errors { Username, Password } with messages
  *
- * Deterministic checks only for now; the semantic check (LLM judge) is added last in W2.
+ * Deterministic checks run first, so a broken response never costs a judge call; the semantic
+ * check (LLM judge, one vote) runs last. W8 replaces the direct call with the
+ * `toMeetCriteria` matcher.
  */
 test.describe('POST /v1/Account/token', { tag: ['@p1', '@live', '@regression'] }, () => {
   test('should reject a wrong password without revealing the user', async ({ api }) => {
@@ -27,7 +37,10 @@ test.describe('POST /v1/Account/token', { tag: ['@p1', '@live', '@regression'] }
     });
     expect(JSON.stringify(response.body)).not.toContain(UNKNOWN_USER_CREDENTIALS.username);
 
-    // W2: await assertSemantic(response.body.title, { criteria: WRONG_PASSWORD_CRITERIA, ... })
+    await assertSemantic(response.body.title, {
+      ...WRONG_PASSWORD_CRITERIA,
+      judge: new ClaudeJudge({ model: runtimeConfig.judgeModel }),
+    });
   });
 
   test('should explain which fields are missing', async ({ api }) => {
@@ -52,7 +65,10 @@ test.describe('POST /v1/Account/token', { tag: ['@p1', '@live', '@regression'] }
       expect(messages).toEqual(expect.arrayContaining([expect.any(String)]));
     }
 
-    // W2: const messages = Object.values(response.body.errors).flat().join('\n');
-    //     await assertSemantic(messages, { criteria: EMPTY_FIELDS_CRITERIA, ... })
+    const messages = Object.values(response.body.errors).flat().join('\n');
+    await assertSemantic(messages, {
+      ...EMPTY_FIELDS_CRITERIA,
+      judge: new ClaudeJudge({ model: runtimeConfig.judgeModel }),
+    });
   });
 });
