@@ -1,0 +1,995 @@
+{
+  "endpoint": "GET /v1/company/document-types",
+  "auth": "Bearer (.env account)",
+  "savedAt": "2026-11-18T16:09:51.648Z",
+  "cases": [
+    {
+      "name": "default",
+      "languageCode": null,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": [
+        {
+          "documentTypeId": 1,
+          "description": "Certificate"
+        },
+        {
+          "documentTypeId": 2,
+          "description": "Checklist"
+        },
+        {
+          "documentTypeId": 3,
+          "description": "Instructions"
+        },
+        {
+          "documentTypeId": 9,
+          "description": "Declaration of conformity"
+        },
+        {
+          "documentTypeId": 5,
+          "description": "Others"
+        },
+        {
+          "documentTypeId": 6,
+          "description": "Control documentation"
+        },
+        {
+          "documentTypeId": 10,
+          "description": "Service documentation"
+        },
+        {
+          "documentTypeId": 11,
+          "description": "Original certificate"
+        },
+        {
+          "documentTypeId": 13,
+          "description": "Original instructions"
+        },
+        {
+          "documentTypeId": 14,
+          "description": "Original declaration of conformity"
+        },
+        {
+          "documentTypeId": 7,
+          "description": "Photo"
+        },
+        {
+          "documentTypeId": 4,
+          "description": "Checklist only deviation"
+        },
+        {
+          "documentTypeId": 15,
+          "description": "Service report"
+        },
+        {
+          "documentTypeId": 16,
+          "description": "Job report"
+        },
+        {
+          "documentTypeId": 17,
+          "description": "Drawing"
+        }
+      ]
+    },
+    {
+      "name": "Norwegian",
+      "languageCode": 0,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": [
+        {
+          "documentTypeId": 1,
+          "description": "Sertifikat"
+        },
+        {
+          "documentTypeId": 2,
+          "description": "Sjekkliste"
+        },
+        {
+          "documentTypeId": 3,
+          "description": "Bruksanvisning"
+        },
+        {
+          "documentTypeId": 9,
+          "description": "Samsvarserklæring"
+        },
+        {
+          "documentTypeId": 5,
+          "description": "Annet"
+        },
+        {
+          "documentTypeId": 6,
+          "description": "Kontrolldokumentasjon"
+        },
+        {
+          "documentTypeId": 10,
+          "description": "Servicedokumentasjon"
+        },
+        {
+          "documentTypeId": 11,
+          "description": "Orginalt sertifikat"
+        },
+        {
+          "documentTypeId": 13,
+          "description": "Original bruksanvisning"
+        },
+        {
+          "documentTypeId": 14,
+          "description": "Original samsvarserklæring"
+        },
+        {
+          "documentTypeId": 7,
+          "description": "Bilde"
+        },
+        {
+          "documentTypeId": 4,
+          "description": "Sjekkliste kun avvik"
+        },
+        {
+          "documentTypeId": 15,
+          "description": "Service rapport"
+        },
+        {
+          "documentTypeId": 16,
+          "description": "Jobbrapport"
+        },
+        {
+          "documentTypeId": 17,
+          "description": "Tegning"
+        }
+      ]
+    },
+    {
+      "name": "English",
+      "languageCode": 1,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": [
+        {
+          "documentTypeId": 1,
+          "description": "Certificate"
+        },
+        {
+          "documentTypeId": 2,
+          "description": "Checklist"
+        },
+        {
+          "documentTypeId": 3,
+          "description": "Instructions"
+        },
+        {
+          "documentTypeId": 9,
+          "description": "Declaration of conformity"
+        },
+        {
+          "documentTypeId": 5,
+          "description": "Others"
+        },
+        {
+          "documentTypeId": 6,
+          "description": "Control documentation"
+        },
+        {
+          "documentTypeId": 10,
+          "description": "Service documentation"
+        },
+        {
+          "documentTypeId": 11,
+          "description": "Original certificate"
+        },
+        {
+          "documentTypeId": 13,
+          "description": "Original instructions"
+        },
+        {
+          "documentTypeId": 14,
+          "description": "Original declaration of conformity"
+        },
+        {
+          "documentTypeId": 7,
+          "description": "Photo"
+        },
+        {
+          "documentTypeId": 4,
+          "description": "Checklist only deviation"
+        },
+        {
+          "documentTypeId": 15,
+          "description": "Service report"
+        },
+        {
+          "documentTypeId": 16,
+          "description": "Job report"
+        },
+        {
+          "documentTypeId": 17,
+          "description": "Drawing"
+        }
+      ]
+    },
+    {
+      "name": "unsupported",
+      "languageCode": 2,
+      "status": 400,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "memberNames": [
+          "languageCode"
+        ],
+        "errorMessage": "2 invalid language"
+      }
+    },
+    {
+      "name": "Swedish",
+      "languageCode": 3,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": [
+        {
+          "documentTypeId": 1,
+          "description": "Certifikat"
+        },
+        {
+          "documentTypeId": 2,
+          "description": "Checklista"
+        },
+        {
+          "documentTypeId": 3,
+          "description": "Instruktion"
+        },
+        {
+          "documentTypeId": 9,
+          "description": "Försäkran om överensstämmelse"
+        },
+        {
+          "documentTypeId": 5,
+          "description": "Övrigt"
+        },
+        {
+          "documentTypeId": 6,
+          "description": "Kontrolldokumentation"
+        },
+        {
+          "documentTypeId": 10,
+          "description": "Servicedokumentation"
+        },
+        {
+          "documentTypeId": 11,
+          "description": "Original certifikat"
+        },
+        {
+          "documentTypeId": 13,
+          "description": "Original instruktion"
+        },
+        {
+          "documentTypeId": 14,
+          "description": "Original försäkran om överensstämmelse"
+        },
+        {
+          "documentTypeId": 7,
+          "description": "Bild"
+        },
+        {
+          "documentTypeId": 4,
+          "description": "Checklista enbart avvikelser"
+        },
+        {
+          "documentTypeId": 15,
+          "description": "Service rapport"
+        },
+        {
+          "documentTypeId": 16,
+          "description": "Jobbrapport"
+        },
+        {
+          "documentTypeId": 17,
+          "description": "Ritning"
+        }
+      ]
+    },
+    {
+      "name": "Danish",
+      "languageCode": 4,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": [
+        {
+          "documentTypeId": 1,
+          "description": "Certifikater"
+        },
+        {
+          "documentTypeId": 2,
+          "description": "Tjekliste"
+        },
+        {
+          "documentTypeId": 3,
+          "description": "Brugsanvisning"
+        },
+        {
+          "documentTypeId": 9,
+          "description": "Overensstemmelseserklæring"
+        },
+        {
+          "documentTypeId": 5,
+          "description": "Andet"
+        },
+        {
+          "documentTypeId": 6,
+          "description": "Kontroldokumentation"
+        },
+        {
+          "documentTypeId": 10,
+          "description": "Servicedokumentation"
+        },
+        {
+          "documentTypeId": 11,
+          "description": "Originalt certifikat"
+        },
+        {
+          "documentTypeId": 13,
+          "description": "Original brugsanvisning"
+        },
+        {
+          "documentTypeId": 14,
+          "description": "Original overenstemmelseserklæring"
+        },
+        {
+          "documentTypeId": 7,
+          "description": "Billede"
+        },
+        {
+          "documentTypeId": 4,
+          "description": "Tjekliste kun afvigelser"
+        },
+        {
+          "documentTypeId": 15,
+          "description": "Service rapport"
+        },
+        {
+          "documentTypeId": 16,
+          "description": "Jobrapport"
+        },
+        {
+          "documentTypeId": 17,
+          "description": "Tegning"
+        }
+      ]
+    },
+    {
+      "name": "Dutch",
+      "languageCode": 5,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": [
+        {
+          "documentTypeId": 1,
+          "description": "Certificaat"
+        },
+        {
+          "documentTypeId": 2,
+          "description": "Checklist"
+        },
+        {
+          "documentTypeId": 3,
+          "description": "Instructies"
+        },
+        {
+          "documentTypeId": 9,
+          "description": "Conformiteitsverklaring (CE)"
+        },
+        {
+          "documentTypeId": 5,
+          "description": "Overige"
+        },
+        {
+          "documentTypeId": 6,
+          "description": "Inspectierapport"
+        },
+        {
+          "documentTypeId": 10,
+          "description": "Service documentatie"
+        },
+        {
+          "documentTypeId": 11,
+          "description": "Origineel certificaat"
+        },
+        {
+          "documentTypeId": 13,
+          "description": "Oorspronkelijke instructies"
+        },
+        {
+          "documentTypeId": 14,
+          "description": "Originele conformiteitsverklaring (CE)"
+        },
+        {
+          "documentTypeId": 7,
+          "description": "Afbeelding"
+        },
+        {
+          "documentTypeId": 4,
+          "description": "Checklist alleen afwijking"
+        },
+        {
+          "documentTypeId": 15,
+          "description": "Service rapport"
+        },
+        {
+          "documentTypeId": 16,
+          "description": "Werkrapport"
+        },
+        {
+          "documentTypeId": 17,
+          "description": "Tekeningen"
+        }
+      ]
+    },
+    {
+      "name": "German",
+      "languageCode": 6,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": [
+        {
+          "documentTypeId": 1,
+          "description": "Zertifikat"
+        },
+        {
+          "documentTypeId": 2,
+          "description": "Checkliste"
+        },
+        {
+          "documentTypeId": 3,
+          "description": "Anweisungen"
+        },
+        {
+          "documentTypeId": 9,
+          "description": "Konformitätserklärung"
+        },
+        {
+          "documentTypeId": 5,
+          "description": "Andere"
+        },
+        {
+          "documentTypeId": 6,
+          "description": "Kontrolldokumentation"
+        },
+        {
+          "documentTypeId": 10,
+          "description": "Servicedokumentation"
+        },
+        {
+          "documentTypeId": 11,
+          "description": "Original-Zertifikat"
+        },
+        {
+          "documentTypeId": 13,
+          "description": "Originalanweisung"
+        },
+        {
+          "documentTypeId": 14,
+          "description": "Original-Konformitätserklärung"
+        },
+        {
+          "documentTypeId": 7,
+          "description": "Foto"
+        },
+        {
+          "documentTypeId": 4,
+          "description": "Abweichung nur in Checkliste"
+        },
+        {
+          "documentTypeId": 15,
+          "description": "Servicebericht"
+        },
+        {
+          "documentTypeId": 16,
+          "description": "Jobbericht"
+        },
+        {
+          "documentTypeId": 17,
+          "description": "Zeichnung"
+        }
+      ]
+    },
+    {
+      "name": "Spanish",
+      "languageCode": 7,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": [
+        {
+          "documentTypeId": 1,
+          "description": "Certificado"
+        },
+        {
+          "documentTypeId": 2,
+          "description": "Lista de verificación"
+        },
+        {
+          "documentTypeId": 3,
+          "description": "Instrucciones"
+        },
+        {
+          "documentTypeId": 9,
+          "description": "Declaración de conformidad"
+        },
+        {
+          "documentTypeId": 5,
+          "description": "Otros"
+        },
+        {
+          "documentTypeId": 6,
+          "description": "Documentación de control"
+        },
+        {
+          "documentTypeId": 10,
+          "description": "Documentación de servicio"
+        },
+        {
+          "documentTypeId": 11,
+          "description": "Certificado original"
+        },
+        {
+          "documentTypeId": 13,
+          "description": "Instrucciones originales"
+        },
+        {
+          "documentTypeId": 14,
+          "description": "Declaración de conformidad original"
+        },
+        {
+          "documentTypeId": 7,
+          "description": "Foto"
+        },
+        {
+          "documentTypeId": 4,
+          "description": "Única desviación de la lista de verificación"
+        },
+        {
+          "documentTypeId": 15,
+          "description": "Informe de servicio"
+        },
+        {
+          "documentTypeId": 16,
+          "description": "Informe del trabajo"
+        },
+        {
+          "documentTypeId": 17,
+          "description": "Dibujo"
+        }
+      ]
+    },
+    {
+      "name": "Finnish",
+      "languageCode": 8,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": [
+        {
+          "documentTypeId": 1,
+          "description": "Todistus"
+        },
+        {
+          "documentTypeId": 2,
+          "description": "Tarkistuslista"
+        },
+        {
+          "documentTypeId": 3,
+          "description": "Ohjeet"
+        },
+        {
+          "documentTypeId": 9,
+          "description": "Vaatimustenmukaisuusvakuutus"
+        },
+        {
+          "documentTypeId": 5,
+          "description": "Muut"
+        },
+        {
+          "documentTypeId": 6,
+          "description": "Tarkastusdokumentaatio"
+        },
+        {
+          "documentTypeId": 10,
+          "description": "Huoltoasiakirjat"
+        },
+        {
+          "documentTypeId": 11,
+          "description": "Alkuperäinen sertifikaatti"
+        },
+        {
+          "documentTypeId": 13,
+          "description": "Alkuperäiset ohjeet"
+        },
+        {
+          "documentTypeId": 14,
+          "description": "Alkuperäinen vaatimustenmukaisuusvakuutus"
+        },
+        {
+          "documentTypeId": 7,
+          "description": "Valokuva"
+        },
+        {
+          "documentTypeId": 4,
+          "description": "Vain poikkeamat tarkistuslistassa"
+        },
+        {
+          "documentTypeId": 15,
+          "description": "Huoltoraportti"
+        },
+        {
+          "documentTypeId": 16,
+          "description": "Työraportti"
+        },
+        {
+          "documentTypeId": 17,
+          "description": "Piirustus"
+        }
+      ]
+    },
+    {
+      "name": "Portuguese",
+      "languageCode": 9,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": [
+        {
+          "documentTypeId": 1,
+          "description": "Certificado"
+        },
+        {
+          "documentTypeId": 2,
+          "description": "Lista de verificação"
+        },
+        {
+          "documentTypeId": 3,
+          "description": "Instruções"
+        },
+        {
+          "documentTypeId": 9,
+          "description": "Declaração de conformidade"
+        },
+        {
+          "documentTypeId": 5,
+          "description": "Outros"
+        },
+        {
+          "documentTypeId": 6,
+          "description": "Documentação de controlo"
+        },
+        {
+          "documentTypeId": 10,
+          "description": "Documentação de serviço"
+        },
+        {
+          "documentTypeId": 11,
+          "description": "Certificado original"
+        },
+        {
+          "documentTypeId": 13,
+          "description": "Instruções originais"
+        },
+        {
+          "documentTypeId": 14,
+          "description": "Declaração de conformidade original"
+        },
+        {
+          "documentTypeId": 7,
+          "description": "Fotografia"
+        },
+        {
+          "documentTypeId": 4,
+          "description": "Desvio apenas da lista de verificação"
+        },
+        {
+          "documentTypeId": 15,
+          "description": "Relatório de serviço"
+        },
+        {
+          "documentTypeId": 16,
+          "description": "Relatório de serviço"
+        },
+        {
+          "documentTypeId": 17,
+          "description": "Desenho"
+        }
+      ]
+    },
+    {
+      "name": "Estonian",
+      "languageCode": 10,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": [
+        {
+          "documentTypeId": 1,
+          "description": "Sertifikaat"
+        },
+        {
+          "documentTypeId": 2,
+          "description": "Kontrollnimekiri"
+        },
+        {
+          "documentTypeId": 3,
+          "description": "Juhised"
+        },
+        {
+          "documentTypeId": 9,
+          "description": "Vastavusdeklaratsioon"
+        },
+        {
+          "documentTypeId": 5,
+          "description": "Teised"
+        },
+        {
+          "documentTypeId": 6,
+          "description": "Kontrolldokumentatsioon"
+        },
+        {
+          "documentTypeId": 10,
+          "description": "Teenindusdokumendid"
+        },
+        {
+          "documentTypeId": 11,
+          "description": "Algne sertifikaat"
+        },
+        {
+          "documentTypeId": 13,
+          "description": "Algsed juhised"
+        },
+        {
+          "documentTypeId": 14,
+          "description": "Algne vastavusdeklaratsioon"
+        },
+        {
+          "documentTypeId": 7,
+          "description": "Foto"
+        },
+        {
+          "documentTypeId": 4,
+          "description": "Ainult kontrollnimekirja kõrvalekalle"
+        },
+        {
+          "documentTypeId": 15,
+          "description": "Teenindusraport"
+        },
+        {
+          "documentTypeId": 16,
+          "description": "Töö aruanne"
+        },
+        {
+          "documentTypeId": 17,
+          "description": "Joonis"
+        }
+      ]
+    },
+    {
+      "name": "Latvian",
+      "languageCode": 11,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": [
+        {
+          "documentTypeId": 1,
+          "description": "Sertifikāts"
+        },
+        {
+          "documentTypeId": 2,
+          "description": "Pārbaudes saraksts"
+        },
+        {
+          "documentTypeId": 3,
+          "description": "Norādījumi"
+        },
+        {
+          "documentTypeId": 9,
+          "description": "Atbilstības deklarācija"
+        },
+        {
+          "documentTypeId": 5,
+          "description": "Citi"
+        },
+        {
+          "documentTypeId": 6,
+          "description": "Kontroles dokumentācija"
+        },
+        {
+          "documentTypeId": 10,
+          "description": "Apkalpes dokumentācija"
+        },
+        {
+          "documentTypeId": 11,
+          "description": "Oriģinālais sertifikāts"
+        },
+        {
+          "documentTypeId": 13,
+          "description": "Oriģinālās instrukcijas"
+        },
+        {
+          "documentTypeId": 14,
+          "description": "Oriģinālā atbilstības deklarācija"
+        },
+        {
+          "documentTypeId": 7,
+          "description": "Foto"
+        },
+        {
+          "documentTypeId": 4,
+          "description": "Tikai noviržu pārbaudes saraksts"
+        },
+        {
+          "documentTypeId": 15,
+          "description": "Apkalpes ziņojums"
+        },
+        {
+          "documentTypeId": 16,
+          "description": "Darba pārskats"
+        },
+        {
+          "documentTypeId": 17,
+          "description": "Zīmējums"
+        }
+      ]
+    },
+    {
+      "name": "Lithuanian",
+      "languageCode": 12,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": [
+        {
+          "documentTypeId": 1,
+          "description": "Sertifikatas"
+        },
+        {
+          "documentTypeId": 2,
+          "description": "Kontrolinis sąrašas"
+        },
+        {
+          "documentTypeId": 3,
+          "description": "Instrukcijos"
+        },
+        {
+          "documentTypeId": 9,
+          "description": "Atitikties deklaracija"
+        },
+        {
+          "documentTypeId": 5,
+          "description": "Kiti"
+        },
+        {
+          "documentTypeId": 6,
+          "description": "Kontrolės dokumentacija"
+        },
+        {
+          "documentTypeId": 10,
+          "description": "Aptarnavimo dokumentacija"
+        },
+        {
+          "documentTypeId": 11,
+          "description": "Originalus sertifikatas"
+        },
+        {
+          "documentTypeId": 13,
+          "description": "Originalios instrukcijos"
+        },
+        {
+          "documentTypeId": 14,
+          "description": "Originali atitikties deklaracija"
+        },
+        {
+          "documentTypeId": 7,
+          "description": "Nuotrauka"
+        },
+        {
+          "documentTypeId": 4,
+          "description": "Tik nukrypimų kontrolinis sąrašas"
+        },
+        {
+          "documentTypeId": 15,
+          "description": "Aptarnavimo ataskaita"
+        },
+        {
+          "documentTypeId": 16,
+          "description": "Darbo ataskaita"
+        },
+        {
+          "documentTypeId": 17,
+          "description": "Brėžinys"
+        }
+      ]
+    },
+    {
+      "name": "Polish",
+      "languageCode": 13,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": [
+        {
+          "documentTypeId": 1,
+          "description": "Certyfikat"
+        },
+        {
+          "documentTypeId": 2,
+          "description": "Lista kontrolna"
+        },
+        {
+          "documentTypeId": 3,
+          "description": "Instrukcje"
+        },
+        {
+          "documentTypeId": 9,
+          "description": "Deklaracja zgodności"
+        },
+        {
+          "documentTypeId": 5,
+          "description": "Inne"
+        },
+        {
+          "documentTypeId": 6,
+          "description": "Dokumentacja kontrolna"
+        },
+        {
+          "documentTypeId": 10,
+          "description": "Dokumentacja serwisowa"
+        },
+        {
+          "documentTypeId": 11,
+          "description": "Oryginalny certyfikat"
+        },
+        {
+          "documentTypeId": 13,
+          "description": "Oryginalne instrukcje"
+        },
+        {
+          "documentTypeId": 14,
+          "description": "Oryginalna deklaracja zgodności"
+        },
+        {
+          "documentTypeId": 7,
+          "description": "Zdjęcie"
+        },
+        {
+          "documentTypeId": 4,
+          "description": "Lista kontrolna tylko z odchyleniami"
+        },
+        {
+          "documentTypeId": 15,
+          "description": "Raport serwisowy"
+        },
+        {
+          "documentTypeId": 16,
+          "description": "Raport z zadania"
+        },
+        {
+          "documentTypeId": 17,
+          "description": "Rysunek"
+        }
+      ]
+    },
+    {
+      "name": "languageCode=14",
+      "languageCode": 14,
+      "status": 400,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "memberNames": [
+          "languageCode"
+        ],
+        "errorMessage": "14 invalid language"
+      }
+    },
+    {
+      "name": "languageCode=15",
+      "languageCode": 15,
+      "status": 400,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "memberNames": [
+          "languageCode"
+        ],
+        "errorMessage": "15 invalid language"
+      }
+    }
+  ]
+}

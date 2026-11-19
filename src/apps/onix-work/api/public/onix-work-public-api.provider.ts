@@ -9,11 +9,13 @@ import { runtimeConfig } from '@framework/config/runtime.config';
 import { getOnixWorkCredentials } from '../auth/onix-work-credentials';
 import { OnixWorkTokenProvider } from '../auth/onix-work-token.provider';
 import { AccountPublicApiClient } from './clients/account/account-public-api.client';
+import { DocumentTypePublicApiClient } from './clients/common/document-type-public-api.client';
 import { ProbePublicApiClient } from './clients/probe/probe-public-api.client';
 import type { TokenRequest } from './models/account/token.request';
 
 export interface OnixWorkPublicApiClients {
   account: AccountPublicApiClient;
+  documentType: DocumentTypePublicApiClient;
   /** Generic request client for the capture spec only. */
   probe: ProbePublicApiClient;
 }
@@ -75,6 +77,7 @@ export class OnixWorkPublicApiProvider {
       api = {
         clients: {
           account: new AccountPublicApiClient(factory),
+          documentType: new DocumentTypePublicApiClient(factory),
           probe: new ProbePublicApiClient(factory),
         },
       };

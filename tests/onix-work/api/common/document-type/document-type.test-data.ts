@@ -1,0 +1,409 @@
+import { resolve } from 'node:path';
+import type { ApiValidationErrorResponse } from '@onix-work/api/public/models/errors/api-validation-error.response';
+
+export interface DocumentTypeLanguageTestCase {
+  languageCode: number;
+  languageName: string;
+  expectedDescriptions: Record<number, string>;
+}
+
+export const DEFAULT_LANGUAGE_CODE = 1;
+export const UNSUPPORTED_LANGUAGE_CODE = 2;
+
+/** Property names of one list item, for `compareLookupList`. */
+export const DOCUMENT_TYPE_KEYS = { idKey: 'documentTypeId', textKey: 'description' };
+
+export const DOCUMENT_TYPE_LANGUAGE_CASES: DocumentTypeLanguageTestCase[] = [
+  {
+    languageCode: 1,
+    languageName: 'English',
+    expectedDescriptions: {
+      1: 'Certificate',
+      2: 'Checklist',
+      3: 'Instructions',
+      9: 'Declaration of conformity',
+      5: 'Others',
+      6: 'Control documentation',
+      10: 'Service documentation',
+      11: 'Original certificate',
+      13: 'Original instructions',
+      14: 'Original declaration of conformity',
+      7: 'Photo',
+      4: 'Checklist only deviation',
+      15: 'Service report',
+      16: 'Job report',
+      17: 'Drawing',
+    },
+  },
+
+  {
+    languageCode: 0,
+    languageName: 'Norwegian',
+    expectedDescriptions: {
+      1: 'Sertifikat',
+      2: 'Sjekkliste',
+      3: 'Bruksanvisning',
+      9: 'Samsvarserklæring',
+      5: 'Annet',
+      6: 'Kontrolldokumentasjon',
+      10: 'Servicedokumentasjon',
+      11: 'Orginalt sertifikat',
+      13: 'Original bruksanvisning',
+      14: 'Original samsvarserklæring',
+      7: 'Bilde',
+      4: 'Sjekkliste kun avvik',
+      15: 'Service rapport',
+      16: 'Jobbrapport',
+      17: 'Tegning',
+    },
+  },
+
+  {
+    languageCode: 3,
+    languageName: 'Swedish',
+    expectedDescriptions: {
+      1: 'Certifikat',
+      2: 'Checklista',
+      3: 'Instruktion',
+      9: 'Försäkran om överensstämmelse',
+      5: 'Övrigt',
+      6: 'Kontrolldokumentation',
+      10: 'Servicedokumentation',
+      11: 'Original certifikat',
+      13: 'Original instruktion',
+      14: 'Original försäkran om överensstämmelse',
+      7: 'Bild',
+      4: 'Checklista enbart avvikelser',
+      15: 'Service rapport',
+      16: 'Jobbrapport',
+      17: 'Ritning',
+    },
+  },
+
+  {
+    languageCode: 4,
+    languageName: 'Danish',
+    expectedDescriptions: {
+      // server text: plural ("certificates"); other languages use the singular
+      1: 'Certifikater',
+      2: 'Tjekliste',
+      3: 'Brugsanvisning',
+      9: 'Overensstemmelseserklæring',
+      5: 'Andet',
+      6: 'Kontroldokumentation',
+      10: 'Servicedokumentation',
+      11: 'Originalt certifikat',
+      13: 'Original brugsanvisning',
+      // server text: "overenstemmelses" is missing an "s" (compare id 9)
+      14: 'Original overenstemmelseserklæring',
+      7: 'Billede',
+      4: 'Tjekliste kun afvigelser',
+      15: 'Service rapport',
+      16: 'Jobrapport',
+      17: 'Tegning',
+    },
+  },
+
+  {
+    languageCode: 5,
+    languageName: 'Dutch',
+    expectedDescriptions: {
+      1: 'Certificaat',
+      2: 'Checklist',
+      3: 'Instructies',
+      9: 'Conformiteitsverklaring (CE)',
+      5: 'Overige',
+      6: 'Inspectierapport',
+      10: 'Service documentatie',
+      11: 'Origineel certificaat',
+      13: 'Oorspronkelijke instructies',
+      14: 'Originele conformiteitsverklaring (CE)',
+      7: 'Afbeelding',
+      4: 'Checklist alleen afwijking',
+      15: 'Service rapport',
+      16: 'Werkrapport',
+      17: 'Tekeningen',
+    },
+  },
+
+  {
+    languageCode: 6,
+    languageName: 'German',
+    expectedDescriptions: {
+      1: 'Zertifikat',
+      2: 'Checkliste',
+      3: 'Anweisungen',
+      9: 'Konformitätserklärung',
+      5: 'Andere',
+      6: 'Kontrolldokumentation',
+      10: 'Servicedokumentation',
+      11: 'Original-Zertifikat',
+      13: 'Originalanweisung',
+      14: 'Original-Konformitätserklärung',
+      7: 'Foto',
+      4: 'Abweichung nur in Checkliste',
+      15: 'Servicebericht',
+      16: 'Jobbericht',
+      17: 'Zeichnung',
+    },
+  },
+
+  {
+    languageCode: 7,
+    languageName: 'Spanish',
+    expectedDescriptions: {
+      1: 'Certificado',
+      2: 'Lista de verificación',
+      3: 'Instrucciones',
+      9: 'Declaración de conformidad',
+      5: 'Otros',
+      6: 'Documentación de control',
+      10: 'Documentación de servicio',
+      11: 'Certificado original',
+      13: 'Instrucciones originales',
+      14: 'Declaración de conformidad original',
+      7: 'Foto',
+      4: 'Única desviación de la lista de verificación',
+      15: 'Informe de servicio',
+      16: 'Informe del trabajo',
+      17: 'Dibujo',
+    },
+  },
+
+  {
+    languageCode: 8,
+    languageName: 'Finnish',
+    expectedDescriptions: {
+      1: 'Todistus',
+      2: 'Tarkistuslista',
+      3: 'Ohjeet',
+      9: 'Vaatimustenmukaisuusvakuutus',
+      5: 'Muut',
+      6: 'Tarkastusdokumentaatio',
+      10: 'Huoltoasiakirjat',
+      11: 'Alkuperäinen sertifikaatti',
+      13: 'Alkuperäiset ohjeet',
+      14: 'Alkuperäinen vaatimustenmukaisuusvakuutus',
+      7: 'Valokuva',
+      4: 'Vain poikkeamat tarkistuslistassa',
+      15: 'Huoltoraportti',
+      16: 'Työraportti',
+      17: 'Piirustus',
+    },
+  },
+
+  {
+    languageCode: 9,
+    languageName: 'Portuguese',
+    expectedDescriptions: {
+      1: 'Certificado',
+      2: 'Lista de verificação',
+      3: 'Instruções',
+      9: 'Declaração de conformidade',
+      5: 'Outros',
+      6: 'Documentação de controlo',
+      10: 'Documentação de serviço',
+      11: 'Certificado original',
+      13: 'Instruções originais',
+      14: 'Declaração de conformidade original',
+      7: 'Fotografia',
+      4: 'Desvio apenas da lista de verificação',
+      15: 'Relatório de serviço',
+      // server text: same as id 15 ("service report"), not "job report"
+      16: 'Relatório de serviço',
+      17: 'Desenho',
+    },
+  },
+
+  {
+    languageCode: 10,
+    languageName: 'Estonian',
+    expectedDescriptions: {
+      1: 'Sertifikaat',
+      2: 'Kontrollnimekiri',
+      3: 'Juhised',
+      9: 'Vastavusdeklaratsioon',
+      5: 'Teised',
+      6: 'Kontrolldokumentatsioon',
+      10: 'Teenindusdokumendid',
+      11: 'Algne sertifikaat',
+      13: 'Algsed juhised',
+      14: 'Algne vastavusdeklaratsioon',
+      7: 'Foto',
+      4: 'Ainult kontrollnimekirja kõrvalekalle',
+      15: 'Teenindusraport',
+      16: 'Töö aruanne',
+      17: 'Joonis',
+    },
+  },
+
+  {
+    languageCode: 11,
+    languageName: 'Latvian',
+    expectedDescriptions: {
+      1: 'Sertifikāts',
+      2: 'Pārbaudes saraksts',
+      3: 'Norādījumi',
+      9: 'Atbilstības deklarācija',
+      5: 'Citi',
+      6: 'Kontroles dokumentācija',
+      10: 'Apkalpes dokumentācija',
+      11: 'Oriģinālais sertifikāts',
+      13: 'Oriģinālās instrukcijas',
+      14: 'Oriģinālā atbilstības deklarācija',
+      7: 'Foto',
+      4: 'Tikai noviržu pārbaudes saraksts',
+      15: 'Apkalpes ziņojums',
+      16: 'Darba pārskats',
+      17: 'Zīmējums',
+    },
+  },
+
+  {
+    languageCode: 12,
+    languageName: 'Lithuanian',
+    expectedDescriptions: {
+      1: 'Sertifikatas',
+      2: 'Kontrolinis sąrašas',
+      3: 'Instrukcijos',
+      9: 'Atitikties deklaracija',
+      5: 'Kiti',
+      6: 'Kontrolės dokumentacija',
+      10: 'Aptarnavimo dokumentacija',
+      11: 'Originalus sertifikatas',
+      13: 'Originalios instrukcijos',
+      14: 'Originali atitikties deklaracija',
+      7: 'Nuotrauka',
+      4: 'Tik nukrypimų kontrolinis sąrašas',
+      15: 'Aptarnavimo ataskaita',
+      16: 'Darbo ataskaita',
+      17: 'Brėžinys',
+    },
+  },
+
+  {
+    languageCode: 13,
+    languageName: 'Polish',
+    expectedDescriptions: {
+      1: 'Certyfikat',
+      2: 'Lista kontrolna',
+      3: 'Instrukcje',
+      9: 'Deklaracja zgodności',
+      5: 'Inne',
+      6: 'Dokumentacja kontrolna',
+      10: 'Dokumentacja serwisowa',
+      11: 'Oryginalny certyfikat',
+      13: 'Oryginalne instrukcje',
+      14: 'Oryginalna deklaracja zgodności',
+      7: 'Zdjęcie',
+      4: 'Lista kontrolna tylko z odchyleniami',
+      15: 'Raport serwisowy',
+      16: 'Raport z zadania',
+      17: 'Rysunek',
+    },
+  },
+];
+
+export const UNSUPPORTED_LANGUAGE_ERROR: ApiValidationErrorResponse = {
+  memberNames: ['languageCode'],
+  errorMessage: `${UNSUPPORTED_LANGUAGE_CODE} invalid language`,
+};
+
+// ---------------------------------------------------------------------------------------------
+// Language selection for the live spec. `npm run test:api` asks for the codes and passes them
+// in this variable; unset or empty = every language.
+// ---------------------------------------------------------------------------------------------
+
+export const LANGUAGE_CODES_ENV = 'ONIX_LANGUAGE_CODES';
+
+/**
+ * Picks language cases from text like `1,3`, `1 3`, `4-13` or `all`. Empty or `all` gives every
+ * case. Throws on anything that is not a known `languageCode`, listing the valid ones.
+ */
+export function selectLanguageCases(input: string | undefined): DocumentTypeLanguageTestCase[] {
+  const text = (input ?? '').trim().toLowerCase();
+  if (text === '' || text === 'all') {
+    return DOCUMENT_TYPE_LANGUAGE_CASES;
+  }
+
+  const known = DOCUMENT_TYPE_LANGUAGE_CASES.map(
+    (language) => `${language.languageCode} ${language.languageName}`,
+  ).join(', ');
+  const fail = (reason: string): never => {
+    throw new Error(`${reason}. Choose from: ${known} (or press Enter for all)`);
+  };
+
+  const codes = new Set<number>();
+  for (const part of text.split(/[\s,]+/)) {
+    const range = /^(\d+)(?:-(\d+))?$/.exec(part);
+    if (!range) {
+      fail(`"${part}" is not a languageCode or a range like 4-13`);
+    }
+    const from = Number(range![1]);
+    const to = range![2] === undefined ? from : Number(range![2]);
+    if (to < from) {
+      fail(`range "${part}" goes backwards`);
+    }
+    for (let code = from; code <= to; code++) {
+      codes.add(code);
+    }
+  }
+
+  const unknown = [...codes].filter(
+    (code) => !DOCUMENT_TYPE_LANGUAGE_CASES.some((language) => language.languageCode === code),
+  );
+  if (unknown.length > 0) {
+    fail(`No test data for languageCode ${unknown.join(', ')}`);
+  }
+  return DOCUMENT_TYPE_LANGUAGE_CASES.filter((language) => codes.has(language.languageCode));
+}
+
+// ---------------------------------------------------------------------------------------------
+// Saved response (FILE 2). Written only by `npm run save:responses`
+// (tests/onix-work/api/capture/save-document-types.spec.ts), read by the offline spec
+// (tests/unit/onix-work/document-type-saved-response.spec.ts).
+// ---------------------------------------------------------------------------------------------
+
+/** Relative to the repo root, where every npm script runs. */
+export const SAVED_RESPONSE_FILE = resolve(
+  'tests/onix-work/api/common/document-type/responses/document-types.response.json',
+);
+
+export interface SavedResponseCase {
+  name: string;
+  /** `null` = `languageCode` left out (server default). */
+  languageCode: number | null;
+  status: number;
+  contentType: string | null;
+  body: unknown;
+}
+
+export interface SavedDocumentTypesFile {
+  endpoint: string;
+  auth: string;
+  savedAt: string;
+  cases: SavedResponseCase[];
+}
+
+/** Highest `languageCode` the save step tries. Codes 1..this are all saved, whatever status they return. */
+export const MAX_SAVED_LANGUAGE_CODE = 15;
+
+/** 0 (Norwegian) plus 1..MAX_SAVED_LANGUAGE_CODE. */
+export const SAVED_LANGUAGE_CODES: number[] = [
+  0,
+  ...Array.from({ length: MAX_SAVED_LANGUAGE_CODE }, (_, index) => index + 1),
+];
+
+const savedCaseName = (languageCode: number): string =>
+  DOCUMENT_TYPE_LANGUAGE_CASES.find((language) => language.languageCode === languageCode)
+    ?.languageName ??
+  (languageCode === UNSUPPORTED_LANGUAGE_CODE ? 'unsupported' : `languageCode=${languageCode}`);
+
+/** The requests that are saved, in file order: default, then each code in SAVED_LANGUAGE_CODES. */
+export const SAVED_CASE_REQUESTS: { name: string; languageCode: number | null }[] = [
+  { name: 'default', languageCode: null },
+  ...SAVED_LANGUAGE_CODES.map((languageCode) => ({
+    name: savedCaseName(languageCode),
+    languageCode,
+  })),
+];

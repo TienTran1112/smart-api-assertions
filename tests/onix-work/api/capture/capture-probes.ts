@@ -68,20 +68,6 @@ export const CAPTURE_PROBES: CaptureProbe[] = [
     request: { method: 'GET', path: 'v1/company/document-types', params: { languageCode: 2 } },
   },
   {
-    id: 'doctypes-lang-999',
-    endpoint: DOCUMENT_TYPES,
-    trigger: 'unknown languageCode=999',
-    auth: 'account',
-    request: { method: 'GET', path: 'v1/company/document-types', params: { languageCode: 999 } },
-  },
-  {
-    id: 'doctypes-lang-abc',
-    endpoint: DOCUMENT_TYPES,
-    trigger: 'languageCode not a number',
-    auth: 'account',
-    request: { method: 'GET', path: 'v1/company/document-types', params: { languageCode: 'abc' } },
-  },
-  {
     id: 'properties-lang-999',
     endpoint: 'GET /v1/company/properties',
     trigger: 'unknown languageCode=999',

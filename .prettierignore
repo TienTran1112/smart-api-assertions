@@ -9,3 +9,5 @@ playwright-report/
 test-results/
 package-lock.json
 .venv/
+# Saved API responses are written by npm run save:responses; keep them byte-for-byte.
+**/responses/*.response.json

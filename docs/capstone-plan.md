@@ -352,9 +352,10 @@ its own third state.
 | Script | Command |
 |---|---|
 | `test` / `test:unit` | `playwright test -c playwright.unit.config.ts` |
-| `test:api` | `playwright test -c playwright.api.config.ts --grep-invert @capture` |
+| `test:api` | `tsx scripts/test-api.ts`: asks which document-types `languageCode`s to run (`1,3`, `4-13`, Enter = all; unknown codes are re-asked), then runs `playwright test -c playwright.api.config.ts --grep-invert @capture` with the answer in `ONIX_LANGUAGE_CODES`. No question when `ONIX_LANGUAGE_CODES` or `CI` is set, or stdin is closed (all languages). Extra arguments pass through: `npm run test:api -- --grep @smoke` |
 | `test:api:smoke` | `playwright test -c playwright.api.config.ts --grep @smoke` |
 | `capture` | `playwright test -c playwright.api.config.ts --grep @capture` |
+| `save:responses` | `playwright test -c playwright.api.config.ts --grep @save-response` (rewrites the saved document-types response; run on purpose, then review with `git diff`) |
 | `experiment` | `tsx src/experiments/run-experiment.ts` |
 | `report` | `playwright show-report` |
 | `typecheck`, `format` | `tsc --noEmit`, `prettier --write .` |
@@ -368,6 +369,7 @@ its own third state.
 | `src/framework/api/api-logger.ts`, `src/framework/fixtures/api-logger.fixture.ts` | new | New. Attaches redacted request/response logs to failed tests. Redact by key (`authorization`, `password`, `token`, …) **and** redact any string value that looks like a JWT (`xxx.yyy.zzz`, base64url). The login response is a bare JSON string with no key, so key-based redaction alone would put the token, and its `username` / `contactId` / `companyId` claims, into the report |
 | `src/framework/api/auth/api-authentication.ts`, `api-key-authentication.ts` | new | New (`Authorization: Key <apiKey>`) |
 | `src/framework/api/auth/bearer-token-authentication.ts` | the `Authorization: Bearer` header in `conftest.py` | New, same interface. Takes a token getter, so the token is fetched lazily |
+| `src/framework/assertions/compare-lookup-list.ts` + `tests/unit/framework/compare-lookup-list.spec.ts` | new | Pure diff of a lookup list (`id` → text) against the expected map: `shapeErrors`, `duplicateIds`, `missingIds`, `extraIds`, `changed`. Matches by id, not position; exact text match (no trim, no case folding). Tests assert `toEqual(EMPTY_LOOKUP_LIST_DIFF)` so one failure prints the whole diff. Reusable for any lookup list that takes `languageCode` |
 | `src/framework/config/environment/environment.loader.ts`, `environment-variable.ts`, `runtime.config.ts` | the `.env` loader in `conftest.py` | New: one `.env` file (only the Onix test environment). Keep the Python rule: also fill variables that exist but are **empty** in Windows (the blank `ANTHROPIC_API_KEY` problem). `runtimeConfig` exposes `onixWorkApiBaseUrl`, `verifyTls`, `judgeModel` |
 
 **TypeScript side: Onix layer** (`src/apps/onix-work/`)
@@ -379,6 +381,7 @@ its own third state.
 | `api/public/clients/account/account-public-api.client.ts` | the login call in `conftest.py` | `getTokenResponse<T>(request: TokenRequest \| string)` (negative tests; a string is sent raw for the malformed-JSON case) and `getToken()` (setup; throws if not 200). getToken() sets `Accept: application/json` itself, so the 200 body is a JSON **string** and the request handler's `JSON.parse` returns the token as `string` (without that header the server sends bare `text/plain`, section 2); `getToken()` checks it is a non-empty string with 3 JWT parts |
 | `api/public/models/account/token.request.ts`, `models/errors/*.response.ts` | new | `TokenRequest` (`username`, `password`); `ProblemDetailsResponse` (`type`, `title`, `status`, `traceId`); `ValidationProblemDetailsResponse` (+ `errors: Record<string, string[]>`); `ApiValidationErrorResponse` (`memberNames`, `errorMessage`, the other error format). Exact-shape checks use `traceId: expect.any(String)` |
 | `api/public/onix-work-public-api.provider.ts` | fixtures `onix_client` / `onix_anon_client` | `anonymous()`, `withAccount()` (Bearer, short-lived token from login) and `withApiKey()` (`Key`, only with a long-lived token from Onix Work settings in `ONIX_WORK_API_KEY`; the short-lived token returns 401 with `Key`). Each returns `{ clients }`, cached per identity |
+| `api/public/clients/common/document-type-public-api.client.ts`, `models/common/document-type.response.ts` | new | `getDocumentTypesResponse<T>(languageCode?)` for `GET v1/company/document-types`; `DocumentTypeResponse` (`documentTypeId`, `description`). Registered as `clients.documentType`; used with `withAccount()` (Bearer returns 200) |
 | `api/public/clients/<area>/…` + `models/<area>/…` | new (W9) | One client per endpoint group chosen at the feasibility gate. Add a `services/` class only for multi-step setup |
 | `fixtures/onix-work-api.fixture.ts` | `conftest.py` | `test = base.extend({ api })` on top of the api-logger fixture; `export { expect } from '@smart-assert/playwright/matchers'` (Playwright's `expect` plus `toMeetCriteria`) |
 
@@ -404,6 +407,11 @@ its own third state.
 | `tests/unit/smart-assert/policy.spec.ts`, `redact.spec.ts`, `cache.spec.ts` | new | One test per row of the decision table; redaction and cache-key cases |
 | `tests/onix-work/api/account/login/login.spec.ts`, `login-errors.spec.ts`, `login.test-data.ts` | `test_login.py`, `test_auth_errors.py` | Port. Same checks, same order: deterministic assertions first, semantic check last. Credentials for negative cases and the criteria go in `login.test-data.ts` |
 | `tests/onix-work/api/capture/capture-responses.spec.ts` | new (replaces the planned `tools/capture.ts`) | Tagged `@capture`. Uses the same providers and clients to call Onix and saves raw responses to `data/raw/`. A spec, not a script, because `RequestHandler` uses `test.step` and needs the test runner |
+| `tests/onix-work/api/common/document-type/document-type.test-data.ts` | new | **Expected** (file 1): descriptions per `documentTypeId` for English 1, Norwegian 0, Swedish 3 (15 ids each), `UNSUPPORTED_LANGUAGE_ERROR` for `languageCode=2`, and the path/format of the saved response |
+| `tests/onix-work/api/common/document-type/responses/document-types.response.json` | new | **Actual** (file 2): bodies as the API returned them for default and `languageCode` 0–15 (`SAVED_LANGUAGE_CODES`; on 2026-11-18 codes 0, 1, 3–13 gave 200 and 2, 14, 15 gave 400), with `status` and `content-type` only. Committed as a reviewed baseline; written only by `npm run save:responses` |
+| `tests/onix-work/api/capture/save-document-types.spec.ts` | new | Tagged `@capture @save-response`, so `test:api` skips it. Writes file 2 through `redactSecrets`. Stores 2xx bodies because document types are a lookup list, not company records |
+| `tests/unit/onix-work/document-type-saved-response.spec.ts` | new | Offline: file 2 vs file 1 with `compareLookupList`; default body = English body; same ids in every language; `languageCode=2` gives 400 + `UNSUPPORTED_LANGUAGE_ERROR`. Runs in `npm test` and CI |
+| `tests/onix-work/api/common/document-type/get-document-types.spec.ts` | new | Live: the same checks on the live body (`@p1 @live @regression`; the default-language test is also `@smoke`), for the languages chosen at the `test:api` prompt (`selectLanguageCases`, unit-tested in `tests/unit/onix-work/document-type-language-selection.spec.ts`). Never writes file 2 |
 | `src/baselines/exact.ts`, `rules.ts` + `tests/unit/baselines/*.spec.ts` | new | B0 and B1. Each exposes the same function: `check(case): "PASS" \| "FAIL"` |
 | `src/experiments/run-experiment.ts` | new | Plain `tsx` script (not a Playwright test, no HTTP). Reads the dataset + a config file, runs the `ajv` check and then one arm one case at a time with the cache off, writes a JSONL run file |
 | `src/experiments/run-file.ts` | new | The run-file format as one Zod schema, so TypeScript and Python agree on the columns |
