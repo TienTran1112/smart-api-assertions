@@ -1,0 +1,29 @@
+$kind: http-request
+description: "Use `ExpressLocationInfo` as input.\r
+
+  \            <br/><u>Result</u>: Location Id"
+url: "{{baseUrl}}/v1/locations"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "locationExternalId": "string",
+      "companyExternalId": "string",
+      "description": "string",
+      "address1": "string",
+      "address2": "string",
+      "countryCode": "st",
+      "zipCode": "string",
+      "cityName": "st",
+      "email": "string",
+      "phone": "string",
+      "active": true,
+      "managedDepartmentId": 8080
+    }
+settings: {}
+examples: ./.resources/Create or update location for your express company.resources/examples
+order: 2000

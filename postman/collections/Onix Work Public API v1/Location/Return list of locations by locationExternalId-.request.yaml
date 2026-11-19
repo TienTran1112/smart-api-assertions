@@ -1,0 +1,22 @@
+$kind: http-request
+name: Return list of locations by locationExternalId.
+description: "<u>Parameters</u>:\r
+
+  \            <br/><b>locationExternalId</b>\r
+
+  \            <br/>- Optional. If empty, returns all mapped locations of logged-in company.\r
+
+  \            <br/>- If provided, returns location mapped with that ERP locationExternalId.\r
+
+  \            <br/>\r
+
+  \            <br/><u>Result</u>: List of `ExpressLocationInfo`"
+url: "{{baseUrl}}/v1/locations?locationExternalId=string"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  locationExternalId: string
+settings: {}
+examples: ./.resources/Return list of locations by locationExternalId-.resources/examples
+order: 1000

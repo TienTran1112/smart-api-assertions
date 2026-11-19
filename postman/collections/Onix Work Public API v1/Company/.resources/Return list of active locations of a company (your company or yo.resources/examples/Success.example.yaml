@@ -1,0 +1,59 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v1/company/:companyId/locations?ImportId=string"
+  method: GET
+  headers:
+    - key: Authorization
+      value: <API Key>
+      description: "Added as a part of security scheme: apikey"
+    - key: Accept
+      value: application/json
+  queryParams:
+    ImportId: string
+  pathVariables:
+    - key: companyId
+      value: "1507"
+      disabled: false
+      description: "(Required) "
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "locationId": 1310,
+          "importId": "string",
+          "description": "string",
+          "address1": "string",
+          "address2": "string",
+          "countryName": "string",
+          "zipCode": "string",
+          "cityName": "string",
+          "email": "string",
+          "phone": "string",
+          "active": false,
+          "managedDepartmentId": 5106
+        },
+        {
+          "locationId": 2957,
+          "importId": "string",
+          "description": "string",
+          "address1": "string",
+          "address2": "string",
+          "countryName": "string",
+          "zipCode": "string",
+          "cityName": "string",
+          "email": "string",
+          "phone": "string",
+          "active": false,
+          "managedDepartmentId": 562
+        }
+      ]
+order: 1000

@@ -1,0 +1,20 @@
+$kind: http-request
+description: "Use `QuantityAdjustmentInfo` as input.\r
+
+  \            <br/><u>Result</u>: Equipment Id"
+url: "{{baseUrl}}/v1/equipment/quantity-adjustment"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "locationId": 560,
+      "productId": 2439,
+      "quantity": 631
+    }
+settings: {}
+examples: ./.resources/Update quantity of non-unique equipment.resources/examples
+order: 11000

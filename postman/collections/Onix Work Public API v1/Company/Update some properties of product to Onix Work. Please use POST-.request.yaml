@@ -1,0 +1,52 @@
+$kind: http-request
+name: Update some properties of product to Onix Work. Please use POST/v1/company/product instead
+description: "Use `ProductInfo` as input.\r
+
+  \            <br/><u>Result</u>: Product Id"
+url: "{{baseUrl}}/v1/company/products/:productId"
+method: PATCH
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  - key: productId
+    value: "1507"
+    disabled: false
+    description: "(Required) "
+body:
+  type: json
+  content: |-
+    {
+      "productId": 4511,
+      "importId": "string",
+      "productNo": "string",
+      "statusId": 8122,
+      "status": "string",
+      "active": false,
+      "controlCategoryId": 7799,
+      "controlCategoryDescription": "string",
+      "controlcategoryDescAndComment": "string",
+      "placement": "strin",
+      "type": "string",
+      "model": "string",
+      "description": "string",
+      "wll": "string",
+      "swl": "string",
+      "comment": "string",
+      "dealer": "string",
+      "prodAccTo": "string",
+      "producer": "string",
+      "prodYear": "string",
+      "quantityUsage": 8008,
+      "productGroup": false,
+      "connectedProductGroupId": 4447,
+      "productClassId": 5464,
+      "downloadToOnixInspect": true,
+      "useFromEquipment": false,
+      "testedAccTo": "string",
+      "process": 5322,
+      "jobComment": "string"
+    }
+settings: {}
+examples: ./.resources/Update some properties of product to Onix Work. Please use POST-.resources/examples
+order: 21000

@@ -1,0 +1,10 @@
+$kind: http-request
+name: Return the list of all form property in Onix Work.
+description: "<br/><u>Result</u>: List of `KeyValuePairInfo`"
+url: "{{baseUrl}}/v1/company/form-properties"
+method: GET
+headers:
+  Accept: application/json
+settings: {}
+examples: ./.resources/Return the list of all form property in Onix Work-.resources/examples
+order: 33000

@@ -1,0 +1,23 @@
+$kind: http-request
+name: Return the list of your departments in Onix Work.
+description: "<br/><u>Result</u>: List of `DepartmentInfo`\r
+
+  \        <br/>\r
+
+  \        <br/><u>Note</u>:\r
+
+  \        <br/>+ To limit which fields will be returned, use `$select` in query string (e.g: $select=fieldName1,fieldName2).\r
+
+  \        "
+url: "{{baseUrl}}/v1/company/departments?ImportId=string"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: ImportId
+    value: string
+    disabled: false
+    description: The import Id of department.
+settings: {}
+examples: ./.resources/Return the list of your departments in Onix Work-.resources/examples
+order: 30000

@@ -1,0 +1,37 @@
+$kind: http-request
+description: "Use `OrderLineItemsInfo` as input.\r
+
+  \            <br/><u>Result</u>: boolean"
+url: "{{baseUrl}}/v1/order-lines/items"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "orderId": 6149,
+      "orderImportId": "string",
+      "orderLineId": 2791,
+      "orderLineImportId": "string",
+      "items": [
+        {
+          "serialNumber": "string",
+          "batchNo": "string",
+          "ownersEquipmentID": "string",
+          "prodYear": "string",
+          "globalID": "string"
+        },
+        {
+          "serialNumber": "string",
+          "batchNo": "string",
+          "ownersEquipmentID": "string",
+          "prodYear": "strin",
+          "globalID": "string"
+        }
+      ]
+    }
+settings: {}
+examples: ./.resources/Numbering order line items of the Order.resources/examples
+order: 2000

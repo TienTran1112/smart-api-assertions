@@ -1,0 +1,31 @@
+$kind: http-request
+name: Return list of active areas of a company (your company or your customer) in Onix Work.
+description: "<u>Parameters</u>:\r
+
+  \        <br/><b>companyId</b>\r
+
+  \        <br/>- Can use value from `GET /company`\r
+
+  \        <br/>\r
+
+  \        <br/><u>Result</u>: List of `AreaInfo`\r
+
+  \        <br/>\r
+
+  \        <br/><u>Note</u>:\r
+
+  \        <br/>+ To limit which fields will be returned, use `$select` in query string (e.g: $select=fieldName1,fieldName2).\r
+
+  \        "
+url: "{{baseUrl}}/v1/company/:companyId/areas"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: companyId
+    value: "1507"
+    disabled: false
+    description: "(Required) "
+settings: {}
+examples: ./.resources/Return list of active areas of a company (your company or your c.resources/examples
+order: 17000

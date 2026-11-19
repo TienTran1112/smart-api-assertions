@@ -1,0 +1,20 @@
+$kind: http-request
+description: "Use `OrderLineConfirmation` as input. <br/><u>Result</u>: boolean"
+url: "{{baseUrl}}/v1/orders/confirm-order-lines"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "orderImportId": "string",
+      "orderLineImportIds": [
+        "string",
+        "string"
+      ]
+    }
+settings: {}
+examples: ./.resources/Confirm order line in order.resources/examples
+order: 3000

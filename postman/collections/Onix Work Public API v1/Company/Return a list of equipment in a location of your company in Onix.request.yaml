@@ -1,0 +1,33 @@
+$kind: http-request
+name: Return a list of equipment in a location of your company in Onix Work
+description: "<u>Parameters</u>:\r
+
+  \        <br/><b>locationId</b>\r
+
+  \        <br/>- Can use value from `GET /company/locations`\r
+
+  \        <br/>\r
+
+  \        <br/><u>Result</u>: List of `EquipmentInfo`\r
+
+  \        <br/>\r
+
+  \        <br/><u>Note</u>:\r
+
+  \        <br/>+ To fetch data, use `$page` and `$pageSize` in query string, default pageSize is 100.\r
+
+  \        <br/>+ To limit which fields will be returned, use `$select` in query string (e.g: $select=fieldName1,fieldName2).\r
+
+  \        "
+url: "{{baseUrl}}/v1/company/locations/:locationId/equipment"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: locationId
+    value: "1507"
+    disabled: false
+    description: "(Required) "
+settings: {}
+examples: ./.resources/Return a list of equipment in a location of your company in Onix.resources/examples
+order: 14000

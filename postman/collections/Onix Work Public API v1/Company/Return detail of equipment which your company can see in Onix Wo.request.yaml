@@ -1,0 +1,41 @@
+$kind: http-request
+name: Return detail of equipment which your company can see in Onix Work.
+description: "<u>Parameters</u>:\r
+
+  \        <br/><b>companyId</b>\r
+
+  \        <br/>- Can get value from `GET /company`\r
+
+  \        <br/><b>equipmentId</b>\r
+
+  \        <br/>- Can get value from api that returns equipment list (e.g.: `GET /company/{companyId}/equipment`, `GET /equipment`, ...).\r
+
+  \        <br/>- Valid value: equipmentId that has owner = companyId.\r
+
+  \        <br/>\r
+
+  \        <br/><u>Result</u>: an `EquipmentInfo`\r
+
+  \        <br/>\r
+
+  \        <br/><u>Note</u>:\r
+
+  \        <br/>+ To limit which fields will be returned, use `$select` in query string (e.g: $select=fieldName1,fieldName2).\r
+
+  \        "
+url: "{{baseUrl}}/v1/company/:companyId/equipment/:equipmentId"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: companyId
+    value: "1507"
+    disabled: false
+    description: "(Required) "
+  - key: equipmentId
+    value: "1507"
+    disabled: false
+    description: "(Required) "
+settings: {}
+examples: ./.resources/Return detail of equipment which your company can see in Onix Wo.resources/examples
+order: 7000

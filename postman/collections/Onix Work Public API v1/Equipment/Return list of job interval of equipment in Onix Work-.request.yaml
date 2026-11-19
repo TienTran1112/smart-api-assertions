@@ -1,0 +1,31 @@
+$kind: http-request
+name: Return list of job interval of equipment in Onix Work.
+description: "<u>Parameters</u>:\r
+
+  \        <br/><b>equipmentId</b>\r
+
+  \        <br/>- Can get from any api returns equipment list (e.g.: `GET /equipment`)\r
+
+  \        <br/>\r
+
+  \        <br/><u>Result</u>: a `JobInterval`\r
+
+  \        <br/>\r
+
+  \        <br/><u>Note</u>:\r
+
+  \        <br/>+ To limit which fields will be returned, use `$select` in query string (e.g: $select=fieldName1,fieldName2).\r
+
+  \        "
+url: "{{baseUrl}}/v1/equipment/:equipmentId/job-intervals"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: equipmentId
+    value: "1507"
+    disabled: false
+    description: "(Required) "
+settings: {}
+examples: ./.resources/Return list of job interval of equipment in Onix Work-.resources/examples
+order: 7000

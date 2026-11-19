@@ -1,0 +1,92 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v1/company/products?ImportId=string&LanguageCode=1507&ChangedFromUtcDatetime=2006-01-09T21:26:31.155Z&QuantityUsage=1507&ProductNo=string"
+  method: GET
+  headers:
+    - key: Authorization
+      value: <API Key>
+      description: "Added as a part of security scheme: apikey"
+    - key: Accept
+      value: application/json
+  queryParams:
+    ImportId: string
+    LanguageCode: "1507"
+    ChangedFromUtcDatetime: 2006-01-09T21:26:31.155Z
+    QuantityUsage: "1507"
+    ProductNo: string
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "productId": 3923,
+          "importId": "string",
+          "productNo": "string",
+          "statusId": 2309,
+          "status": "string",
+          "active": true,
+          "controlCategoryId": 7636,
+          "controlCategoryDescription": "string",
+          "controlcategoryDescAndComment": "string",
+          "placement": "string",
+          "type": "string",
+          "model": "string",
+          "description": "string",
+          "wll": "strin",
+          "swl": "string",
+          "comment": "string",
+          "dealer": "string",
+          "prodAccTo": "string",
+          "producer": "string",
+          "prodYear": "string",
+          "quantityUsage": 767,
+          "productGroup": false,
+          "connectedProductGroupId": 7237,
+          "productClassId": 5751,
+          "downloadToOnixInspect": true,
+          "useFromEquipment": true,
+          "testedAccTo": "string",
+          "process": 8154,
+          "jobComment": "string"
+        },
+        {
+          "productId": 1268,
+          "importId": "string",
+          "productNo": "string",
+          "statusId": 4589,
+          "status": "string",
+          "active": false,
+          "controlCategoryId": 8321,
+          "controlCategoryDescription": "string",
+          "controlcategoryDescAndComment": "string",
+          "placement": "string",
+          "type": "string",
+          "model": "string",
+          "description": "string",
+          "wll": "string",
+          "swl": "string",
+          "comment": "string",
+          "dealer": "string",
+          "prodAccTo": "string",
+          "producer": "string",
+          "prodYear": "string",
+          "quantityUsage": 887,
+          "productGroup": true,
+          "connectedProductGroupId": 7667,
+          "productClassId": 6311,
+          "downloadToOnixInspect": false,
+          "useFromEquipment": true,
+          "testedAccTo": "string",
+          "process": 6964,
+          "jobComment": "string"
+        }
+      ]
+order: 1000

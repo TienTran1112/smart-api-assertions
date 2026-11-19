@@ -1,0 +1,33 @@
+$kind: http-request
+name: Add/Update product's properties to Onix Work
+description: "Use `ProductPropertiesInfoDto` as input.\r
+
+  \            <br/><u>Result</u>: boolean"
+url: "{{baseUrl}}/v1/company/products/properties"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "productId": 9054,
+      "importId": "string",
+      "productNo": "string",
+      "properties": [
+        {
+          "description": "string",
+          "languageCode": 2270,
+          "value": "str"
+        },
+        {
+          "description": "stri",
+          "languageCode": 9082,
+          "value": "string"
+        }
+      ]
+    }
+settings: {}
+examples: ./.resources/Add-Update product's properties to Onix Work.resources/examples
+order: 28000

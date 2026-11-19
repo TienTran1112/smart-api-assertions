@@ -8,5 +8,7 @@ playwright-report/
 test-results/
 package-lock.json
 .venv/
+# Postman files are written by the Postman CLI; the spec is kept as downloaded.
+postman/
 # Saved API responses are written by npm run save:responses; keep them byte-for-byte.
 **/responses/*.response.json

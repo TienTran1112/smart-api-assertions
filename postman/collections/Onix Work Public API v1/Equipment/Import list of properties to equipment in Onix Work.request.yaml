@@ -1,0 +1,30 @@
+$kind: http-request
+description: Use `PropertyInfo` as input
+url: "{{baseUrl}}/v1/equipment/:equipmentId/properties"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: text/plain
+pathVariables:
+  - key: equipmentId
+    value: "1507"
+    disabled: false
+    description: "(Required) "
+body:
+  type: json
+  content: |-
+    [
+      {
+        "description": "",
+        "languageCode": 8875,
+        "value": "string"
+      },
+      {
+        "description": "string",
+        "languageCode": 7510,
+        "value": "string"
+      }
+    ]
+settings: {}
+examples: ./.resources/Import list of properties to equipment in Onix Work.resources/examples
+order: 6000

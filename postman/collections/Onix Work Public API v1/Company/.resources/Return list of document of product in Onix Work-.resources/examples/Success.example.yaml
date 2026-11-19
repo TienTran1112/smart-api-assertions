@@ -1,0 +1,47 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v1/company/products/:productId/documents?languageCode=1507"
+  method: GET
+  headers:
+    - key: Authorization
+      value: <API Key>
+      description: "Added as a part of security scheme: apikey"
+    - key: Accept
+      value: application/json
+  queryParams:
+    languageCode: "1507"
+  pathVariables:
+    - key: productId
+      value: "1507"
+      disabled: false
+      description: "(Required) "
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "documentId": 5368,
+          "description": "string",
+          "documentType": "string",
+          "documentDate": "string",
+          "contentType": "string",
+          "viewerUrl": "string"
+        },
+        {
+          "documentId": 5689,
+          "description": "string",
+          "documentType": "string",
+          "documentDate": "string",
+          "contentType": "string",
+          "viewerUrl": "string"
+        }
+      ]
+order: 1000

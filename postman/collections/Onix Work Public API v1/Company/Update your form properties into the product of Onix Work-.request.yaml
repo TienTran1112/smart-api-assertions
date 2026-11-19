@@ -1,0 +1,28 @@
+$kind: http-request
+name: Update your form properties into the product of Onix Work.
+description: "<br/><u>Result</u>: Returns the boolean value indicating the success of the updating process`"
+url: "{{baseUrl}}/v1/company/products/form-properties"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "productId": 9840,
+      "importId": "s",
+      "productNo": "string",
+      "properties": [
+        {
+          "key": "string",
+          "value": "string"
+        },
+        {
+          "key": "string",
+          "value": "string"
+        }
+      ]
+    }
+settings: {}
+examples: ./.resources/Update your form properties into the product of Onix Work-.resources/examples
+order: 34000

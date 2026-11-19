@@ -1,0 +1,40 @@
+$kind: http-request
+description: "<u>Parameters</u>:\r
+
+  \        <br/>Use `JobInfo` as input.\r
+
+  \        <br/><u>Result</u>: List of job id have created.\r
+
+  \        "
+url: "{{baseUrl}}/v1/jobs"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "companyId": 630,
+      "locationId": 6444,
+      "jobDate": "string",
+      "certificateString": "string",
+      "jobType": 532,
+      "jobForm": 5896,
+      "orderNo": "st",
+      "customerOrderNo": "string",
+      "filed": false,
+      "equipment": [
+        {
+          "equipmentId": 2591,
+          "importId": "str"
+        },
+        {
+          "equipmentId": 1415,
+          "importId": "string"
+        }
+      ]
+    }
+settings: {}
+examples: ./.resources/Import job for equipment.resources/examples
+order: 1000

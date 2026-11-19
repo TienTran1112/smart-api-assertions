@@ -3,8 +3,8 @@
 Plan section 2. Question: does Onix Work return enough **server-written text** to seed the
 dataset from real responses (Track A), or is a mock API needed (Track B)?
 
-**Date:** 2026-11-18. **Server:** `openapi-test.onixwork.com` (Swagger v1: 57 paths, 68
-operations). **Account:** the test account from `.env`, plus no token.
+**Date:** 2026-11-18. **Server:** `openapi-test.onixwork.com` (Swagger v1: 57 paths, 67
+operations; saved in `postman/specs/onix-work-public-api-v1.json`). **Account:** the test account from `.env`, plus no token.
 **Raw data:** `data/raw/onix-capture-2026-11-18.jsonl` (39 probes, written by
 `npm run capture`). Login cases come from `login-errors.spec.ts` and plan section 2.
 

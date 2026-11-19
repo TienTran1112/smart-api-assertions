@@ -1,0 +1,29 @@
+$kind: http-request
+description: "Use `IssueInfo` as input.\r
+
+  \            <br/><u>Result</u>: Issue Id"
+url: "{{baseUrl}}/v1/equipment/:equipmentId/issues"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  - key: equipmentId
+    value: "1507"
+    disabled: false
+    description: "(Required) "
+body:
+  type: json
+  content: |-
+    {
+      "id": 9765,
+      "importId": "string",
+      "issueStatusId": 9654,
+      "description": "string",
+      "comment": "string",
+      "dueDate": "string",
+      "solution": "string"
+    }
+settings: {}
+examples: ./.resources/Create or update issue of equipment.resources/examples
+order: 14000

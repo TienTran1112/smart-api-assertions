@@ -1,0 +1,56 @@
+$kind: http-request
+description: "<u>Parameters</u>:\r
+
+  \            <br/><b>equipmentId</b>\r
+
+  \            <br/>- Can get from any api returns equipment list (e.g.: `GET /equipment`)\r
+
+  \            <br/><u>Result</u>: Equipment Id"
+url: "{{baseUrl}}/v1/equipment/:equipmentId"
+method: PATCH
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  - key: equipmentId
+    value: "1507"
+    disabled: false
+    description: "(Required) "
+body:
+  type: json
+  content: |-
+    {
+      "equipmentId": 5293,
+      "globalId": "string",
+      "importId": "strin",
+      "serialNumber": "string",
+      "batchNo": "st",
+      "ownerEquipmentId": "",
+      "companySupplier": 1446,
+      "producer": "string",
+      "dealer": "string",
+      "companyOwner": 8313,
+      "locationId": 5861,
+      "areaId": 984,
+      "placement": "string",
+      "activeStatusId": 5814,
+      "productId": 5695,
+      "productNo": "string",
+      "controlCategoryId": 3731,
+      "wll": "string",
+      "swl": "string",
+      "type": "string",
+      "model": "string",
+      "producedAccTo": "string",
+      "producedYear": "string",
+      "keyword": "string",
+      "certificate": "string",
+      "certifiedBy": "string",
+      "certificateDate": "string",
+      "certificateExpiry": "string",
+      "nextMandatoryControlDue": "string",
+      "comment": "string"
+    }
+settings: {}
+examples: ./.resources/Update some properties equipment in Onix Work.resources/examples
+order: 3000

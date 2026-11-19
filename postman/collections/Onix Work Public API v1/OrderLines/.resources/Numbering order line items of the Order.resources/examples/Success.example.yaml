@@ -1,0 +1,44 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v1/order-lines/items"
+  method: POST
+  headers:
+    - key: Authorization
+      value: <API Key>
+      description: "Added as a part of security scheme: apikey"
+    - key: Accept
+      value: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "orderId": 4562,
+        "orderImportId": "stri",
+        "orderLineId": 5636,
+        "orderLineImportId": "string",
+        "items": [
+          {
+            "serialNumber": "string",
+            "batchNo": "string",
+            "ownersEquipmentID": "string",
+            "prodYear": "stri",
+            "globalID": "string"
+          },
+          {
+            "serialNumber": "string",
+            "batchNo": "string",
+            "ownersEquipmentID": "",
+            "prodYear": "strin",
+            "globalID": "string"
+          }
+        ]
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: "true"
+order: 1000

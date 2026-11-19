@@ -1,0 +1,48 @@
+$kind: http-request
+name: Import/update whole equipment to Onix Work
+description: "Use `EquipmentInfo` as input.\r
+
+  \            <br/><u>Result</u>: Equipment Id"
+url: "{{baseUrl}}/v1/equipment"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "equipmentId": 5293,
+      "globalId": "string",
+      "importId": "strin",
+      "serialNumber": "string",
+      "batchNo": "st",
+      "ownerEquipmentId": "",
+      "companySupplier": 1446,
+      "producer": "string",
+      "dealer": "string",
+      "companyOwner": 8313,
+      "locationId": 5861,
+      "areaId": 984,
+      "placement": "string",
+      "activeStatusId": 5814,
+      "productId": 5695,
+      "productNo": "string",
+      "controlCategoryId": 3731,
+      "wll": "string",
+      "swl": "string",
+      "type": "string",
+      "model": "string",
+      "producedAccTo": "string",
+      "producedYear": "string",
+      "keyword": "string",
+      "certificate": "string",
+      "certifiedBy": "string",
+      "certificateDate": "string",
+      "certificateExpiry": "string",
+      "nextMandatoryControlDue": "string",
+      "comment": "string"
+    }
+settings: {}
+examples: ./.resources/Import-update whole equipment to Onix Work.resources/examples
+order: 2000

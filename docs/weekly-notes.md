@@ -70,6 +70,13 @@ the Method chapter.
   Claude Code headless on the Pro/Max subscription instead of the API key. Picked with
   `JUDGE_BACKEND=claude-code` or `npm run test:api:subscription`. `npm test` 48/48;
   `npm run test:api:subscription` 20/20.
+- Imported the Onix Swagger into Postman (local files, no Postman account needed). Spec as
+  downloaded: `postman/specs/onix-work-public-api-v1.json` (OpenAPI 3.0.1, build 1.18.0.17,
+  57 paths, 67 operations). Collection: `postman/collections/Onix Work Public API v1/`
+  (`postman spec generate collection`, folders by tag: 67 requests in 7 folders).
+  `baseUrl` is the test server; `apiKey` is empty and must not be committed. Lint clean after
+  fixing 2 date query parameters; one request run with `-k` (TLS check off) reached the server
+  (401 with no key, as expected).
 
 ### Decisions
 

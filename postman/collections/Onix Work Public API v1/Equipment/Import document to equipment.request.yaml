@@ -1,0 +1,33 @@
+$kind: http-request
+description: "<u>Parameters</u>:\r
+
+  \        <br/>Use `IssuedDocumentInfo` as input.\r
+
+  \        <br/><u>Result</u>: Document Id\r
+
+  \        "
+url: "{{baseUrl}}/v1/equipment/:equipmentId/documents"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  - key: equipmentId
+    value: "1507"
+    disabled: false
+    description: "(Required) "
+body:
+  type: json
+  content: |-
+    {
+      "description": "string",
+      "documentType": 9022,
+      "documentDate": "string",
+      "contentType": "string",
+      "orderNo": "string",
+      "customerOrderNo": "string",
+      "data": "string"
+    }
+settings: {}
+examples: ./.resources/Import document to equipment.resources/examples
+order: 9000

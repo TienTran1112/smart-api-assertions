@@ -1,0 +1,33 @@
+$kind: http-request
+name: Return list of equipment of a company (your customer or your company) which you can see in Onix Work.
+description: "<u>Parameters</u>:\r
+
+  \        <br/><b>companyId</b>\r
+
+  \        <br/>- Can use value from `GET /company`\r
+
+  \        <br/>\r
+
+  \        <br/><u>Result</u>: List of `EquipmentInfo`\r
+
+  \        <br/>\r
+
+  \        <br/><u>Note</u>:\r
+
+  \        <br/>+ To fetch data, use `$page` and `$pageSize` in query string, default pageSize is 100.\r
+
+  \        <br/>+ To limit which fields will be returned, use `$select` in query string (e.g: $select=fieldName1,fieldName2).               \r
+
+  \        "
+url: "{{baseUrl}}/v1/company/:companyId/equipment"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: companyId
+    value: "1507"
+    disabled: false
+    description: "(Required) "
+settings: {}
+examples: ./.resources/Return list of equipment of a company (your customer or your com.resources/examples
+order: 5000
