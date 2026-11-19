@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
-import { assertSemantic, SemanticAssertionError } from '@smart-assert/index';
-import type { Judge, JudgeInput, JudgeVerdict, VerdictValue } from '@smart-assert/index';
+import { assertSemantic, SemanticAssertionError } from '@smart-assert';
+import type { Judge, JudgeInput, JudgeVerdict, VerdictValue } from '@smart-assert';
 
 /** Returns the given verdicts in order and records every call. */
 class FakeJudge implements Judge {

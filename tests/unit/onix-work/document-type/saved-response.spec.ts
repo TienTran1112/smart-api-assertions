@@ -5,14 +5,16 @@ import {
   EMPTY_LOOKUP_LIST_DIFF,
 } from '@framework/assertions/compare-lookup-list';
 import {
-  DOCUMENT_TYPE_KEYS,
-  DOCUMENT_TYPE_LANGUAGE_CASES,
   SAVED_RESPONSE_FILE,
-  UNSUPPORTED_LANGUAGE_CODE,
-  UNSUPPORTED_LANGUAGE_ERROR,
   type SavedDocumentTypesFile,
   type SavedResponseCase,
-} from '../../onix-work/api/common/document-type/document-type.test-data';
+} from '@tests/onix-work/api/common/document-type/document-type.saved-response';
+import {
+  DOCUMENT_TYPE_KEYS,
+  DOCUMENT_TYPE_LANGUAGE_CASES,
+  UNSUPPORTED_LANGUAGE_CODE,
+  UNSUPPORTED_LANGUAGE_ERROR,
+} from '@tests/onix-work/api/common/document-type/document-type.test-data';
 
 /**
  * Offline: compares the saved response (FILE 2, `responses/document-types.response.json`) with

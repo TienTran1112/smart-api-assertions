@@ -10,10 +10,10 @@ import { spawn } from 'node:child_process';
 import { resolve } from 'node:path';
 import { createInterface } from 'node:readline';
 import {
-  DOCUMENT_TYPE_LANGUAGE_CASES,
   LANGUAGE_CODES_ENV,
   selectLanguageCases,
-} from '../tests/onix-work/api/common/document-type/document-type.test-data';
+} from '@tests/onix-work/api/common/document-type/document-type.language-selection';
+import { DOCUMENT_TYPE_LANGUAGE_CASES } from '@tests/onix-work/api/common/document-type/document-type.test-data';
 
 const PLAYWRIGHT_CLI = resolve('node_modules/@playwright/test/cli.js');
 

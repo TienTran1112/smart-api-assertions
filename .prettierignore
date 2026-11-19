@@ -2,7 +2,6 @@
 **/*.md
 docs/
 data/
-assets/
 experiments/runs/
 notebooks/
 playwright-report/

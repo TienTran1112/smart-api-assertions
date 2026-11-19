@@ -13,10 +13,12 @@
     "types": ["node"],
     "paths": {
       "@framework/*": ["./src/framework/*"],
+      "@smart-assert": ["./src/smart-assert/index.ts"],
       "@smart-assert/*": ["./src/smart-assert/*"],
       "@onix-work/*": ["./src/apps/onix-work/*"],
       "@baselines/*": ["./src/baselines/*"],
-      "@experiments/*": ["./src/experiments/*"]
+      "@experiments/*": ["./src/experiments/*"],
+      "@tests/*": ["./tests/*"]
     }
   },
   "include": ["src/**/*.ts", "tests/**/*.ts", "scripts/**/*.ts", "*.config.ts"]

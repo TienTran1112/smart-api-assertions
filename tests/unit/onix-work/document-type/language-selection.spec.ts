@@ -1,8 +1,6 @@
 import { expect, test } from '@playwright/test';
-import {
-  DOCUMENT_TYPE_LANGUAGE_CASES,
-  selectLanguageCases,
-} from '../../onix-work/api/common/document-type/document-type.test-data';
+import { selectLanguageCases } from '@tests/onix-work/api/common/document-type/document-type.language-selection';
+import { DOCUMENT_TYPE_LANGUAGE_CASES } from '@tests/onix-work/api/common/document-type/document-type.test-data';
 
 const codes = (input: string | undefined) =>
   selectLanguageCases(input).map((language) => language.languageCode);

@@ -5,11 +5,10 @@ import {
 import type { DocumentTypeResponse } from '@onix-work/api/public/models/common/document-type.response';
 import type { ApiValidationErrorResponse } from '@onix-work/api/public/models/errors/api-validation-error.response';
 import { expect, test } from '@onix-work/fixtures/onix-work-api.fixture';
+import { LANGUAGE_CODES_ENV, selectLanguageCases } from './document-type.language-selection';
 import {
   DEFAULT_LANGUAGE_CODE,
   DOCUMENT_TYPE_KEYS,
-  LANGUAGE_CODES_ENV,
-  selectLanguageCases,
   UNSUPPORTED_LANGUAGE_CODE,
   UNSUPPORTED_LANGUAGE_ERROR,
 } from './document-type.test-data';

@@ -2,7 +2,7 @@ import type { ProblemDetailsResponse } from '@onix-work/api/public/models/errors
 import type { ValidationProblemDetailsResponse } from '@onix-work/api/public/models/errors/validation-problem-details.response';
 import { expect, test } from '@onix-work/fixtures/onix-work-api.fixture';
 import { runtimeConfig } from '@framework/config/runtime.config';
-import { assertSemantic, ClaudeJudge } from '@smart-assert/index';
+import { assertSemantic, ClaudeJudge } from '@smart-assert';
 import {
   EMPTY_CREDENTIALS,
   EMPTY_FIELDS_CRITERIA,

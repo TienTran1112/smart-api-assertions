@@ -108,13 +108,13 @@ Deterministic checks always run first, so a broken response never costs an LLM c
 | `src/framework/` | Generic API test layer: request handler, clients, auth, config, logger |
 | `src/apps/onix-work/` | Onix Work clients, models, auth, fixture |
 | `src/smart-assert/` | The library: judge, prompt versions, `assertSemantic` |
-| `tests/unit/` | Offline unit tests (judge mocked) |
-| `tests/onix-work/api/` | Live tests against Onix Work; `capture/` holds the `@capture` spec |
+| `tests/unit/` | Offline unit tests (judge mocked), mirroring `src/` and the app folders |
+| `tests/onix-work/api/` | Live tests against Onix Work, one folder per endpoint area (spec, `*.test-data.ts`, saved responses); `capture/` holds the dataset `@capture` spec |
 | `data/raw/` | Captured Onix responses (`onix-capture-<date>.jsonl`) |
 | `data/labeled/` | Labeled dataset (from W3) |
 | `experiments/configs/` | One config per experiment arm (from W7); `experiments/results/` is git-ignored |
 | `notebooks/` | Analysis notebook (W12) |
-| `docs/` | Plan, feasibility gate, proposal, weekly notes, proposal documents (`.docx`) |
+| `docs/` | Plan, feasibility gate, proposal, weekly notes; `proposal/` holds the `.docx` proposal documents, `drafts/` unsent drafts |
 
 ## Notes on the API under test
 

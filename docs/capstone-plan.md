@@ -161,7 +161,7 @@ used at the last line of a spec: `await expect(text).toMeetCriteria(CRITERIA)`.
 playwright.unit.config.ts     tests/unit/**, offline, no keys needed (the default: npm test)
 playwright.api.config.ts      tests/**/api/**, live Onix + real LLM, workers: 1
 tsconfig.json                 path aliases: @framework, @smart-assert, @onix-work,
-                              @baselines, @experiments
+                              @baselines, @experiments, @tests (shared test data)
 src/
   framework/                  generic, knows nothing about Onix or LLMs
     api/                      request-handler.ts, request-handler.factory.ts, base-api.client.ts,
@@ -203,7 +203,12 @@ tests/
   onix-work/api/account/login/
                               login.spec.ts, login-errors.spec.ts, login.test-data.ts
   onix-work/api/<area>/…      live tests for the endpoints chosen at the gate (W9)
-  onix-work/api/capture/      capture-responses.spec.ts (tag @capture; not run by default)
+  onix-work/api/common/document-type/
+                              document-type.test-data.ts (expected), .language-selection.ts,
+                              .saved-response.ts, get-document-types.spec.ts,
+                              save-document-types.spec.ts (@capture @save-response), responses/
+  onix-work/api/capture/      capture-responses.spec.ts, capture-probes.ts (tag @capture)
+  unit/onix-work/<area>/      offline checks of an area's test data and saved responses
 ```
 
 **Dependency rule** (check it in code review; break it and the experiments get harder):
@@ -407,11 +412,11 @@ its own third state.
 | `tests/unit/smart-assert/policy.spec.ts`, `redact.spec.ts`, `cache.spec.ts` | new | One test per row of the decision table; redaction and cache-key cases |
 | `tests/onix-work/api/account/login/login.spec.ts`, `login-errors.spec.ts`, `login.test-data.ts` | `test_login.py`, `test_auth_errors.py` | Port. Same checks, same order: deterministic assertions first, semantic check last. Credentials for negative cases and the criteria go in `login.test-data.ts` |
 | `tests/onix-work/api/capture/capture-responses.spec.ts` | new (replaces the planned `tools/capture.ts`) | Tagged `@capture`. Uses the same providers and clients to call Onix and saves raw responses to `data/raw/`. A spec, not a script, because `RequestHandler` uses `test.step` and needs the test runner |
-| `tests/onix-work/api/common/document-type/document-type.test-data.ts` | new | **Expected** (file 1): descriptions per `documentTypeId` for English 1, Norwegian 0, Swedish 3 (15 ids each), `UNSUPPORTED_LANGUAGE_ERROR` for `languageCode=2`, and the path/format of the saved response |
+| `tests/onix-work/api/common/document-type/document-type.test-data.ts` | new | **Expected** (file 1): descriptions per `documentTypeId` for English 1, Norwegian 0, Swedish 3 (15 ids each), `UNSUPPORTED_LANGUAGE_ERROR` for `languageCode=2`, and the `languageCode` constants. Two siblings: `document-type.language-selection.ts` (`selectLanguageCases`, `ONIX_LANGUAGE_CODES`) and `document-type.saved-response.ts` (path/format of file 2, `SAVED_CASE_REQUESTS`) |
 | `tests/onix-work/api/common/document-type/responses/document-types.response.json` | new | **Actual** (file 2): bodies as the API returned them for default and `languageCode` 0–15 (`SAVED_LANGUAGE_CODES`; on 2026-11-18 codes 0, 1, 3–13 gave 200 and 2, 14, 15 gave 400), with `status` and `content-type` only. Committed as a reviewed baseline; written only by `npm run save:responses` |
-| `tests/onix-work/api/capture/save-document-types.spec.ts` | new | Tagged `@capture @save-response`, so `test:api` skips it. Writes file 2 through `redactSecrets`. Stores 2xx bodies because document types are a lookup list, not company records |
-| `tests/unit/onix-work/document-type-saved-response.spec.ts` | new | Offline: file 2 vs file 1 with `compareLookupList`; default body = English body; same ids in every language; `languageCode=2` gives 400 + `UNSUPPORTED_LANGUAGE_ERROR`. Runs in `npm test` and CI |
-| `tests/onix-work/api/common/document-type/get-document-types.spec.ts` | new | Live: the same checks on the live body (`@p1 @live @regression`; the default-language test is also `@smoke`), for the languages chosen at the `test:api` prompt (`selectLanguageCases`, unit-tested in `tests/unit/onix-work/document-type-language-selection.spec.ts`). Never writes file 2 |
+| `tests/onix-work/api/common/document-type/save-document-types.spec.ts` | new | Tagged `@capture @save-response`, so `test:api` skips it. Writes file 2 through `redactSecrets`. Stores 2xx bodies because document types are a lookup list, not company records |
+| `tests/unit/onix-work/document-type/saved-response.spec.ts` | new | Offline: file 2 vs file 1 with `compareLookupList`; default body = English body; same ids in every language; `languageCode=2` gives 400 + `UNSUPPORTED_LANGUAGE_ERROR`. Runs in `npm test` and CI |
+| `tests/onix-work/api/common/document-type/get-document-types.spec.ts` | new | Live: the same checks on the live body (`@p1 @live @regression`; the default-language test is also `@smoke`), for the languages chosen at the `test:api` prompt (`selectLanguageCases`, unit-tested in `tests/unit/onix-work/document-type/language-selection.spec.ts`). Never writes file 2 |
 | `src/baselines/exact.ts`, `rules.ts` + `tests/unit/baselines/*.spec.ts` | new | B0 and B1. Each exposes the same function: `check(case): "PASS" \| "FAIL"` |
 | `src/experiments/run-experiment.ts` | new | Plain `tsx` script (not a Playwright test, no HTTP). Reads the dataset + a config file, runs the `ajv` check and then one arm one case at a time with the cache off, writes a JSONL run file |
 | `src/experiments/run-file.ts` | new | The run-file format as one Zod schema, so TypeScript and Python agree on the columns |

@@ -7,7 +7,7 @@ import {
   SAVED_RESPONSE_FILE,
   type SavedDocumentTypesFile,
   type SavedResponseCase,
-} from '../common/document-type/document-type.test-data';
+} from './document-type.saved-response';
 
 /**
  * Saves the actual `GET /v1/company/document-types` bodies to
@@ -15,7 +15,7 @@ import {
  * Run on purpose with `npm run save:responses`; `npm run test:api` skips it (`@capture`).
  * Review the change with `git diff` before committing it.
  *
- * Unlike `capture-responses.spec.ts`, this stores 2xx bodies: document types are a lookup list,
+ * Unlike `../../capture/capture-responses.spec.ts`, this stores 2xx bodies: document types are a lookup list,
  * not company records. No username, token or header other than `content-type` is stored.
  */
 test.describe('Save document-types responses', { tag: ['@capture', '@save-response'] }, () => {
