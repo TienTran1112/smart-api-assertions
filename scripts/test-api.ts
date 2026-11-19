@@ -5,6 +5,9 @@
  *
  * No question is asked when ONIX_LANGUAGE_CODES is already set or CI is set. Press Enter for
  * all languages; when there is no keyboard (stdin closed), all languages run.
+ *
+ * `--subscription` (used by `npm run test:api:subscription`) sets JUDGE_BACKEND=claude-code: the
+ * judge runs through Claude Code on the Pro/Max subscription instead of the API key (dev only).
  */
 import { spawn } from 'node:child_process';
 import { resolve } from 'node:path';
@@ -46,12 +49,19 @@ async function askLanguageCodes(): Promise<string> {
   }
 }
 
+const SUBSCRIPTION_FLAG = '--subscription';
+
 async function main(): Promise<void> {
+  const args = process.argv.slice(2);
+  const subscription = args.includes(SUBSCRIPTION_FLAG);
+  const playwrightArgs = args.filter((arg) => arg !== SUBSCRIPTION_FLAG);
   const preset = process.env[LANGUAGE_CODES_ENV];
   const answer = preset ?? (process.env.CI ? '' : await askLanguageCodes());
 
   const selected = selectLanguageCases(answer);
   const all = selected.length === DOCUMENT_TYPE_LANGUAGE_CASES.length;
+  if (subscription)
+    console.log('Judge: Claude Code on the subscription (JUDGE_BACKEND=claude-code)');
   console.log(
     `Running document-types for ${
       all
@@ -69,13 +79,14 @@ async function main(): Promise<void> {
       'playwright.api.config.ts',
       '--grep-invert',
       '@capture',
-      ...process.argv.slice(2),
+      ...playwrightArgs,
     ],
     {
       stdio: 'inherit',
       env: {
         ...process.env,
         [LANGUAGE_CODES_ENV]: all ? '' : selected.map((l) => l.languageCode).join(','),
+        ...(subscription ? { JUDGE_BACKEND: 'claude-code' } : {}),
       },
     },
   );
