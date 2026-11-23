@@ -13,4 +13,4 @@ export type { CreateJudgeOptions, JudgeBackend } from './judge/create-judge';
 export type { Judge, JudgeCallInfo, JudgeInput, JudgeVerdict } from './judge/judge';
 export { VerdictSchema } from './judge/judge-output.schema';
 export type { Verdict, VerdictValue } from './judge/judge-output.schema';
-export { PROMPT_VERSION } from './judge/prompts/v1';
+export { PROMPT_VERSION } from './judge/prompts/v2';

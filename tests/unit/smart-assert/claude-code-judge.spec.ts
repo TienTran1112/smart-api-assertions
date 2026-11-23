@@ -47,7 +47,7 @@ test.describe('ClaudeCodeJudge', () => {
       requestedModel: MODEL,
       model: MODEL,
       effort: 'low',
-      promptVersion: 'v1',
+      promptVersion: 'v2',
       inputTokens: 1502,
       outputTokens: 200,
     });

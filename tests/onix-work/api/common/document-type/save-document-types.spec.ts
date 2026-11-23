@@ -11,7 +11,8 @@ import {
 
 /**
  * Saves the actual `GET /v1/company/document-types` bodies to
- * `tests/onix-work/api/common/document-type/responses/document-types.response.json` (FILE 2).
+ * `tests/onix-work/api/common/document-type/responses/document-types.response.json`.
+ * GET rule (plan section 3.1): this stored data is not an expected result; nothing compares it.
  * Run on purpose with `npm run save:responses`; `npm run test:api` skips it (`@capture`).
  * Review the change with `git diff` before committing it.
  *

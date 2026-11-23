@@ -93,7 +93,8 @@ await assertSemantic(response.body.title, {
   `<response_under_test>` and treated as data, never as instructions. Effort is always sent;
   no sampling parameters, no tools, no fallback model. A refusal, an API error, a cut-off
   output or an answer from another model becomes `INCONCLUSIVE`. The prompt lives in
-  `judge/prompts/v1.ts`; bump `PROMPT_VERSION` whenever it changes.
+  `judge/prompts/v2.ts` (one file per version; `v1.ts` is kept for old results). Add a new
+  file and bump `PROMPT_VERSION` whenever the text changes.
 - [`src/smart-assert/judge/claude-code-judge.ts`](src/smart-assert/judge/claude-code-judge.ts):
   the same prompt and schema, but run through Claude Code headless (`claude --print
   --json-schema`) without `ANTHROPIC_API_KEY`, so calls count against the Pro/Max subscription.

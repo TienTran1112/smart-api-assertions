@@ -2,9 +2,9 @@ import { resolve } from 'node:path';
 import { DOCUMENT_TYPE_LANGUAGE_CASES, UNSUPPORTED_LANGUAGE_CODE } from './document-type.test-data';
 
 /**
- * Saved response (FILE 2). Written only by `npm run save:responses`
- * (tests/onix-work/api/common/document-type/save-document-types.spec.ts), read by the offline spec
- * (tests/unit/onix-work/document-type/saved-response.spec.ts).
+ * Stored GET data. Written only by `npm run save:responses`
+ * (tests/onix-work/api/common/document-type/save-document-types.spec.ts). It is the record of what
+ * the API returned, not an expected result: nothing compares against it.
  */
 
 /** Relative to the repo root, where every npm script runs. */

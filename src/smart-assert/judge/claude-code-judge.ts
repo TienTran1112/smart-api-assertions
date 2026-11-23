@@ -4,7 +4,7 @@ import { z } from 'zod';
 import type { JudgeEffort } from './claude-judge';
 import type { Judge, JudgeCallInfo, JudgeInput, JudgeVerdict } from './judge';
 import { VerdictSchema } from './judge-output.schema';
-import { PROMPT_VERSION, SYSTEM_PROMPT, buildUserMessage } from './prompts/v1';
+import { PROMPT_VERSION, SYSTEM_PROMPT, buildUserMessage } from './prompts/v2';
 
 export interface ClaudeCodeRunResult {
   exitCode: number | null;
