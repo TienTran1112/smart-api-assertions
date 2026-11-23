@@ -199,6 +199,9 @@ src/
       models/errors/          problem-details.response.ts, validation-problem-details.response.ts,
                               api-validation-error.response.ts ({ memberNames, errorMessage })
       errors/                 classify-token-error.ts (why POST v1/Account/token gave no token)
+    language/                 language-code.ts (ONIX_LANGUAGES, UNSUPPORTED_LANGUAGE_CODE),
+                              language-selection.ts (selectedLanguages, ONIX_LANGUAGE_CODES);
+                              shared by every endpoint that takes languageCode
     fixtures/onix-work-api.fixture.ts   test.extend({ api }) + export expect from smart-assert
   baselines/                  exact.ts (B0), rules.ts (B1)
   experiments/                run-experiment.ts, run-file.ts (plain tsx scripts, no Playwright)
@@ -210,9 +213,11 @@ tests/
                               login.test-data.ts
   onix-work/api/<area>/…      live tests for the endpoints chosen at the gate (W9)
   onix-work/api/common/document-type/
-                              document-type.test-data.ts (language list), .language-selection.ts,
-                              .saved-response.ts, get-document-types.spec.ts,
+                              document-type.saved-response.ts, get-document-types.spec.ts,
                               save-document-types.spec.ts (@capture @save-response), responses/
+  onix-work/api/common/property/, job-type/
+                              save-properties.spec.ts / save-job-types.spec.ts (@capture
+                              @save-response), responses/; shared: common/saved-lookup-response.ts
   onix-work/api/capture/      capture-responses.spec.ts, capture-probes.ts (tag @capture)
   unit/onix-work/<area>/      offline checks of an area's test data and saved responses
 ```
@@ -368,10 +373,10 @@ its own third state.
 | Script | Command |
 |---|---|
 | `test` / `test:unit` | `playwright test -c playwright.unit.config.ts` |
-| `test:api` | `tsx scripts/test-api.ts`: asks which document-types `languageCode`s to run (`1,3`, `4-13`, Enter = all; unknown codes are re-asked), then runs `playwright test -c playwright.api.config.ts --grep-invert @capture` with the answer in `ONIX_LANGUAGE_CODES`. No question when `ONIX_LANGUAGE_CODES` or `CI` is set, or stdin is closed (all languages). Extra arguments pass through: `npm run test:api -- --grep @smoke` |
+| `test:api` | `tsx scripts/test-api.ts`: asks which `languageCode`s to run (`1,3`, `4-13`, Enter = all; one answer for every spec that loops over `selectedLanguages()`; unknown codes are re-asked), then runs `playwright test -c playwright.api.config.ts --grep-invert @capture` with the answer in `ONIX_LANGUAGE_CODES`. No question when `ONIX_LANGUAGE_CODES` or `CI` is set, or stdin is closed (all languages). Extra arguments pass through: `npm run test:api -- --grep @smoke` |
 | `test:api:smoke` | `playwright test -c playwright.api.config.ts --grep @smoke` |
 | `capture` | `playwright test -c playwright.api.config.ts --grep @capture` |
-| `save:responses` | `playwright test -c playwright.api.config.ts --grep @save-response` (stores the data the GET endpoints return: document-types today, plus one save spec per new GET endpoint; run on purpose, then review with `git diff`) |
+| `save:responses` | `playwright test -c playwright.api.config.ts --grep @save-response` (stores the data the GET endpoints return: document-types, properties and job-types today, plus one save spec per new GET endpoint; run on purpose, then review with `git diff`) |
 | `experiment` | `tsx src/experiments/run-experiment.ts` |
 | `report` | `playwright show-report` |
 | `typecheck`, `format` | `tsc --noEmit`, `prettier --write .` |
@@ -398,7 +403,10 @@ its own third state.
 | `api/public/models/account/token.request.ts`, `models/errors/*.response.ts` | new | `TokenRequest` (`username`, `password`); `ProblemDetailsResponse` (`type`, `title`, `status`, `traceId`); `ValidationProblemDetailsResponse` (+ `errors: Record<string, string[]>`); `ApiValidationErrorResponse` (`memberNames`, `errorMessage`, the other error format). Exact-shape checks use `traceId: expect.any(String)` |
 | `api/public/onix-work-public-api.provider.ts` | fixtures `onix_client` / `onix_anon_client` | `anonymous()`, `withAccount()` (Bearer, short-lived token from login) and `withApiKey()` (`Key`, only with a long-lived token from Onix Work settings in `ONIX_WORK_API_KEY`; the short-lived token returns 401 with `Key`). Each returns `{ clients }`, cached per identity |
 | `api/public/clients/common/document-type-public-api.client.ts`, `models/common/document-type.response.ts` | new | `getDocumentTypesResponse<T>(languageCode?)` for `GET v1/company/document-types`; `DocumentTypeResponse` (`documentTypeId`, `description`). Registered as `clients.documentType`; used with `withAccount()` (Bearer returns 200) |
+| `api/public/clients/common/property-public-api.client.ts`, `job-type-public-api.client.ts`, `models/common/property.response.ts`, `job-type.response.ts` | new | `getPropertiesResponse<T>(languageCode?)` for `GET v1/company/properties` (`PropertyResponse`: `languageCode`, `description`, `value`) and `getJobTypesResponse<T>(languageCode?)` for `GET v1/company/job-types` (`JobTypeResponse`: `key` as a string, `value`; the Swagger file names `DocumentTypeInfoDto` there, which the live body does not match). Registered as `clients.property` and `clients.jobType`; same `languageCode` rules as document-types (2, 14, 15 → 400) |
+| `src/framework/data/limit-list.ts` | new | `limitList(body, { limit, sortBy })`: a list longer than `limit` is sorted descending by `sortBy` (English collator, numeric, so `"14"` > `"2"`) and cut to `limit`; a shorter list is kept as returned; an error body is kept unchanged. Returns `totalCount`, `storedCount`, `order`. Unit-tested in `tests/unit/framework/limit-list.spec.ts` |
 | `api/public/clients/<area>/…` + `models/<area>/…` | new (W9) | One client per endpoint group chosen at the feasibility gate. Add a `services/` class only for multi-step setup |
+| `language/language-code.ts`, `language/language-selection.ts` | new | Shared by every endpoint that takes `languageCode`. `ONIX_LANGUAGES` (`languageCode` + `languageName` for codes 0, 1, 3–13, English first), `DEFAULT_LANGUAGE_CODE` (1), `UNSUPPORTED_LANGUAGE_CODE` (2, gives 400), `findLanguage(code)`. `selectLanguages(text)` parses the `test:api` answer (`1,3`, `4-13`, `all`); `selectedLanguages()` reads `ONIX_LANGUAGE_CODES`, so a spec loops with `for (const language of selectedLanguages())`. Unit-tested in `tests/unit/onix-work/language/language-selection.spec.ts`. No expected values (GET rule, section 3.1) |
 | `fixtures/onix-work-api.fixture.ts` | `conftest.py` | `test = base.extend({ api })` on top of the api-logger fixture; `export { expect } from '@smart-assert/playwright/matchers'` (Playwright's `expect` plus `toMeetCriteria`) |
 
 **TypeScript side: smart-assert layer** (`src/smart-assert/`, the research contribution)
@@ -424,10 +432,11 @@ its own third state.
 | `tests/onix-work/api/account/login/login.spec.ts`, `login-errors.spec.ts`, `login.test-data.ts` | `test_login.py`, `test_auth_errors.py` | Port. Same checks, same order: deterministic assertions first, semantic check last. Credentials for negative cases and the criteria go in `login.test-data.ts` |
 | `tests/onix-work/api/account/login/login-error-kinds.spec.ts` | new | Live (`@p2 @live @regression`): 10 bad requests from `TOKEN_ERROR_KIND_CASES` in `login.test-data.ts` (unknown user, extra property, empty fields, missing password, 101-char username, empty body, truncated JSON, number for username, array body, text/plain), each must get its expected status, kind and fields. Made-up usernames only. Offline rules: `tests/unit/onix-work/account/classify-token-error.spec.ts` (25 tests, live bodies) |
 | `tests/onix-work/api/capture/capture-responses.spec.ts` | new (replaces the planned `tools/capture.ts`) | Tagged `@capture`. Uses the same providers and clients to call Onix and saves raw responses to `data/raw/`. A spec, not a script, because `RequestHandler` uses `test.step` and needs the test runner |
-| `tests/onix-work/api/common/document-type/document-type.test-data.ts` | new | Language list only (`languageCode` + `languageName` for codes 0, 1, 3–13), `DEFAULT_LANGUAGE_CODE` and `UNSUPPORTED_LANGUAGE_CODE`. No expected descriptions (GET rule, section 3.1). Two siblings: `document-type.language-selection.ts` (`selectLanguageCases`, `ONIX_LANGUAGE_CODES`) and `document-type.saved-response.ts` (path/format of the stored file, `SAVED_CASE_REQUESTS`) |
+| `tests/onix-work/api/common/document-type/document-type.saved-response.ts` | new | Path and format of the stored file; `SAVED_CASE_REQUESTS` (default plus `languageCode` 0–15, names from `findLanguage`). Languages come from `src/apps/onix-work/language/` |
 | `tests/onix-work/api/common/document-type/responses/document-types.response.json` | new | The stored data: bodies as the API returned them for default and `languageCode` 0–15 (`SAVED_LANGUAGE_CODES`; on 2026-11-18 codes 0, 1, 3–13 gave 200 and 2, 14, 15 gave 400), with `status` and `content-type` only. Committed; written only by `npm run save:responses`; nothing compares against it |
 | `tests/onix-work/api/common/document-type/save-document-types.spec.ts` | new | Tagged `@capture @save-response`, so `test:api` skips it. Writes the stored file through `redactSecrets`. Stores 2xx bodies because document types are a lookup list, not company records |
-| `tests/onix-work/api/common/document-type/get-document-types.spec.ts` | new | Live (`@p1 @live @regression`): status 200 + `application/json` for each language chosen at the `test:api` prompt (`selectLanguageCases`, unit-tested in `tests/unit/onix-work/document-type/language-selection.spec.ts`) and for the default language (`@smoke`); 400 + `application/json` for `languageCode=2`. Never compares the body, never writes the stored file |
+| `tests/onix-work/api/common/saved-lookup-response.ts`, `property/save-properties.spec.ts`, `job-type/save-job-types.spec.ts`, `*/responses/*.response.json` | new | `saveLookupResponses()` saves default + `languageCode` 0–15 for one endpoint, at most `MAX_STORED_ITEMS` = 20 items per case: a longer list is stored as its top 20 by `sortBy` descending (`description` for properties, which have no id; `key` for job-types). Each case records `totalCount`, `storedCount` and `order`, so a cut list is visible. On 2026-11-23 properties had 50 items (`$skip=50` returns none), stored as the top 20 by `description` descending; job-types had 9, stored as returned. Tagged `@capture @save-response`; nothing compares against the stored files |
+| `tests/onix-work/api/common/document-type/get-document-types.spec.ts` | new | Live (`@p1 @live @regression`): status 200 + `application/json` for each language chosen at the `test:api` prompt (`selectedLanguages()` from `@onix-work/language/language-selection`) and for the default language (`@smoke`); 400 + `application/json` for `languageCode=2`. Never compares the body, never writes the stored file |
 | `src/baselines/exact.ts`, `rules.ts` + `tests/unit/baselines/*.spec.ts` | new | B0 and B1. Each exposes the same function: `check(case): "PASS" \| "FAIL"` |
 | `src/experiments/run-experiment.ts` | new | Plain `tsx` script (not a Playwright test, no HTTP). Reads the dataset + a config file, runs the `ajv` check and then one arm one case at a time with the cache off, writes a JSONL run file |
 | `src/experiments/run-file.ts` | new | The run-file format as one Zod schema, so TypeScript and Python agree on the columns |

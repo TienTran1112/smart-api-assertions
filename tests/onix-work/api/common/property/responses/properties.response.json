@@ -1,0 +1,1608 @@
+{
+  "endpoint": "GET /v1/company/properties",
+  "auth": "Bearer (.env account)",
+  "savedAt": "2026-11-23T15:10:28.482Z",
+  "maxStoredItems": 20,
+  "sortBy": "description",
+  "cases": [
+    {
+      "name": "default",
+      "languageCode": null,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 50,
+      "storedCount": 20,
+      "order": "description desc",
+      "body": [
+        {
+          "languageCode": 1,
+          "description": "Weight (mt)",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Warranty term",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Unit",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Type of terminal fittings",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Transmission",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Test report No.",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Temperature class",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Surface Treatment",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Safety Factor",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Reference standard",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Quality of wire (N/mm2)",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Operational Class",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Number of strands",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Number of falls",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Nominal diameter (mm)",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "No. of wires per strand",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Minimum breaking load",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Min length (m)",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Max length (m)",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Lifting speed",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "Norwegian",
+      "languageCode": 0,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 50,
+      "storedCount": 20,
+      "order": "description desc",
+      "body": [
+        {
+          "languageCode": 0,
+          "description": "Vekt (mt)",
+          "value": null
+        },
+        {
+          "languageCode": 0,
+          "description": "Utstyrs beskyttelsesnivå (EPL)",
+          "value": null
+        },
+        {
+          "languageCode": 0,
+          "description": "Testrapport nr.",
+          "value": null
+        },
+        {
+          "languageCode": 0,
+          "description": "Temperaturklasser",
+          "value": null
+        },
+        {
+          "languageCode": 0,
+          "description": "Strekkfasthet",
+          "value": null
+        },
+        {
+          "languageCode": 0,
+          "description": "Stråle (m)",
+          "value": null
+        },
+        {
+          "languageCode": 0,
+          "description": "Slagning",
+          "value": null
+        },
+        {
+          "languageCode": 0,
+          "description": "Sikkerhetsfaktor",
+          "value": null
+        },
+        {
+          "languageCode": 0,
+          "description": "Registreringsnummer",
+          "value": null
+        },
+        {
+          "languageCode": 0,
+          "description": "Referansestandard",
+          "value": null
+        },
+        {
+          "languageCode": 0,
+          "description": "Overflatebehandling",
+          "value": null
+        },
+        {
+          "languageCode": 0,
+          "description": "Operasjonell klasse",
+          "value": null
+        },
+        {
+          "languageCode": 0,
+          "description": "Nominell diameter (mm)",
+          "value": null
+        },
+        {
+          "languageCode": 0,
+          "description": "Minimum bruddlast",
+          "value": null
+        },
+        {
+          "languageCode": 0,
+          "description": "Min lengde (m)",
+          "value": null
+        },
+        {
+          "languageCode": 0,
+          "description": "Materialkvalitet (N/mm2)",
+          "value": null
+        },
+        {
+          "languageCode": 0,
+          "description": "Maks lengde (m)",
+          "value": null
+        },
+        {
+          "languageCode": 0,
+          "description": "Løftehøyde",
+          "value": null
+        },
+        {
+          "languageCode": 0,
+          "description": "Løftehastighet",
+          "value": null
+        },
+        {
+          "languageCode": 0,
+          "description": "Lengde ståltau ben (forløper)",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "English",
+      "languageCode": 1,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 50,
+      "storedCount": 20,
+      "order": "description desc",
+      "body": [
+        {
+          "languageCode": 1,
+          "description": "Weight (mt)",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Warranty term",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Unit",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Type of terminal fittings",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Transmission",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Test report No.",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Temperature class",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Surface Treatment",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Safety Factor",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Reference standard",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Quality of wire (N/mm2)",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Operational Class",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Number of strands",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Number of falls",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Nominal diameter (mm)",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "No. of wires per strand",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Minimum breaking load",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Min length (m)",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Max length (m)",
+          "value": null
+        },
+        {
+          "languageCode": 1,
+          "description": "Lifting speed",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "unsupported",
+      "languageCode": 2,
+      "status": 400,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": null,
+      "storedCount": null,
+      "order": "as returned",
+      "body": {
+        "memberNames": [
+          "languageCode"
+        ],
+        "errorMessage": "2 invalid language"
+      }
+    },
+    {
+      "name": "Swedish",
+      "languageCode": 3,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 50,
+      "storedCount": 20,
+      "order": "description desc",
+      "body": [
+        {
+          "languageCode": 3,
+          "description": "Ytbehandling",
+          "value": null
+        },
+        {
+          "languageCode": 3,
+          "description": "Vikt (mt)",
+          "value": null
+        },
+        {
+          "languageCode": 3,
+          "description": "Utrustningsskyddsnivå (EPL)",
+          "value": null
+        },
+        {
+          "languageCode": 3,
+          "description": "Transmission",
+          "value": null
+        },
+        {
+          "languageCode": 3,
+          "description": "Testrapport nr",
+          "value": null
+        },
+        {
+          "languageCode": 3,
+          "description": "Temperaturklassen",
+          "value": null
+        },
+        {
+          "languageCode": 3,
+          "description": "Slagning",
+          "value": null
+        },
+        {
+          "languageCode": 3,
+          "description": "Säkerhetsfaktor",
+          "value": null
+        },
+        {
+          "languageCode": 3,
+          "description": "Referensstandard",
+          "value": null
+        },
+        {
+          "languageCode": 3,
+          "description": "Operativ klass",
+          "value": null
+        },
+        {
+          "languageCode": 3,
+          "description": "Number of falls",
+          "value": null
+        },
+        {
+          "languageCode": 3,
+          "description": "Nominell diameter (mm)",
+          "value": null
+        },
+        {
+          "languageCode": 3,
+          "description": "Minimum brottstyrka",
+          "value": null
+        },
+        {
+          "languageCode": 3,
+          "description": "Min Längd (m)",
+          "value": null
+        },
+        {
+          "languageCode": 3,
+          "description": "Maxlängd (m)",
+          "value": null
+        },
+        {
+          "languageCode": 3,
+          "description": "Materialkvalitet (N/mm2)",
+          "value": null
+        },
+        {
+          "languageCode": 3,
+          "description": "Lifting speed",
+          "value": null
+        },
+        {
+          "languageCode": 3,
+          "description": "Lifting height",
+          "value": null
+        },
+        {
+          "languageCode": 3,
+          "description": "License plate number",
+          "value": null
+        },
+        {
+          "languageCode": 3,
+          "description": "Längden på vajern (föregångaren)",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "Danish",
+      "languageCode": 4,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 50,
+      "storedCount": 20,
+      "order": "description desc",
+      "body": [
+        {
+          "languageCode": 4,
+          "description": "Vægt (mt)",
+          "value": null
+        },
+        {
+          "languageCode": 4,
+          "description": "Udstyrsbeskyttelsesniveau (EPL)",
+          "value": null
+        },
+        {
+          "languageCode": 4,
+          "description": "Transmission",
+          "value": null
+        },
+        {
+          "languageCode": 4,
+          "description": "Trækstyrke",
+          "value": null
+        },
+        {
+          "languageCode": 4,
+          "description": "Testrapport nr.",
+          "value": null
+        },
+        {
+          "languageCode": 4,
+          "description": "Temperaturklasser",
+          "value": null
+        },
+        {
+          "languageCode": 4,
+          "description": "Stråle (m)",
+          "value": null
+        },
+        {
+          "languageCode": 4,
+          "description": "Slagning",
+          "value": null
+        },
+        {
+          "languageCode": 4,
+          "description": "Sikkerhedsfaktor",
+          "value": null
+        },
+        {
+          "languageCode": 4,
+          "description": "Reference standard",
+          "value": null
+        },
+        {
+          "languageCode": 4,
+          "description": "Overfladebehandling",
+          "value": null
+        },
+        {
+          "languageCode": 4,
+          "description": "Operationel klasse",
+          "value": null
+        },
+        {
+          "languageCode": 4,
+          "description": "Number of falls",
+          "value": null
+        },
+        {
+          "languageCode": 4,
+          "description": "Nominel diameter (mm)",
+          "value": null
+        },
+        {
+          "languageCode": 4,
+          "description": "Minimum brudstyrke",
+          "value": null
+        },
+        {
+          "languageCode": 4,
+          "description": "Min længde (m)",
+          "value": null
+        },
+        {
+          "languageCode": 4,
+          "description": "Materialekvalitet (N/mm2)",
+          "value": null
+        },
+        {
+          "languageCode": 4,
+          "description": "Maks. længde (m)",
+          "value": null
+        },
+        {
+          "languageCode": 4,
+          "description": "Lifting speed",
+          "value": null
+        },
+        {
+          "languageCode": 4,
+          "description": "Lifting height",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "Dutch",
+      "languageCode": 5,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 50,
+      "storedCount": 20,
+      "order": "description desc",
+      "body": [
+        {
+          "languageCode": 5,
+          "description": "Veiligheidsfactor",
+          "value": null
+        },
+        {
+          "languageCode": 5,
+          "description": "Type eindverbindingen ",
+          "value": null
+        },
+        {
+          "languageCode": 5,
+          "description": "Testrapport nr.",
+          "value": null
+        },
+        {
+          "languageCode": 5,
+          "description": "Temperatuurklasse",
+          "value": null
+        },
+        {
+          "languageCode": 5,
+          "description": "Slag",
+          "value": null
+        },
+        {
+          "languageCode": 5,
+          "description": "Referentienorm",
+          "value": null
+        },
+        {
+          "languageCode": 5,
+          "description": "Parten",
+          "value": null
+        },
+        {
+          "languageCode": 5,
+          "description": "Oppervlakte behandeling",
+          "value": null
+        },
+        {
+          "languageCode": 5,
+          "description": "Operationele klasse",
+          "value": null
+        },
+        {
+          "languageCode": 5,
+          "description": "Nominale diameter (mm)",
+          "value": null
+        },
+        {
+          "languageCode": 5,
+          "description": "Minimale lengte (m)",
+          "value": null
+        },
+        {
+          "languageCode": 5,
+          "description": "Minimale breukbelasting",
+          "value": null
+        },
+        {
+          "languageCode": 5,
+          "description": "Maximale lengte (m)",
+          "value": null
+        },
+        {
+          "languageCode": 5,
+          "description": "Lengte poten (voorloper)",
+          "value": null
+        },
+        {
+          "languageCode": 5,
+          "description": "Lengte (m)",
+          "value": null
+        },
+        {
+          "languageCode": 5,
+          "description": "Kwaliteit van staalkabel",
+          "value": null
+        },
+        {
+          "languageCode": 5,
+          "description": "Kriticiteitsniveau",
+          "value": null
+        },
+        {
+          "languageCode": 5,
+          "description": "Kleur",
+          "value": null
+        },
+        {
+          "languageCode": 5,
+          "description": "Kern",
+          "value": null
+        },
+        {
+          "languageCode": 5,
+          "description": "Kentekennummer",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "German",
+      "languageCode": 6,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 50,
+      "storedCount": 20,
+      "order": "description desc",
+      "body": [
+        {
+          "languageCode": 6,
+          "description": "Winkel der Schenkel (zur Vertikalen)",
+          "value": null
+        },
+        {
+          "languageCode": 6,
+          "description": "Transmission",
+          "value": null
+        },
+        {
+          "languageCode": 6,
+          "description": "Temperaturklasse",
+          "value": null
+        },
+        {
+          "languageCode": 6,
+          "description": "Tatsächlicher Durchmesser (mm)",
+          "value": null
+        },
+        {
+          "languageCode": 6,
+          "description": "Tatsächliche Bruchlast (ABL)",
+          "value": null
+        },
+        {
+          "languageCode": 6,
+          "description": "Sicherheitsfaktor",
+          "value": null
+        },
+        {
+          "languageCode": 6,
+          "description": "Schlacke",
+          "value": null
+        },
+        {
+          "languageCode": 6,
+          "description": "Referenzstandard",
+          "value": null
+        },
+        {
+          "languageCode": 6,
+          "description": "Prüfbericht Nr.",
+          "value": null
+        },
+        {
+          "languageCode": 6,
+          "description": "Oberflächenbehandlung",
+          "value": null
+        },
+        {
+          "languageCode": 6,
+          "description": "Number of falls",
+          "value": null
+        },
+        {
+          "languageCode": 6,
+          "description": "Nenndurchmesser (mm)",
+          "value": null
+        },
+        {
+          "languageCode": 6,
+          "description": "Minimale Bruchlast",
+          "value": null
+        },
+        {
+          "languageCode": 6,
+          "description": "Mindestlänge (m)",
+          "value": null
+        },
+        {
+          "languageCode": 6,
+          "description": "Maximale Länge (m)",
+          "value": null
+        },
+        {
+          "languageCode": 6,
+          "description": "Lifting speed",
+          "value": null
+        },
+        {
+          "languageCode": 6,
+          "description": "Lifting height",
+          "value": null
+        },
+        {
+          "languageCode": 6,
+          "description": "License plate number",
+          "value": null
+        },
+        {
+          "languageCode": 6,
+          "description": "Länge der Schenkel (Vorläufer)",
+          "value": null
+        },
+        {
+          "languageCode": 6,
+          "description": "Länge (m)",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "Spanish",
+      "languageCode": 7,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 50,
+      "storedCount": 20,
+      "order": "description desc",
+      "body": [
+        {
+          "languageCode": 7,
+          "description": "Unit",
+          "value": null
+        },
+        {
+          "languageCode": 7,
+          "description": "Type of terminal fittings",
+          "value": null
+        },
+        {
+          "languageCode": 7,
+          "description": "Tratamiento de superficie",
+          "value": null
+        },
+        {
+          "languageCode": 7,
+          "description": "Transmission",
+          "value": null
+        },
+        {
+          "languageCode": 7,
+          "description": "Test report No",
+          "value": null
+        },
+        {
+          "languageCode": 7,
+          "description": "Reference standard",
+          "value": null
+        },
+        {
+          "languageCode": 7,
+          "description": "Probabilidad de fallo",
+          "value": null
+        },
+        {
+          "languageCode": 7,
+          "description": "Plazo de garantía",
+          "value": null
+        },
+        {
+          "languageCode": 7,
+          "description": "Peso (tm)",
+          "value": null
+        },
+        {
+          "languageCode": 7,
+          "description": "Operaction class",
+          "value": null
+        },
+        {
+          "languageCode": 7,
+          "description": "Número de hebras",
+          "value": null
+        },
+        {
+          "languageCode": 7,
+          "description": "Número de cables por hebra",
+          "value": null
+        },
+        {
+          "languageCode": 7,
+          "description": "Number of falls",
+          "value": null
+        },
+        {
+          "languageCode": 7,
+          "description": "Núcleo",
+          "value": null
+        },
+        {
+          "languageCode": 7,
+          "description": "Niveles de protección de equipos (EPL)",
+          "value": null
+        },
+        {
+          "languageCode": 7,
+          "description": "Marcación ATEX",
+          "value": null
+        },
+        {
+          "languageCode": 7,
+          "description": "Longitud mínima (m)",
+          "value": null
+        },
+        {
+          "languageCode": 7,
+          "description": "Longitud máxima (m)",
+          "value": null
+        },
+        {
+          "languageCode": 7,
+          "description": "Longitud de trabajo efectiva",
+          "value": null
+        },
+        {
+          "languageCode": 7,
+          "description": "Longitud (m)",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "Finnish",
+      "languageCode": 8,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 50,
+      "storedCount": 20,
+      "order": "description desc",
+      "body": [
+        {
+          "languageCode": 8,
+          "description": "Yleistä tietoa",
+          "value": null
+        },
+        {
+          "languageCode": 8,
+          "description": "Yksikkö",
+          "value": null
+        },
+        {
+          "languageCode": 8,
+          "description": "Vikatodennäköisyys",
+          "value": null
+        },
+        {
+          "languageCode": 8,
+          "description": "Vikaseuraus",
+          "value": null
+        },
+        {
+          "languageCode": 8,
+          "description": "Viitestandardi",
+          "value": null
+        },
+        {
+          "languageCode": 8,
+          "description": "Väri",
+          "value": null
+        },
+        {
+          "languageCode": 8,
+          "description": "Vaijerin laatu (N/mm2)",
+          "value": null
+        },
+        {
+          "languageCode": 8,
+          "description": "Vaijeriköyden laatu",
+          "value": null
+        },
+        {
+          "languageCode": 8,
+          "description": "Turvallisuuskerroin",
+          "value": null
+        },
+        {
+          "languageCode": 8,
+          "description": "Transmission",
+          "value": null
+        },
+        {
+          "languageCode": 8,
+          "description": "Todellinen murtokuorma (ABL)",
+          "value": null
+        },
+        {
+          "languageCode": 8,
+          "description": "Todellinen halkaisija (mm)",
+          "value": null
+        },
+        {
+          "languageCode": 8,
+          "description": "Testiraportin nro",
+          "value": null
+        },
+        {
+          "languageCode": 8,
+          "description": "Tehokas työskentelypituus",
+          "value": null
+        },
+        {
+          "languageCode": 8,
+          "description": "Takuuaika",
+          "value": null
+        },
+        {
+          "languageCode": 8,
+          "description": "Sydän",
+          "value": null
+        },
+        {
+          "languageCode": 8,
+          "description": "Suurin pituus (m)",
+          "value": null
+        },
+        {
+          "languageCode": 8,
+          "description": "Säikeiden määrä",
+          "value": null
+        },
+        {
+          "languageCode": 8,
+          "description": "Säde (m)",
+          "value": null
+        },
+        {
+          "languageCode": 8,
+          "description": "Rakenne",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "Portuguese",
+      "languageCode": 9,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 50,
+      "storedCount": 20,
+      "order": "description desc",
+      "body": [
+        {
+          "languageCode": 9,
+          "description": "Zona Ex",
+          "value": null
+        },
+        {
+          "languageCode": 9,
+          "description": "Viga (m)",
+          "value": null
+        },
+        {
+          "languageCode": 9,
+          "description": "Unidade",
+          "value": null
+        },
+        {
+          "languageCode": 9,
+          "description": "Tratamento de superfície",
+          "value": null
+        },
+        {
+          "languageCode": 9,
+          "description": "Transmission",
+          "value": null
+        },
+        {
+          "languageCode": 9,
+          "description": "Tipo de acessórios de terminal",
+          "value": null
+        },
+        {
+          "languageCode": 9,
+          "description": "Resistência à rutura (kN/mt)",
+          "value": null
+        },
+        {
+          "languageCode": 9,
+          "description": "Relatório de teste n.º",
+          "value": null
+        },
+        {
+          "languageCode": 9,
+          "description": "Qualidade do fio (N/mm2)",
+          "value": null
+        },
+        {
+          "languageCode": 9,
+          "description": "Probabilidade de falha",
+          "value": null
+        },
+        {
+          "languageCode": 9,
+          "description": "Prazo de garantia",
+          "value": null
+        },
+        {
+          "languageCode": 9,
+          "description": "Peso (mt)",
+          "value": null
+        },
+        {
+          "languageCode": 9,
+          "description": "Padrão de referência",
+          "value": null
+        },
+        {
+          "languageCode": 9,
+          "description": "Número de filamentos",
+          "value": null
+        },
+        {
+          "languageCode": 9,
+          "description": "Number of falls",
+          "value": null
+        },
+        {
+          "languageCode": 9,
+          "description": "Núcleo",
+          "value": null
+        },
+        {
+          "languageCode": 9,
+          "description": "Nível de proteção do equipamento (EPL)",
+          "value": null
+        },
+        {
+          "languageCode": 9,
+          "description": "N.º de fios por filamento",
+          "value": null
+        },
+        {
+          "languageCode": 9,
+          "description": "Marcação ATEX",
+          "value": null
+        },
+        {
+          "languageCode": 9,
+          "description": "Lifting speed",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "Estonian",
+      "languageCode": 10,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 50,
+      "storedCount": 20,
+      "order": "description desc",
+      "body": [
+        {
+          "languageCode": 10,
+          "description": "Weight (mt)",
+          "value": null
+        },
+        {
+          "languageCode": 10,
+          "description": "Warranty Term",
+          "value": null
+        },
+        {
+          "languageCode": 10,
+          "description": "Viidatud standard",
+          "value": null
+        },
+        {
+          "languageCode": 10,
+          "description": "Unit",
+          "value": null
+        },
+        {
+          "languageCode": 10,
+          "description": "Tuum",
+          "value": null
+        },
+        {
+          "languageCode": 10,
+          "description": "Transmission",
+          "value": null
+        },
+        {
+          "languageCode": 10,
+          "description": "Traadi kvaliteet (N/mm2)",
+          "value": null
+        },
+        {
+          "languageCode": 10,
+          "description": "Testiaruande nr.",
+          "value": null
+        },
+        {
+          "languageCode": 10,
+          "description": "Terminali ühenduste tüüp",
+          "value": null
+        },
+        {
+          "languageCode": 10,
+          "description": "Temperature class",
+          "value": null
+        },
+        {
+          "languageCode": 10,
+          "description": "Tegelik lõhke koormus (ABL)",
+          "value": null
+        },
+        {
+          "languageCode": 10,
+          "description": "Tegelik diameeter (mm)",
+          "value": null
+        },
+        {
+          "languageCode": 10,
+          "description": "Strandide arv",
+          "value": null
+        },
+        {
+          "languageCode": 10,
+          "description": "Pindaviimistlus",
+          "value": null
+        },
+        {
+          "languageCode": 10,
+          "description": "Pikkus (m)",
+          "value": null
+        },
+        {
+          "languageCode": 10,
+          "description": "Paigutus or Paigutamine",
+          "value": null
+        },
+        {
+          "languageCode": 10,
+          "description": "Operaction class",
+          "value": null
+        },
+        {
+          "languageCode": 10,
+          "description": "Ohutusfaktor",
+          "value": null
+        },
+        {
+          "languageCode": 10,
+          "description": "Number of falls",
+          "value": null
+        },
+        {
+          "languageCode": 10,
+          "description": "Nominaalne diameeter (mm)",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "Latvian",
+      "languageCode": 11,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 50,
+      "storedCount": 20,
+      "order": "description desc",
+      "body": [
+        {
+          "languageCode": 11,
+          "description": "Weight (mt)",
+          "value": null
+        },
+        {
+          "languageCode": 11,
+          "description": "Warranty Term",
+          "value": null
+        },
+        {
+          "languageCode": 11,
+          "description": "Virsmas apstrāde",
+          "value": null
+        },
+        {
+          "languageCode": 11,
+          "description": "Vadu skaits uz strandu",
+          "value": null
+        },
+        {
+          "languageCode": 11,
+          "description": "Uzvija",
+          "value": null
+        },
+        {
+          "languageCode": 11,
+          "description": "Unit",
+          "value": null
+        },
+        {
+          "languageCode": 11,
+          "description": "Transmission",
+          "value": null
+        },
+        {
+          "languageCode": 11,
+          "description": "Testa ziņojuma Nr.",
+          "value": null
+        },
+        {
+          "languageCode": 11,
+          "description": "Temperature class",
+          "value": null
+        },
+        {
+          "languageCode": 11,
+          "description": "Stropes kāju diametrs (priekškonte)",
+          "value": null
+        },
+        {
+          "languageCode": 11,
+          "description": "Strandu skaits",
+          "value": null
+        },
+        {
+          "languageCode": 11,
+          "description": "Stieples troses pakāpe",
+          "value": null
+        },
+        {
+          "languageCode": 11,
+          "description": "Stieples kvalitāte (N/mm2)",
+          "value": null
+        },
+        {
+          "languageCode": 11,
+          "description": "Serdenis",
+          "value": null
+        },
+        {
+          "languageCode": 11,
+          "description": "Reālais diametrs (mm)",
+          "value": null
+        },
+        {
+          "languageCode": 11,
+          "description": "Reālā pārrāvuma slodze (ABL)",
+          "value": null
+        },
+        {
+          "languageCode": 11,
+          "description": "Operaction class",
+          "value": null
+        },
+        {
+          "languageCode": 11,
+          "description": "Number of falls",
+          "value": null
+        },
+        {
+          "languageCode": 11,
+          "description": "Nominālais diametrs (mm)",
+          "value": null
+        },
+        {
+          "languageCode": 11,
+          "description": "Minimālā pārrāvuma slodze",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "Lithuanian",
+      "languageCode": 12,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 50,
+      "storedCount": 20,
+      "order": "description desc",
+      "body": [
+        {
+          "languageCode": 12,
+          "description": "Weight (mt)",
+          "value": null
+        },
+        {
+          "languageCode": 12,
+          "description": "Warranty Term",
+          "value": null
+        },
+        {
+          "languageCode": 12,
+          "description": "Vielos lyno klasė",
+          "value": null
+        },
+        {
+          "languageCode": 12,
+          "description": "Vielos kokybė (N/mm²)",
+          "value": null
+        },
+        {
+          "languageCode": 12,
+          "description": "Unit",
+          "value": null
+        },
+        {
+          "languageCode": 12,
+          "description": "Transmission",
+          "value": null
+        },
+        {
+          "languageCode": 12,
+          "description": "Tikroji lūžimo apkrova (ABL)",
+          "value": null
+        },
+        {
+          "languageCode": 12,
+          "description": "Tikrasis skersmuo (mm)",
+          "value": null
+        },
+        {
+          "languageCode": 12,
+          "description": "Temperature class",
+          "value": null
+        },
+        {
+          "languageCode": 12,
+          "description": "Šerdis",
+          "value": null
+        },
+        {
+          "languageCode": 12,
+          "description": "Saugos koeficientas",
+          "value": null
+        },
+        {
+          "languageCode": 12,
+          "description": "Paviršiaus apdorojimas",
+          "value": null
+        },
+        {
+          "languageCode": 12,
+          "description": "Operaction class",
+          "value": null
+        },
+        {
+          "languageCode": 12,
+          "description": "Number of falls",
+          "value": null
+        },
+        {
+          "languageCode": 12,
+          "description": "Nominalus skersmuo (mm)",
+          "value": null
+        },
+        {
+          "languageCode": 12,
+          "description": "Minimalus lūžimo apkrova",
+          "value": null
+        },
+        {
+          "languageCode": 12,
+          "description": "Min Length (m)",
+          "value": null
+        },
+        {
+          "languageCode": 12,
+          "description": "Max Length (m)",
+          "value": null
+        },
+        {
+          "languageCode": 12,
+          "description": "Lifting speed",
+          "value": null
+        },
+        {
+          "languageCode": 12,
+          "description": "Lifting height",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "Polish",
+      "languageCode": 13,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 50,
+      "storedCount": 20,
+      "order": "description desc",
+      "body": [
+        {
+          "languageCode": 13,
+          "description": "Współczynnik bezpieczeństwa",
+          "value": null
+        },
+        {
+          "languageCode": 13,
+          "description": "Weight (mt)",
+          "value": null
+        },
+        {
+          "languageCode": 13,
+          "description": "Warranty Term",
+          "value": null
+        },
+        {
+          "languageCode": 13,
+          "description": "Unit",
+          "value": null
+        },
+        {
+          "languageCode": 13,
+          "description": "Typ końcówek",
+          "value": null
+        },
+        {
+          "languageCode": 13,
+          "description": "Transmission",
+          "value": null
+        },
+        {
+          "languageCode": 13,
+          "description": "Temperature class",
+          "value": null
+        },
+        {
+          "languageCode": 13,
+          "description": "Średnica ramion zawiesia (lina przednia)",
+          "value": null
+        },
+        {
+          "languageCode": 13,
+          "description": "Skręt",
+          "value": null
+        },
+        {
+          "languageCode": 13,
+          "description": "Rzeczywiste obciążenie zrywające (ABL)",
+          "value": null
+        },
+        {
+          "languageCode": 13,
+          "description": "Rzeczywista średnica (mm)",
+          "value": null
+        },
+        {
+          "languageCode": 13,
+          "description": "Rdzeń",
+          "value": null
+        },
+        {
+          "languageCode": 13,
+          "description": "Operaction class",
+          "value": null
+        },
+        {
+          "languageCode": 13,
+          "description": "Obróbka powierzchni",
+          "value": null
+        },
+        {
+          "languageCode": 13,
+          "description": "Numer raportu z testu",
+          "value": null
+        },
+        {
+          "languageCode": 13,
+          "description": "Number of falls",
+          "value": null
+        },
+        {
+          "languageCode": 13,
+          "description": "Norma odniesienia",
+          "value": null
+        },
+        {
+          "languageCode": 13,
+          "description": "Nominalna średnica (mm)",
+          "value": null
+        },
+        {
+          "languageCode": 13,
+          "description": "Minimalne obciążenie zrywające",
+          "value": null
+        },
+        {
+          "languageCode": 13,
+          "description": "Min Length (m)",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "languageCode=14",
+      "languageCode": 14,
+      "status": 400,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": null,
+      "storedCount": null,
+      "order": "as returned",
+      "body": {
+        "memberNames": [
+          "languageCode"
+        ],
+        "errorMessage": "14 invalid language"
+      }
+    },
+    {
+      "name": "languageCode=15",
+      "languageCode": 15,
+      "status": 400,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": null,
+      "storedCount": null,
+      "order": "as returned",
+      "body": {
+        "memberNames": [
+          "languageCode"
+        ],
+        "errorMessage": "15 invalid language"
+      }
+    }
+  ]
+}
