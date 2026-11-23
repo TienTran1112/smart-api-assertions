@@ -66,6 +66,17 @@ the Method chapter.
   (`npm run capture`) with 39 safe probes on 26 endpoints → `data/raw/onix-capture-2026-11-18.jsonl`.
   Result and text-field table in `docs/feasibility.md`. One-page proposal in `docs/proposal.md`.
 - Results: `npm run typecheck` clean; `npm test` 13/13; `npm run test:api` 4/4 (with the judge).
+- Added a dev-only judge backend, `ClaudeCodeJudge` (`judge/claude-code-judge.ts`), that runs
+  Claude Code headless on the Pro/Max subscription instead of the API key. Picked with
+  `JUDGE_BACKEND=claude-code` or `npm run test:api:subscription`. `npm test` 48/48;
+  `npm run test:api:subscription` 20/20.
+- Imported the Onix Swagger into Postman (local files, no Postman account needed). Spec as
+  downloaded: `postman/specs/onix-work-public-api-v1.json` (OpenAPI 3.0.1, build 1.18.0.17,
+  57 paths, 67 operations). Collection: `postman/collections/Onix Work Public API v1/`
+  (`postman spec generate collection`, folders by tag: 67 requests in 7 folders).
+  `baseUrl` is the test server; `apiKey` is empty and must not be committed. Lint clean after
+  fixing 2 date query parameters; one request run with `-k` (TLS check off) reached the server
+  (401 with no key, as expected).
 
 ### Decisions
 
@@ -75,6 +86,10 @@ the Method chapter.
   does not match the schema. Other errors (bugs) are thrown.
 - `assertSemantic` takes the judge as a required option in W2; the login spec builds
   `new ClaudeJudge({ model: runtimeConfig.judgeModel })`. The matcher (W8) will hide this.
+- The subscription judge is for development only, never for measured runs: Claude Code adds
+  its own context (about 1.5K input tokens and a structured-output tool), `max_tokens` cannot
+  be set, and rate limits differ. It keeps the same prompt, schema and `INCONCLUSIVE` rules,
+  and drops `ANTHROPIC_API_KEY` from the child process (Claude Code would otherwise bill the key).
 - The capture spec uses one generic `probe` client, because its request list is data. Regular
   tests still get one client per endpoint group (W9).
 - Probe safety rule: GET with any bad input; POST only with bodies rejected before the action

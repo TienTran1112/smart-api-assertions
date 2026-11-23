@@ -1,0 +1,43 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v1/jobs"
+  method: POST
+  headers:
+    - key: Authorization
+      value: <API Key>
+      description: "Added as a part of security scheme: apikey"
+    - key: Accept
+      value: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "companyId": 7877,
+        "locationId": 6936,
+        "jobDate": "string",
+        "certificateString": "string",
+        "jobType": 1100,
+        "jobForm": 5597,
+        "orderNo": "string",
+        "customerOrderNo": "string",
+        "filed": false,
+        "equipment": [
+          {
+            "equipmentId": 4828,
+            "importId": "st"
+          },
+          {
+            "equipmentId": 4120,
+            "importId": "string"
+          }
+        ]
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: "1507"
+order: 1000

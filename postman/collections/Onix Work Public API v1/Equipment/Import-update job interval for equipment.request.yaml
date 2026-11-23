@@ -1,0 +1,39 @@
+$kind: http-request
+name: Import/update job interval for equipment
+description: "<u>Parameters</u>:\r
+
+  \        <br/><b>equipmentId</b>\r
+
+  \        <br/>- Can get from any api returns equipment list (e.g.: `GET /equipment`)\r
+
+  \        <br/>\r
+
+  \        <br/>Use `EquipmentIntervalInfo` as input.\r
+
+  \        <br/><u>Result</u>: Job interval id.\r
+
+  \        "
+url: "{{baseUrl}}/v1/equipment/:equipmentId/equipment-job-intervals"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  - key: equipmentId
+    value: "1507"
+    disabled: false
+    description: "(Required) "
+body:
+  type: json
+  content: |-
+    {
+      "jobClassId": 5931,
+      "interval": 5846,
+      "unitOfMeasureId": 9991,
+      "dueDate": "string",
+      "doneDate": "string",
+      "doneStatus": 1817
+    }
+settings: {}
+examples: ./.resources/Import-update job interval for equipment.resources/examples
+order: 13000

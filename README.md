@@ -31,6 +31,7 @@ Copy [`.env.example`](.env.example) to `.env` and fill it in:
 |---|---|
 | `ANTHROPIC_API_KEY` | Key for the judge (live tests only) |
 | `JUDGE_MODEL` | `claude-opus-5-5` (default), `claude-sonnet-5-5` or `claude-haiku-5-5` |
+| `JUDGE_BACKEND` | `api` (default, API key) or `claude-code` (dev only: Claude Code on your Pro/Max subscription) |
 | `ONIX_WORK_API_BASE_URL` | Onix Work test API, default `https://openapi-test.onixwork.com` |
 | `ONIX_WORK_USERNAME`, `ONIX_WORK_PASSWORD` | Test account used to get a short-lived token |
 | `ONIX_WORK_API_KEY` | Optional long-lived key, sent as `Authorization: Key <apiKey>` |
@@ -43,6 +44,7 @@ Windows environment (e.g. a blank `ANTHROPIC_API_KEY` in user settings); non-emp
 |---|---|
 | `npm test` | Offline unit tests (`tests/unit/`), no keys needed |
 | `npm run test:api` | Live tests against the Onix Work test API with the real judge (needs VPN and an API key; costs money), one worker |
+| `npm run test:api:subscription` | Same as `test:api`, but the judge runs through Claude Code on your Pro/Max subscription instead of the API key (needs Claude Code installed and signed in). Dev only; don't use it for measured runs |
 | `npm run test:api:smoke` | Only tests tagged `@smoke` |
 | `npm run capture` | Sends the bad-request probes in `tests/onix-work/api/capture/capture-probes.ts` and saves the responses to `data/raw/` (tag `@capture`, not part of `test:api`) |
 | `npm run typecheck` | `tsc --noEmit` |
@@ -81,7 +83,7 @@ await assertSemantic(response.body.title, {
     'MUST NOT reveal whether the username exists. ' +
     'MUST NOT include stack traces or internal error details.',
   context: 'Error title returned by a login endpoint after a wrong password.',
-  judge: new ClaudeJudge({ model: runtimeConfig.judgeModel }),
+  judge: createJudge({ backend: runtimeConfig.judgeBackend, model: runtimeConfig.judgeModel }),
 });
 ```
 
@@ -91,13 +93,20 @@ await assertSemantic(response.body.title, {
   `<response_under_test>` and treated as data, never as instructions. Effort is always sent;
   no sampling parameters, no tools, no fallback model. A refusal, an API error, a cut-off
   output or an answer from another model becomes `INCONCLUSIVE`. The prompt lives in
-  `judge/prompts/v1.ts`; bump `PROMPT_VERSION` whenever it changes.
+  `judge/prompts/v2.ts` (one file per version; `v1.ts` is kept for old results). Add a new
+  file and bump `PROMPT_VERSION` whenever the text changes.
+- [`src/smart-assert/judge/claude-code-judge.ts`](src/smart-assert/judge/claude-code-judge.ts):
+  the same prompt and schema, but run through Claude Code headless (`claude --print
+  --json-schema`) without `ANTHROPIC_API_KEY`, so calls count against the Pro/Max subscription.
+  Tools, MCP servers and settings are turned off. Dev only: Claude Code adds about 1.5K input
+  tokens of its own, `max_tokens` cannot be set, and subscription rate limits apply.
+  `createJudge({ backend })` picks one of the two judges.
 - [`src/smart-assert/assert-semantic.ts`](src/smart-assert/assert-semantic.ts):
   `assertSemantic(actual, { criteria, judge, votes })` calls the judge `votes` times and needs a
   **strict majority of `PASS`**; `INCONCLUSIVE` counts against passing. On failure it throws a
   `SemanticAssertionError` with the reason and the quoted evidence, which fails the test.
-- The core (`src/smart-assert/` outside `playwright/`) imports only `@anthropic-ai/sdk` and
-  `zod`, so it can be used without the test runner. Unit tests use a `FakeJudge`.
+- The core (`src/smart-assert/` outside `playwright/`) imports only `@anthropic-ai/sdk`,
+  `zod` and Node built-ins, so it can be used without the test runner. Unit tests use a `FakeJudge`.
 
 Deterministic checks always run first, so a broken response never costs an LLM call.
 
@@ -108,13 +117,13 @@ Deterministic checks always run first, so a broken response never costs an LLM c
 | `src/framework/` | Generic API test layer: request handler, clients, auth, config, logger |
 | `src/apps/onix-work/` | Onix Work clients, models, auth, fixture |
 | `src/smart-assert/` | The library: judge, prompt versions, `assertSemantic` |
-| `tests/unit/` | Offline unit tests (judge mocked) |
-| `tests/onix-work/api/` | Live tests against Onix Work; `capture/` holds the `@capture` spec |
+| `tests/unit/` | Offline unit tests (judge mocked), mirroring `src/` and the app folders |
+| `tests/onix-work/api/` | Live tests against Onix Work, one folder per endpoint area (spec, `*.test-data.ts`, saved responses); `capture/` holds the dataset `@capture` spec |
 | `data/raw/` | Captured Onix responses (`onix-capture-<date>.jsonl`) |
 | `data/labeled/` | Labeled dataset (from W3) |
 | `experiments/configs/` | One config per experiment arm (from W7); `experiments/results/` is git-ignored |
 | `notebooks/` | Analysis notebook (W12) |
-| `docs/` | Plan, feasibility gate, proposal, weekly notes, proposal documents (`.docx`) |
+| `docs/` | Plan, feasibility gate, proposal, weekly notes; `proposal/` holds the `.docx` proposal documents, `drafts/` unsent drafts |
 
 ## Notes on the API under test
 

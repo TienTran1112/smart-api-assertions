@@ -6,9 +6,11 @@
   "scripts": {
     "test": "playwright test -c playwright.unit.config.ts",
     "test:unit": "playwright test -c playwright.unit.config.ts",
-    "test:api": "playwright test -c playwright.api.config.ts --grep-invert @capture",
+    "test:api": "tsx scripts/test-api.ts",
+    "test:api:subscription": "tsx scripts/test-api.ts --subscription",
     "test:api:smoke": "playwright test -c playwright.api.config.ts --grep @smoke",
     "capture": "playwright test -c playwright.api.config.ts --grep @capture",
+    "save:responses": "playwright test -c playwright.api.config.ts --grep @save-response",
     "experiment": "tsx src/experiments/run-experiment.ts",
     "report": "playwright show-report",
     "typecheck": "tsc --noEmit",

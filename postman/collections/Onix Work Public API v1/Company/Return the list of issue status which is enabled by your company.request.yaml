@@ -1,0 +1,10 @@
+$kind: http-request
+name: Return the list of issue status which is enabled by your company in Onix Work
+description: "<br/><u>Result</u>: List of `KeyValuePairInfo`"
+url: "{{baseUrl}}/v1/company/issue-statuses"
+method: GET
+headers:
+  Accept: application/json
+settings: {}
+examples: ./.resources/Return the list of issue status which is enabled by your company.resources/examples
+order: 36000

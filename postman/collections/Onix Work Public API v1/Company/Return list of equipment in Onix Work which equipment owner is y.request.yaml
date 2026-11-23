@@ -1,0 +1,24 @@
+$kind: http-request
+name: Return list of equipment in Onix Work which equipment owner is your company.
+description: "No parameter.\r
+
+  \        <br/>\r
+
+  \        <br/><u>Result</u>: List of `EquipmentInfo`\r
+
+  \        <br/>\r
+
+  \        <br/><u>Note</u>:\r
+
+  \        <br/>+ To fetch data, use `$page` and `$pageSize` in query string, default pageSize is 100.\r
+
+  \        <br/>+ To limit which fields will be returned, use `$select` in query string (e.g: $select=fieldName1,fieldName2).\r
+
+  \        "
+url: "{{baseUrl}}/v1/company/equipment"
+method: GET
+headers:
+  Accept: application/json
+settings: {}
+examples: ./.resources/Return list of equipment in Onix Work which equipment owner is y.resources/examples
+order: 4000

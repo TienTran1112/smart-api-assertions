@@ -1,0 +1,6 @@
+workflows:
+  syncSpecToCollection:
+    - spec: ../postman/specs/onix-work-public-api-v1.json
+      collection: ../postman/collections/Onix Work Public API v1
+      options:
+        folderStrategy: Tags

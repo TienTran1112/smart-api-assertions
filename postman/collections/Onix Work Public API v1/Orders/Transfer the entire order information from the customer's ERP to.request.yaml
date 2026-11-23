@@ -1,0 +1,158 @@
+$kind: http-request
+name: Transfer the entire order information from the customer's ERP to Onix Work.
+description: ""
+url: "{{baseUrl}}/v1/orders/transfer-order"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "orderId": 2342,
+      "importId": "string",
+      "erpOrderId": "string",
+      "erpOrderDate": "string",
+      "erpCustomerOrderNo": "string",
+      "workflowStatusId": 730,
+      "erpCustomerId": "string",
+      "erpCustomerDescription": "string",
+      "erpCustomerAddress": "string",
+      "erpCustomerPostalCode": "string",
+      "erpCustomerWeb": "string",
+      "erpCustomerOrgNumber": "string",
+      "erpCustomerCountryCode": "strin",
+      "erpCustomerContactId": "string",
+      "erpCustomerContactEmail": "t8-5n1@wDXvSBqZVSonRgZyOQpkFQLByNuqD.rf",
+      "erpCustomerContactFirstName": "string",
+      "erpCustomerContactLastName": "string",
+      "erpCustomerContactName": "string",
+      "erpSupplierId": "string",
+      "erpSupplierDescription": "string",
+      "erpSupplierContactId": "string",
+      "erpSupplierContactName": "string",
+      "source": 7442,
+      "createSubEquipment": true,
+      "autoCreateCustomer": false,
+      "autoProcessOnCustomer": false,
+      "orderLines": [
+        {
+          "orderLineImportId": "s",
+          "erpArticleNo": "string",
+          "quantity": 421,
+          "externalLineNo": "string",
+          "workflowStatusId": 5343,
+          "parentOrderLineImportId": "string",
+          "batchNo": "string",
+          "certificateString": "string",
+          "model": "string",
+          "erpModel": "string",
+          "wll": "string",
+          "comment": "string",
+          "jobComment": "string",
+          "type": "string",
+          "process": 282,
+          "placement": "string",
+          "producer": "string",
+          "items": [
+            {
+              "serialNumber": "string",
+              "batchNo": "string",
+              "ownersEquipmentID": "string",
+              "prodYear": "st",
+              "globalID": "stri"
+            },
+            {
+              "serialNumber": "string",
+              "batchNo": "string",
+              "ownersEquipmentID": "string",
+              "prodYear": "string",
+              "globalID": "string"
+            }
+          ],
+          "properties": [
+            {
+              "languageCode": 7056,
+              "description": "strin",
+              "value": "string"
+            },
+            {
+              "languageCode": 8939,
+              "description": "string",
+              "value": "strin"
+            }
+          ],
+          "formProperties": [
+            {
+              "key": "string",
+              "value": "string"
+            },
+            {
+              "key": "string",
+              "value": "string"
+            }
+          ]
+        },
+        {
+          "orderLineImportId": "string",
+          "erpArticleNo": "string",
+          "quantity": 6896,
+          "externalLineNo": "string",
+          "workflowStatusId": 8700,
+          "parentOrderLineImportId": "string",
+          "batchNo": "str",
+          "certificateString": "string",
+          "model": "string",
+          "erpModel": "string",
+          "wll": "string",
+          "comment": "string",
+          "jobComment": "string",
+          "type": "st",
+          "process": 465,
+          "placement": "string",
+          "producer": "string",
+          "items": [
+            {
+              "serialNumber": "string",
+              "batchNo": "string",
+              "ownersEquipmentID": "string",
+              "prodYear": "strin",
+              "globalID": "string"
+            },
+            {
+              "serialNumber": "string",
+              "batchNo": "string",
+              "ownersEquipmentID": "string",
+              "prodYear": "string",
+              "globalID": "string"
+            }
+          ],
+          "properties": [
+            {
+              "languageCode": 4407,
+              "description": "string",
+              "value": "string"
+            },
+            {
+              "languageCode": 4224,
+              "description": "string",
+              "value": "s"
+            }
+          ],
+          "formProperties": [
+            {
+              "key": "string",
+              "value": "string"
+            },
+            {
+              "key": "string",
+              "value": "string"
+            }
+          ]
+        }
+      ]
+    }
+settings: {}
+examples: ./.resources/Transfer the entire order information from the customer's ERP to.resources/examples
+order: 2000

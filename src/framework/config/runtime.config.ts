@@ -20,4 +20,13 @@ export const runtimeConfig = {
   get judgeModel(): string {
     return optionalEnvironmentVariable('JUDGE_MODEL', 'claude-opus-5-5');
   },
+
+  /** `api` (default, API key) or `claude-code` (dev-only, Pro/Max subscription). */
+  get judgeBackend(): 'api' | 'claude-code' {
+    const value = optionalEnvironmentVariable('JUDGE_BACKEND', 'api');
+    if (value !== 'api' && value !== 'claude-code') {
+      throw new Error(`JUDGE_BACKEND must be "api" or "claude-code", got "${value}".`);
+    }
+    return value;
+  },
 };

@@ -1,0 +1,105 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v1/company/locations/:locationId/equipment"
+  method: GET
+  headers:
+    - key: Authorization
+      value: <API Key>
+      description: "Added as a part of security scheme: apikey"
+    - key: Accept
+      value: application/json
+  pathVariables:
+    - key: locationId
+      value: "1507"
+      disabled: false
+      description: "(Required) "
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "equipmentId": 4957,
+          "globalId": "string",
+          "importId": "stri",
+          "serialNumber": "string",
+          "batchNo": "stri",
+          "ownerEquipmentId": "string",
+          "companySupplier": 1476,
+          "producer": "string",
+          "dealer": "string",
+          "companyOwner": 9604,
+          "locationId": 1047,
+          "areaId": 1462,
+          "placement": "string",
+          "activeStatusId": 5005,
+          "status": 7917,
+          "productId": 8870,
+          "productNo": "string",
+          "controlCategoryId": 982,
+          "wll": "string",
+          "swl": "string",
+          "type": "string",
+          "model": "string",
+          "producedAccTo": "string",
+          "producedYear": "string",
+          "keyword": "string",
+          "certificate": "string",
+          "certifiedBy": "string",
+          "certificateDate": "string",
+          "certificateExpiry": "string",
+          "nextMandatoryControlDue": "string",
+          "nextPreventiveDue": "string",
+          "nextOperatorDue": "string",
+          "issueDueDate": "string",
+          "comment": "string",
+          "quantity": 764,
+          "quantityUsage": 8440
+        },
+        {
+          "equipmentId": 4582,
+          "globalId": "string",
+          "importId": "string",
+          "serialNumber": "string",
+          "batchNo": "string",
+          "ownerEquipmentId": "strin",
+          "companySupplier": 5725,
+          "producer": "string",
+          "dealer": "string",
+          "companyOwner": 5616,
+          "locationId": 7257,
+          "areaId": 5338,
+          "placement": "string",
+          "activeStatusId": 6818,
+          "status": 2975,
+          "productId": 348,
+          "productNo": "string",
+          "controlCategoryId": 7581,
+          "wll": "string",
+          "swl": "string",
+          "type": "string",
+          "model": "string",
+          "producedAccTo": "string",
+          "producedYear": "string",
+          "keyword": "string",
+          "certificate": "string",
+          "certifiedBy": "string",
+          "certificateDate": "string",
+          "certificateExpiry": "string",
+          "nextMandatoryControlDue": "string",
+          "nextPreventiveDue": "string",
+          "nextOperatorDue": "string",
+          "issueDueDate": "string",
+          "comment": "string",
+          "quantity": 1116,
+          "quantityUsage": 3662
+        }
+      ]
+order: 1000

@@ -1,0 +1,27 @@
+$kind: http-request
+name: Return list of active locations of your company in Onix Work.
+description: "No parameter.\r
+
+  \        <br/>\r
+
+  \        <br/><u>Result</u>: List of `LocationInfo`\r
+
+  \        <br/>\r
+
+  \        <br/><u>Note</u>:\r
+
+  \        <br/>+ To limit which fields will be returned, use `$select` in query string (e.g: $select=fieldName1,fieldName2).\r
+
+  \        "
+url: "{{baseUrl}}/v1/company/locations?ImportId=string"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: ImportId
+    value: string
+    disabled: false
+    description: ImportID from the exporting service.
+settings: {}
+examples: ./.resources/Return list of active locations of your company in Onix Work-.resources/examples
+order: 8000

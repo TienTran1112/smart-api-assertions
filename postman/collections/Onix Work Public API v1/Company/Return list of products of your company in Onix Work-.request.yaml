@@ -1,0 +1,26 @@
+$kind: http-request
+name: Return list of products of your company in Onix Work.
+description: "<br/><u>Result</u>: List of `ProductInfo`\r\n        <br/>\r\n        <br/><u>Note</u>:\r\n        <br/>+ To fetch data, use `$page` and `$pageSize` in query string, default pageSize is 100.\r\n        <br/>+ To limit which fields in `ProductInfo` will be returned, use `$select` in query string (e.g: $select=fieldName1,fieldName2)."
+url: '{{baseUrl}}/v1/company/products?ImportId=string&LanguageCode=1507&ChangedFromUtcDatetime=2006-01-09T21:26:31.155Z&QuantityUsage=1507&ProductNo=string'
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: ImportId
+    value: string
+    description: ImportID from the exporting service.
+  - key: LanguageCode
+    value: '1507'
+    description: "The language of description.\r\n            <br/>Available values: 0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13\r\n            <br/>Default value: 1\r\n            <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r\n                where: 0: Norwegian, 1: English, 3: Swedish, 4: Danish, 5: Nederlands, 6: Deutsch, 7: Spanish, 8: Finnish, 9: Portuguese, 10: Estonian, 11: Latvian, 12: Lithuanian, 13: Polish\r\n            "
+  - key: ChangedFromUtcDatetime
+    value: '2006-01-09T21:26:31.155Z'
+    description: "The start changing UTC datetime of equipment. \r\n                            <br/>Format: yyyy.MM.dd HH:mm:ss"
+  - key: QuantityUsage
+    value: '1507'
+    description: "The quantity usage of equipment.\r\n                        <br/>Available values: 0, 1, 2. \r\n                        <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;where 0: Unique, 1: Stock, 2: Consumable"
+  - key: ProductNo
+    value: string
+    description: The product number in Onix Work
+settings: {}
+examples: ./.resources/Return list of products of your company in Onix Work-.resources/examples
+order: 20000

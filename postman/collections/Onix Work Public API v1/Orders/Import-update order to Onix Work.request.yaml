@@ -1,0 +1,44 @@
+$kind: http-request
+name: Import/update order to Onix Work
+description: "Use `OrderInfo` as input.\r
+
+  \            <br/><u>Result</u>: Id of order"
+url: "{{baseUrl}}/v1/orders"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "orderId": 1089,
+      "importId": "s",
+      "erpOrderId": "string",
+      "erpOrderDate": "string",
+      "erpCustomerOrderNo": "string",
+      "workflowStatusId": 5351,
+      "erpCustomerId": "string",
+      "erpCustomerDescription": "string",
+      "erpCustomerAddress": "string",
+      "erpCustomerPostalCode": "string",
+      "erpCustomerWeb": "string",
+      "erpCustomerOrgNumber": "string",
+      "erpCustomerCountryCode": "str",
+      "erpCustomerContactId": "string",
+      "erpCustomerContactEmail": "nvow0A@GNTxHfhEdqrtOzPcUGKUFdplW.yk",
+      "erpCustomerContactFirstName": "string",
+      "erpCustomerContactLastName": "stri",
+      "erpCustomerContactName": "string",
+      "erpSupplierId": "string",
+      "erpSupplierDescription": "string",
+      "erpSupplierContactId": "string",
+      "erpSupplierContactName": "string",
+      "source": 5175,
+      "createSubEquipment": false,
+      "autoCreateCustomer": true,
+      "autoProcessOnCustomer": false
+    }
+settings: {}
+examples: ./.resources/Import-update order to Onix Work.resources/examples
+order: 1000

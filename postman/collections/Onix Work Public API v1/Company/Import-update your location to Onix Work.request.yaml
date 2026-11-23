@@ -1,0 +1,30 @@
+$kind: http-request
+name: Import/update your location to Onix Work
+description: "Use `LocationInfo` as input.\r
+
+  \            <br/><u>Result</u>: Location Id"
+url: "{{baseUrl}}/v1/company/locations"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "locationId": 8746,
+      "importId": "string",
+      "description": "string",
+      "address1": "string",
+      "address2": "str",
+      "countryName": "string",
+      "zipCode": "string",
+      "cityName": "string",
+      "email": "string",
+      "phone": "string",
+      "active": true,
+      "managedDepartmentId": 6092
+    }
+settings: {}
+examples: ./.resources/Import-update your location to Onix Work.resources/examples
+order: 9000

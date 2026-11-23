@@ -1,0 +1,23 @@
+$kind: collection
+description: "\r
+
+  <span>This is an external service of Onix Work, provided by Onix. You can find out more about Onix Work at <a href='https://www.onix.com/s/'>www.onix.com</a>.</span>\r
+
+  <br/>\r
+
+  <span>In order to use this service, you will need to obtain a private Token (apiKey) from Onix. <a href='https://www.onix.com/customer-resources/developers-api/' target='_blank'>More information</a></span>\r
+
+  <br/>\r
+
+  <span>Build version: 1.18.0.17</span>"
+variables:
+  baseUrl: https://openapi-test.onixwork.com
+  apiKey: ""
+auth:
+  - id: 9d823345-6f0e-419f-9cd3-21cc90459091
+    type: apikey
+    name: apikey auth
+    credentials:
+      key: Authorization
+      value: "{{apiKey}}"
+      in: header

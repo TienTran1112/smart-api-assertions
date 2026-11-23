@@ -1,0 +1,39 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v1/company/products/properties"
+  method: POST
+  headers:
+    - key: Authorization
+      value: <API Key>
+      description: "Added as a part of security scheme: apikey"
+    - key: Accept
+      value: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "productId": 9001,
+        "importId": "string",
+        "productNo": "string",
+        "properties": [
+          {
+            "description": "string",
+            "languageCode": 9945,
+            "value": "string"
+          },
+          {
+            "description": "string",
+            "languageCode": 3087,
+            "value": "string"
+          }
+        ]
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: "false"
+order: 1000

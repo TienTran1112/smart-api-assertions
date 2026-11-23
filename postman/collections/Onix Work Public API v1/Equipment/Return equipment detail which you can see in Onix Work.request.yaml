@@ -1,0 +1,22 @@
+$kind: http-request
+description: "<br/><u>Result</u>: a `EquipmentInfo`\r
+
+  \        <br/>\r
+
+  \        <br/><u>Note</u>:\r
+
+  \        <br/>+ To limit which fields will be returned, use `$select` in query string (e.g: $select=fieldName1,fieldName2).\r
+
+  \        "
+url: "{{baseUrl}}/v1/equipment/:equipmentId"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: equipmentId
+    value: "1507"
+    disabled: false
+    description: "(Required) "
+settings: {}
+examples: ./.resources/Return equipment detail which you can see in Onix Work.resources/examples
+order: 4000

@@ -1,0 +1,35 @@
+$kind: http-request
+name: Return list of your customers in Onix Work.
+description: "<u>Parameters</u>:\r
+
+  \        <br/><b>externalId</b>\r
+
+  \        <br/>- Can use value from `GET /company/{companyId}`\r
+
+  \        <br/><b>orgNumber</b>\r
+
+  \        <br/>- Can use value from `GET /company/{companyId}`\r
+
+  \        <br/>\r
+
+  \        <br/><u>Result</u>: List of `CompanyInfo`\r
+
+  \        <br/>\r
+
+  \        <br/><u>Note</u>:\r
+
+  \        <br/>+ To fetch data, use `$page` and `$pageSize` in query string, default pageSize is 100.\r
+
+  \        <br/>+ To limit which fields will be returned, use `$select` in query string (e.g: $select=fieldName1,fieldName2).\r
+
+  \        "
+url: "{{baseUrl}}/v1/company?externalId=string&orgNumber=string"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  externalId: string
+  orgNumber: string
+settings: {}
+examples: ./.resources/Return list of your customers in Onix Work-.resources/examples
+order: 1000

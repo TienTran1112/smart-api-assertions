@@ -2,7 +2,7 @@ import type { ProblemDetailsResponse } from '@onix-work/api/public/models/errors
 import type { ValidationProblemDetailsResponse } from '@onix-work/api/public/models/errors/validation-problem-details.response';
 import { expect, test } from '@onix-work/fixtures/onix-work-api.fixture';
 import { runtimeConfig } from '@framework/config/runtime.config';
-import { assertSemantic, ClaudeJudge } from '@smart-assert/index';
+import { assertSemantic, createJudge } from '@smart-assert';
 import {
   EMPTY_CREDENTIALS,
   EMPTY_FIELDS_CRITERIA,
@@ -10,6 +10,9 @@ import {
   UNKNOWN_USER_CREDENTIALS,
   WRONG_PASSWORD_CRITERIA,
 } from './login.test-data';
+
+/** `JUDGE_BACKEND=claude-code` runs the judge on the Claude Code subscription (dev only). */
+const judge = createJudge({ backend: runtimeConfig.judgeBackend, model: runtimeConfig.judgeModel });
 
 /**
  * Real behavior (checked live 2026-11-10 and 2026-11-16):
@@ -39,7 +42,7 @@ test.describe('POST /v1/Account/token', { tag: ['@p1', '@live', '@regression'] }
 
     await assertSemantic(response.body.title, {
       ...WRONG_PASSWORD_CRITERIA,
-      judge: new ClaudeJudge({ model: runtimeConfig.judgeModel }),
+      judge,
     });
   });
 
@@ -68,7 +71,7 @@ test.describe('POST /v1/Account/token', { tag: ['@p1', '@live', '@regression'] }
     const messages = Object.values(response.body.errors).flat().join('\n');
     await assertSemantic(messages, {
       ...EMPTY_FIELDS_CRITERIA,
-      judge: new ClaudeJudge({ model: runtimeConfig.judgeModel }),
+      judge,
     });
   });
 });

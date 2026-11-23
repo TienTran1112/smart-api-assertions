@@ -1,0 +1,36 @@
+$kind: http-request
+name: Create/update order line of the Order
+description: "Use `OrderLineInfo` as input.\r
+
+  \            <br/><u>Result</u>: Id of order line"
+url: "{{baseUrl}}/v1/order-lines"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "orderImportId": "string",
+      "orderLineImportId": "st",
+      "erpArticleNo": "string",
+      "quantity": 2029,
+      "externalLineNo": "string",
+      "workflowStatusId": 1789,
+      "parentOrderLineImportId": "string",
+      "batchNo": "string",
+      "certificateString": "string",
+      "model": "string",
+      "erpModel": "string",
+      "wll": "string",
+      "comment": "string",
+      "jobComment": "string",
+      "type": "string",
+      "process": 1420,
+      "placement": "string",
+      "producer": "string"
+    }
+settings: {}
+examples: ./.resources/Create-update order line of the Order.resources/examples
+order: 1000

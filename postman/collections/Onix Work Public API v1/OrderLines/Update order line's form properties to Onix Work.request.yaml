@@ -1,0 +1,31 @@
+$kind: http-request
+description: "Use `OrderlineFormPropertiesInfo` as input.\r
+
+  \            <br/><u>Result</u>: boolean"
+url: "{{baseUrl}}/v1/order-lines/form-properties"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "orderId": 6656,
+      "orderImportId": "s",
+      "orderLineId": 9831,
+      "orderLineImportId": "string",
+      "properties": [
+        {
+          "key": "string",
+          "value": "string"
+        },
+        {
+          "key": "string",
+          "value": "string"
+        }
+      ]
+    }
+settings: {}
+examples: ./.resources/Update order line's form properties to Onix Work.resources/examples
+order: 4000

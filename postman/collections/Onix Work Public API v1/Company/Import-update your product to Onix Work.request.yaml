@@ -1,0 +1,49 @@
+$kind: http-request
+name: Import/update your product to Onix Work
+description: "No parameter.\r
+
+  \            <br/>Use `ProductInfo` as input.\r
+
+  \            <br/><u>Result</u>: product Id"
+url: "{{baseUrl}}/v1/company/product"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "productId": 4511,
+      "importId": "string",
+      "productNo": "string",
+      "statusId": 8122,
+      "status": "string",
+      "active": false,
+      "controlCategoryId": 7799,
+      "controlCategoryDescription": "string",
+      "controlcategoryDescAndComment": "string",
+      "placement": "strin",
+      "type": "string",
+      "model": "string",
+      "description": "string",
+      "wll": "string",
+      "swl": "string",
+      "comment": "string",
+      "dealer": "string",
+      "prodAccTo": "string",
+      "producer": "string",
+      "prodYear": "string",
+      "quantityUsage": 8008,
+      "productGroup": false,
+      "connectedProductGroupId": 4447,
+      "productClassId": 5464,
+      "downloadToOnixInspect": true,
+      "useFromEquipment": false,
+      "testedAccTo": "string",
+      "process": 5322,
+      "jobComment": "string"
+    }
+settings: {}
+examples: ./.resources/Import-update your product to Onix Work.resources/examples
+order: 27000

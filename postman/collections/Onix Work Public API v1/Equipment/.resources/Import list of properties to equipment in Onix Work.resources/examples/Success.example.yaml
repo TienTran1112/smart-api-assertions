@@ -1,0 +1,39 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v1/equipment/:equipmentId/properties"
+  method: POST
+  headers:
+    - key: Authorization
+      value: <API Key>
+      description: "Added as a part of security scheme: apikey"
+    - key: Accept
+      value: text/plain
+  pathVariables:
+    - key: equipmentId
+      value: "1507"
+      disabled: false
+      description: "(Required) "
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "description": "string",
+          "languageCode": 1736,
+          "value": "string"
+        },
+        {
+          "description": "string",
+          "languageCode": 7479,
+          "value": "s"
+        }
+      ]
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: text/plain
+  body:
+    type: text
+    content: ""
+order: 1000

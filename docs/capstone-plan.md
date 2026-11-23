@@ -16,6 +16,10 @@ added as its own layer, `src/smart-assert/`. Section 3.1 has the details. Reason
 short and readable, the HTTP, auth and logging code is written once, and the thesis can say "added
 to a conventional layered API test framework without changing its layers".
 
+**GET rule (updated 2026-11-23):** GET endpoints keep no expected result. A live GET test checks
+status and content type only; the returned data is stored by `npm run save:responses` and never
+compared. The document-types expected lists and `compareLookupList` were removed (section 3.1).
+
 **Two assumptions (change the plan if they are wrong):**
 1. You have 12–15 hours per week. If you have less than 10, use the cut list in section 10.
 2. One colleague can give about 6–8 hours in weeks 5–6 as a second labeler. If nobody can,
@@ -161,7 +165,7 @@ used at the last line of a spec: `await expect(text).toMeetCriteria(CRITERIA)`.
 playwright.unit.config.ts     tests/unit/**, offline, no keys needed (the default: npm test)
 playwright.api.config.ts      tests/**/api/**, live Onix + real LLM, workers: 1
 tsconfig.json                 path aliases: @framework, @smart-assert, @onix-work,
-                              @baselines, @experiments
+                              @baselines, @experiments, @tests (shared test data)
 src/
   framework/                  generic, knows nothing about Onix or LLMs
     api/                      request-handler.ts, request-handler.factory.ts, base-api.client.ts,
@@ -194,6 +198,10 @@ src/
       models/account/         token.request.ts
       models/errors/          problem-details.response.ts, validation-problem-details.response.ts,
                               api-validation-error.response.ts ({ memberNames, errorMessage })
+      errors/                 classify-token-error.ts (why POST v1/Account/token gave no token)
+    language/                 language-code.ts (ONIX_LANGUAGES, UNSUPPORTED_LANGUAGE_CODE),
+                              language-selection.ts (selectedLanguages, ONIX_LANGUAGE_CODES);
+                              shared by every endpoint that takes languageCode
     fixtures/onix-work-api.fixture.ts   test.extend({ api }) + export expect from smart-assert
   baselines/                  exact.ts (B0), rules.ts (B1)
   experiments/                run-experiment.ts, run-file.ts (plain tsx scripts, no Playwright)
@@ -201,9 +209,17 @@ tests/
   unit/smart-assert/          policy.spec.ts, assert-semantic.spec.ts, redact.spec.ts, cache.spec.ts
   unit/baselines/             exact.spec.ts, rules.spec.ts
   onix-work/api/account/login/
-                              login.spec.ts, login-errors.spec.ts, login.test-data.ts
+                              login.spec.ts, login-errors.spec.ts, login-error-kinds.spec.ts,
+                              login.test-data.ts
   onix-work/api/<area>/…      live tests for the endpoints chosen at the gate (W9)
-  onix-work/api/capture/      capture-responses.spec.ts (tag @capture; not run by default)
+  onix-work/api/common/document-type/
+                              document-type.saved-response.ts, get-document-types.spec.ts,
+                              save-document-types.spec.ts (@capture @save-response), responses/
+  onix-work/api/common/property/, job-type/
+                              save-properties.spec.ts / save-job-types.spec.ts (@capture
+                              @save-response), responses/; shared: common/saved-lookup-response.ts
+  onix-work/api/capture/      capture-responses.spec.ts, capture-probes.ts (tag @capture)
+  unit/onix-work/<area>/      offline checks of an area's test data and saved responses
 ```
 
 **Dependency rule** (check it in code review; break it and the experiments get harder):
@@ -233,6 +249,11 @@ measured and the code being demoed are the same code.
   deterministic layer of the experiments.
 - Fixed values (credentials for negative tests, expected texts, **criteria**) live in the
   `*.test-data.ts` file next to the spec. A rubric is test data, not code.
+- **GET endpoints: no expected result.** A live GET test checks status and content type only,
+  for success and error responses alike; the body is never compared. The returned data is
+  stored by a `@capture @save-response` spec, run on purpose with `npm run save:responses`, in
+  `tests/…/<endpoint>/responses/*.response.json`, and reviewed with `git diff`. Expected values
+  and criteria are for the responses of the other methods.
 - Data-driven cases are a `for … of` loop over a test-data array that creates one `test` per
   case.
 - Inside a test: deterministic checks first, the semantic check last, so a broken response never
@@ -352,9 +373,10 @@ its own third state.
 | Script | Command |
 |---|---|
 | `test` / `test:unit` | `playwright test -c playwright.unit.config.ts` |
-| `test:api` | `playwright test -c playwright.api.config.ts --grep-invert @capture` |
+| `test:api` | `tsx scripts/test-api.ts`: asks which `languageCode`s to run (`1,3`, `4-13`, Enter = all; one answer for every spec that loops over `selectedLanguages()`; unknown codes are re-asked), then runs `playwright test -c playwright.api.config.ts --grep-invert @capture` with the answer in `ONIX_LANGUAGE_CODES`. No question when `ONIX_LANGUAGE_CODES` or `CI` is set, or stdin is closed (all languages). Extra arguments pass through: `npm run test:api -- --grep @smoke` |
 | `test:api:smoke` | `playwright test -c playwright.api.config.ts --grep @smoke` |
 | `capture` | `playwright test -c playwright.api.config.ts --grep @capture` |
+| `save:responses` | `playwright test -c playwright.api.config.ts --grep @save-response` (stores the data the GET endpoints return: document-types, properties and job-types today, plus one save spec per new GET endpoint; run on purpose, then review with `git diff`) |
 | `experiment` | `tsx src/experiments/run-experiment.ts` |
 | `report` | `playwright show-report` |
 | `typecheck`, `format` | `tsc --noEmit`, `prettier --write .` |
@@ -376,10 +398,15 @@ its own third state.
 |---|---|---|
 | `api/auth/onix-work-credentials.ts` | `os.environ["ONIX_USERNAME"]` | Reads `ONIX_WORK_USERNAME` / `ONIX_WORK_PASSWORD` with `requireEnvironmentVariable` |
 | `api/auth/onix-work-token.provider.ts` | `get_onix_token()` + session fixture `onix_token` | Calls `AccountPublicApiClient.getToken()` once and caches the token for the worker. Read `exp` from the JWT and fetch a new token when less than 5 minutes are left (Swagger says 60 minutes; the token has no `iat`, so do not assume it) |
-| `api/public/clients/account/account-public-api.client.ts` | the login call in `conftest.py` | `getTokenResponse<T>(request: TokenRequest \| string)` (negative tests; a string is sent raw for the malformed-JSON case) and `getToken()` (setup; throws if not 200). getToken() sets `Accept: application/json` itself, so the 200 body is a JSON **string** and the request handler's `JSON.parse` returns the token as `string` (without that header the server sends bare `text/plain`, section 2); `getToken()` checks it is a non-empty string with 3 JWT parts |
+| `api/public/clients/account/account-public-api.client.ts` | the login call in `conftest.py` | `getTokenResponse<T>(request: TokenRequest \| string)` (negative tests; a string is sent raw for the malformed-JSON case) and `getToken()` (setup; throws if not 200). getToken() sets `Accept: application/json` itself, so the 200 body is a JSON **string** and the request handler's `JSON.parse` returns the token as `string` (without that header the server sends bare `text/plain`, section 2); `getToken()` checks it is a non-empty string with 3 JWT parts. On failure `getToken()` throws with the `classifyTokenError` kind, description and `traceId` (no body, no password), e.g. `failed [HTTP 400, credentials-rejected]` or `failed [no response, tls, unreachable]` |
+| `api/public/errors/classify-token-error.ts` | new | `classifyTokenError(result \| Error)` → `{ status?, kind, problems[{kind, field?, message}], description, cause?, traceId? }`. Every token 400 has the same title, so the kind is read from the `errors` keys and messages (live, 2026-11-22): no `errors` → `credentials-rejected` (wrong password, unknown user and an extra property look the same, by design); `"is required"` → `field-required`; `"maximum length"` → `field-too-long`; `errors[""]` or only `data` → `body-missing`; a `$…` key → `wrong-field-type` ("could not be converted") or else `malformed-json`; other text → `field-invalid`. `data` is ignored when other keys exist. 401/405/415/5xx by status; a thrown error → `unreachable` with `cause` dns / refused / timeout / tls / reset / other. Matches the server's English default texts |
 | `api/public/models/account/token.request.ts`, `models/errors/*.response.ts` | new | `TokenRequest` (`username`, `password`); `ProblemDetailsResponse` (`type`, `title`, `status`, `traceId`); `ValidationProblemDetailsResponse` (+ `errors: Record<string, string[]>`); `ApiValidationErrorResponse` (`memberNames`, `errorMessage`, the other error format). Exact-shape checks use `traceId: expect.any(String)` |
 | `api/public/onix-work-public-api.provider.ts` | fixtures `onix_client` / `onix_anon_client` | `anonymous()`, `withAccount()` (Bearer, short-lived token from login) and `withApiKey()` (`Key`, only with a long-lived token from Onix Work settings in `ONIX_WORK_API_KEY`; the short-lived token returns 401 with `Key`). Each returns `{ clients }`, cached per identity |
+| `api/public/clients/common/document-type-public-api.client.ts`, `models/common/document-type.response.ts` | new | `getDocumentTypesResponse<T>(languageCode?)` for `GET v1/company/document-types`; `DocumentTypeResponse` (`documentTypeId`, `description`). Registered as `clients.documentType`; used with `withAccount()` (Bearer returns 200) |
+| `api/public/clients/common/property-public-api.client.ts`, `job-type-public-api.client.ts`, `models/common/property.response.ts`, `job-type.response.ts` | new | `getPropertiesResponse<T>(languageCode?)` for `GET v1/company/properties` (`PropertyResponse`: `languageCode`, `description`, `value`) and `getJobTypesResponse<T>(languageCode?)` for `GET v1/company/job-types` (`JobTypeResponse`: `key` as a string, `value`; the Swagger file names `DocumentTypeInfoDto` there, which the live body does not match). Registered as `clients.property` and `clients.jobType`; same `languageCode` rules as document-types (2, 14, 15 → 400) |
+| `src/framework/data/limit-list.ts` | new | `limitList(body, { limit, sortBy })`: a list longer than `limit` is sorted descending by `sortBy` (English collator, numeric, so `"14"` > `"2"`) and cut to `limit`; a shorter list is kept as returned; an error body is kept unchanged. Returns `totalCount`, `storedCount`, `order`. Unit-tested in `tests/unit/framework/limit-list.spec.ts` |
 | `api/public/clients/<area>/…` + `models/<area>/…` | new (W9) | One client per endpoint group chosen at the feasibility gate. Add a `services/` class only for multi-step setup |
+| `language/language-code.ts`, `language/language-selection.ts` | new | Shared by every endpoint that takes `languageCode`. `ONIX_LANGUAGES` (`languageCode` + `languageName` for codes 0, 1, 3–13, English first), `DEFAULT_LANGUAGE_CODE` (1), `UNSUPPORTED_LANGUAGE_CODE` (2, gives 400), `findLanguage(code)`. `selectLanguages(text)` parses the `test:api` answer (`1,3`, `4-13`, `all`); `selectedLanguages()` reads `ONIX_LANGUAGE_CODES`, so a spec loops with `for (const language of selectedLanguages())`. Unit-tested in `tests/unit/onix-work/language/language-selection.spec.ts`. No expected values (GET rule, section 3.1) |
 | `fixtures/onix-work-api.fixture.ts` | `conftest.py` | `test = base.extend({ api })` on top of the api-logger fixture; `export { expect } from '@smart-assert/playwright/matchers'` (Playwright's `expect` plus `toMeetCriteria`) |
 
 **TypeScript side: smart-assert layer** (`src/smart-assert/`, the research contribution)
@@ -403,7 +430,13 @@ its own third state.
 | `tests/unit/smart-assert/assert-semantic.spec.ts` | `tests/unit/test_voting.py` | Same 3 tests. A `FakeJudge` is passed in through the `judge` option (Playwright Test cannot replace a module the way pytest `monkeypatch` did) |
 | `tests/unit/smart-assert/policy.spec.ts`, `redact.spec.ts`, `cache.spec.ts` | new | One test per row of the decision table; redaction and cache-key cases |
 | `tests/onix-work/api/account/login/login.spec.ts`, `login-errors.spec.ts`, `login.test-data.ts` | `test_login.py`, `test_auth_errors.py` | Port. Same checks, same order: deterministic assertions first, semantic check last. Credentials for negative cases and the criteria go in `login.test-data.ts` |
+| `tests/onix-work/api/account/login/login-error-kinds.spec.ts` | new | Live (`@p2 @live @regression`): 10 bad requests from `TOKEN_ERROR_KIND_CASES` in `login.test-data.ts` (unknown user, extra property, empty fields, missing password, 101-char username, empty body, truncated JSON, number for username, array body, text/plain), each must get its expected status, kind and fields. Made-up usernames only. Offline rules: `tests/unit/onix-work/account/classify-token-error.spec.ts` (25 tests, live bodies) |
 | `tests/onix-work/api/capture/capture-responses.spec.ts` | new (replaces the planned `tools/capture.ts`) | Tagged `@capture`. Uses the same providers and clients to call Onix and saves raw responses to `data/raw/`. A spec, not a script, because `RequestHandler` uses `test.step` and needs the test runner |
+| `tests/onix-work/api/common/document-type/document-type.saved-response.ts` | new | Path and format of the stored file; `SAVED_CASE_REQUESTS` (default plus `languageCode` 0–15, names from `findLanguage`). Languages come from `src/apps/onix-work/language/` |
+| `tests/onix-work/api/common/document-type/responses/document-types.response.json` | new | The stored data: bodies as the API returned them for default and `languageCode` 0–15 (`SAVED_LANGUAGE_CODES`; on 2026-11-18 codes 0, 1, 3–13 gave 200 and 2, 14, 15 gave 400), with `status` and `content-type` only. Committed; written only by `npm run save:responses`; nothing compares against it |
+| `tests/onix-work/api/common/document-type/save-document-types.spec.ts` | new | Tagged `@capture @save-response`, so `test:api` skips it. Writes the stored file through `redactSecrets`. Stores 2xx bodies because document types are a lookup list, not company records |
+| `tests/onix-work/api/common/saved-lookup-response.ts`, `property/save-properties.spec.ts`, `job-type/save-job-types.spec.ts`, `*/responses/*.response.json` | new | `saveLookupResponses()` saves default + `languageCode` 0–15 for one endpoint, at most `MAX_STORED_ITEMS` = 20 items per case: a longer list is stored as its top 20 by `sortBy` descending (`description` for properties, which have no id; `key` for job-types). Each case records `totalCount`, `storedCount` and `order`, so a cut list is visible. On 2026-11-23 properties had 50 items (`$skip=50` returns none), stored as the top 20 by `description` descending; job-types had 9, stored as returned. Tagged `@capture @save-response`; nothing compares against the stored files |
+| `tests/onix-work/api/common/document-type/get-document-types.spec.ts` | new | Live (`@p1 @live @regression`): status 200 + `application/json` for each language chosen at the `test:api` prompt (`selectedLanguages()` from `@onix-work/language/language-selection`) and for the default language (`@smoke`); 400 + `application/json` for `languageCode=2`. Never compares the body, never writes the stored file |
 | `src/baselines/exact.ts`, `rules.ts` + `tests/unit/baselines/*.spec.ts` | new | B0 and B1. Each exposes the same function: `check(case): "PASS" \| "FAIL"` |
 | `src/experiments/run-experiment.ts` | new | Plain `tsx` script (not a Playwright test, no HTTP). Reads the dataset + a config file, runs the `ajv` check and then one arm one case at a time with the cache off, writes a JSONL run file |
 | `src/experiments/run-file.ts` | new | The run-file format as one Zod schema, so TypeScript and Python agree on the columns |
@@ -577,7 +610,7 @@ Weeks are relative (W1 = your first week). Hours are a guide; total ≈ 218 h.
 |---|---|---|---|
 | **W7** | 14 | `src/experiments/run-experiment.ts` + `run-file.ts` + config files. `src/baselines/rules.ts` (B1) written on dev only — log hours spent. `analysis/embedding_baseline.py` (B2, Python). Run every arm end-to-end on dev. | One command produces a run file for each arm on dev |
 | **W8** | 14 | Prompt rounds on dev (v1 → v3, one file each in `judge/prompts/`). After each round do a short error analysis and change **one** thing. Update `assertSemantic` to the new design (redact → judge → policy → log). Add `smart-assert/playwright/matchers.ts` (`toMeetCriteria`) + `judge-evidence.ts`, export it from the Onix fixture, and switch `login-errors.spec.ts` to the matcher. `cache.ts` + `cache.spec.ts`. | Prompt v3; dev results table; notes on what each change did |
-| **W9** | 14 | Validation runs: pick prompt version, effort, embedding threshold. Build the injection set (20–30 cases) and the change-resilience set (~40 cases) — both from non-test families or new ones. For 2–3 endpoints from the gate, add a client + models under `src/apps/onix-work/api/public/` and a live spec + `*.test-data.ts` under `tests/onix-work/api/<area>/` using `toMeetCriteria`. | Settings chosen with evidence; challenge sets ready |
+| **W9** | 14 | Validation runs: pick prompt version, effort, embedding threshold. Build the injection set (20–30 cases) and the change-resilience set (~40 cases) — both from non-test families or new ones. For 2–3 endpoints from the gate, add a client + models under `src/apps/onix-work/api/public/` and a live spec + `*.test-data.ts` under `tests/onix-work/api/<area>/`. A GET endpoint gets a status/content-type spec and a `@save-response` spec (no expected result); `toMeetCriteria` is used where a response is checked against criteria. | Settings chosen with evidence; challenge sets ready |
 | **W10** | 12 | Dry run of the full pipeline on validation (find bugs now, not in W11). Write `docs/preregistration.md`, commit, tag `freeze-v1`. Start the thesis Method chapter from your weekly notes. | Tag exists. **Checkpoint 3: supervisor signs off the freeze** |
 
 ### Phase 3 — Experiments and analysis (W11–W12)

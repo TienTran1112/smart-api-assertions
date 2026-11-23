@@ -1,0 +1,712 @@
+{
+  "endpoint": "GET /v1/company/job-types",
+  "auth": "Bearer (.env account)",
+  "savedAt": "2026-11-23T15:10:22.062Z",
+  "maxStoredItems": 20,
+  "sortBy": "key",
+  "cases": [
+    {
+      "name": "default",
+      "languageCode": null,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 9,
+      "storedCount": 9,
+      "order": "as returned",
+      "body": [
+        {
+          "key": "1",
+          "value": "Initial control"
+        },
+        {
+          "key": "2",
+          "value": "Periodic control"
+        },
+        {
+          "key": "3",
+          "value": "Extraordinary -/special control"
+        },
+        {
+          "key": "4",
+          "value": "Safety evaluation"
+        },
+        {
+          "key": "7",
+          "value": "Recertification"
+        },
+        {
+          "key": "9",
+          "value": "Installation"
+        },
+        {
+          "key": "10",
+          "value": "Resale"
+        },
+        {
+          "key": "13",
+          "value": "Ad hoc"
+        },
+        {
+          "key": "14",
+          "value": "Periodic"
+        }
+      ]
+    },
+    {
+      "name": "Norwegian",
+      "languageCode": 0,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 9,
+      "storedCount": 9,
+      "order": "as returned",
+      "body": [
+        {
+          "key": "1",
+          "value": "Førstegangskontroll"
+        },
+        {
+          "key": "2",
+          "value": "Periodisk kontroll"
+        },
+        {
+          "key": "3",
+          "value": "Ekstraordinær-/spesialkontroll "
+        },
+        {
+          "key": "4",
+          "value": "Sikkerhetsvurdering"
+        },
+        {
+          "key": "7",
+          "value": "Resertifisering"
+        },
+        {
+          "key": "9",
+          "value": "Montasjekontroll"
+        },
+        {
+          "key": "10",
+          "value": "Videresalg"
+        },
+        {
+          "key": "13",
+          "value": "Ad hoc"
+        },
+        {
+          "key": "14",
+          "value": "Periodisk"
+        }
+      ]
+    },
+    {
+      "name": "English",
+      "languageCode": 1,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 9,
+      "storedCount": 9,
+      "order": "as returned",
+      "body": [
+        {
+          "key": "1",
+          "value": "Initial control"
+        },
+        {
+          "key": "2",
+          "value": "Periodic control"
+        },
+        {
+          "key": "3",
+          "value": "Extraordinary -/special control"
+        },
+        {
+          "key": "4",
+          "value": "Safety evaluation"
+        },
+        {
+          "key": "7",
+          "value": "Recertification"
+        },
+        {
+          "key": "9",
+          "value": "Installation"
+        },
+        {
+          "key": "10",
+          "value": "Resale"
+        },
+        {
+          "key": "13",
+          "value": "Ad hoc"
+        },
+        {
+          "key": "14",
+          "value": "Periodic"
+        }
+      ]
+    },
+    {
+      "name": "unsupported",
+      "languageCode": 2,
+      "status": 400,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": null,
+      "storedCount": null,
+      "order": "as returned",
+      "body": {
+        "memberNames": [
+          "languageCode"
+        ],
+        "errorMessage": "2 invalid language"
+      }
+    },
+    {
+      "name": "Swedish",
+      "languageCode": 3,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 9,
+      "storedCount": 9,
+      "order": "as returned",
+      "body": [
+        {
+          "key": "1",
+          "value": "Initial kontroll"
+        },
+        {
+          "key": "2",
+          "value": "Periodisk kontroll"
+        },
+        {
+          "key": "3",
+          "value": "Extraordinär-/Specialkontroll"
+        },
+        {
+          "key": "4",
+          "value": "Säkerhetsutvärdering"
+        },
+        {
+          "key": "7",
+          "value": "Recertification"
+        },
+        {
+          "key": "9",
+          "value": "Monteringskontroll"
+        },
+        {
+          "key": "10",
+          "value": "Återförsäljning"
+        },
+        {
+          "key": "13",
+          "value": "Ad hoc"
+        },
+        {
+          "key": "14",
+          "value": "Periodisk"
+        }
+      ]
+    },
+    {
+      "name": "Danish",
+      "languageCode": 4,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 9,
+      "storedCount": 9,
+      "order": "as returned",
+      "body": [
+        {
+          "key": "1",
+          "value": "Førstegangskontrol"
+        },
+        {
+          "key": "2",
+          "value": "Periodisk kontrol"
+        },
+        {
+          "key": "3",
+          "value": "Ekstraordinær kontrol/specialkontrol"
+        },
+        {
+          "key": "4",
+          "value": "Sikkerhedsvurdering"
+        },
+        {
+          "key": "7",
+          "value": "Recertificering"
+        },
+        {
+          "key": "9",
+          "value": "Montagekontrol"
+        },
+        {
+          "key": "10",
+          "value": "Videresalg"
+        },
+        {
+          "key": "13",
+          "value": "Ad hoc"
+        },
+        {
+          "key": "14",
+          "value": "Periodisk"
+        }
+      ]
+    },
+    {
+      "name": "Dutch",
+      "languageCode": 5,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 9,
+      "storedCount": 9,
+      "order": "as returned",
+      "body": [
+        {
+          "key": "1",
+          "value": "Ingebruikname controle"
+        },
+        {
+          "key": "2",
+          "value": "Periodieke controle"
+        },
+        {
+          "key": "3",
+          "value": "Speciale controle"
+        },
+        {
+          "key": "4",
+          "value": "Veiligheids evaluatie"
+        },
+        {
+          "key": "7",
+          "value": "Herkeuring"
+        },
+        {
+          "key": "9",
+          "value": "Installatie"
+        },
+        {
+          "key": "10",
+          "value": "Doorverkoop"
+        },
+        {
+          "key": "13",
+          "value": "Ad hoc"
+        },
+        {
+          "key": "14",
+          "value": "Periodiek"
+        }
+      ]
+    },
+    {
+      "name": "German",
+      "languageCode": 6,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 9,
+      "storedCount": 9,
+      "order": "as returned",
+      "body": [
+        {
+          "key": "1",
+          "value": "Erstkontrolle"
+        },
+        {
+          "key": "2",
+          "value": "Wiederkehrende Prüfung"
+        },
+        {
+          "key": "3",
+          "value": "Außergewöhnliche - / Sonderkontrolle"
+        },
+        {
+          "key": "4",
+          "value": "Sicherheitsbewertung"
+        },
+        {
+          "key": "7",
+          "value": "Rezertifizierung"
+        },
+        {
+          "key": "9",
+          "value": "Montagesteuerung"
+        },
+        {
+          "key": "10",
+          "value": "Wiederverkauf"
+        },
+        {
+          "key": "13",
+          "value": "Ad hoc"
+        },
+        {
+          "key": "14",
+          "value": "Periodisch"
+        }
+      ]
+    },
+    {
+      "name": "Spanish",
+      "languageCode": 7,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 9,
+      "storedCount": 9,
+      "order": "as returned",
+      "body": [
+        {
+          "key": "1",
+          "value": "Control inicial"
+        },
+        {
+          "key": "2",
+          "value": "Control periódico"
+        },
+        {
+          "key": "3",
+          "value": "Extraordinario/control especial"
+        },
+        {
+          "key": "4",
+          "value": "Evaluación de seguridad"
+        },
+        {
+          "key": "7",
+          "value": "Recertificación"
+        },
+        {
+          "key": "9",
+          "value": "Instalación"
+        },
+        {
+          "key": "10",
+          "value": "Reventa"
+        },
+        {
+          "key": "13",
+          "value": "Ad hoc"
+        },
+        {
+          "key": "14",
+          "value": "Periódico"
+        }
+      ]
+    },
+    {
+      "name": "Finnish",
+      "languageCode": 8,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 9,
+      "storedCount": 9,
+      "order": "as returned",
+      "body": [
+        {
+          "key": "1",
+          "value": "Alustava kontrolli"
+        },
+        {
+          "key": "2",
+          "value": "Jaksoittainen valvonta"
+        },
+        {
+          "key": "3",
+          "value": "Poikkeuksellinen -/Erityinen kontrolli"
+        },
+        {
+          "key": "4",
+          "value": "Turvallisuusarvio"
+        },
+        {
+          "key": "7",
+          "value": "Uudelleen sertifiointi"
+        },
+        {
+          "key": "9",
+          "value": "Asennus"
+        },
+        {
+          "key": "10",
+          "value": "Uudelleenmyynti"
+        },
+        {
+          "key": "13",
+          "value": "Ad hoc"
+        },
+        {
+          "key": "14",
+          "value": "Jaksoittainen"
+        }
+      ]
+    },
+    {
+      "name": "Portuguese",
+      "languageCode": 9,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 9,
+      "storedCount": 9,
+      "order": "as returned",
+      "body": [
+        {
+          "key": "1",
+          "value": "Controlo inicial"
+        },
+        {
+          "key": "2",
+          "value": "Controlo periódico"
+        },
+        {
+          "key": "3",
+          "value": "Controlo extraordinário -/especial"
+        },
+        {
+          "key": "4",
+          "value": "Avaliação da segurança"
+        },
+        {
+          "key": "7",
+          "value": "Recertificação"
+        },
+        {
+          "key": "9",
+          "value": "Instalação"
+        },
+        {
+          "key": "10",
+          "value": "Revenda"
+        },
+        {
+          "key": "13",
+          "value": "Ad hoc"
+        },
+        {
+          "key": "14",
+          "value": "Periódico"
+        }
+      ]
+    },
+    {
+      "name": "Estonian",
+      "languageCode": 10,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 9,
+      "storedCount": 9,
+      "order": "as returned",
+      "body": [
+        {
+          "key": "1",
+          "value": "Esialgne kontroll"
+        },
+        {
+          "key": "2",
+          "value": "Perioodiline kontroll"
+        },
+        {
+          "key": "3",
+          "value": "Erakorraline -/eriline kontroll"
+        },
+        {
+          "key": "4",
+          "value": "Ohutuse hindamine"
+        },
+        {
+          "key": "7",
+          "value": "Uuesti sertifitseerimine"
+        },
+        {
+          "key": "9",
+          "value": "Paigaldamine"
+        },
+        {
+          "key": "10",
+          "value": "Edasimüük"
+        },
+        {
+          "key": "13",
+          "value": "Ad Hoc"
+        },
+        {
+          "key": "14",
+          "value": "Perioodiline"
+        }
+      ]
+    },
+    {
+      "name": "Latvian",
+      "languageCode": 11,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 9,
+      "storedCount": 9,
+      "order": "as returned",
+      "body": [
+        {
+          "key": "1",
+          "value": "Sākotnējā kontrole"
+        },
+        {
+          "key": "2",
+          "value": "Periodiskā kontrole"
+        },
+        {
+          "key": "3",
+          "value": "Ārkārtas/īpaša kontrole"
+        },
+        {
+          "key": "4",
+          "value": "Drošības novērtējums"
+        },
+        {
+          "key": "7",
+          "value": "Atkārtota sertifikācija"
+        },
+        {
+          "key": "9",
+          "value": "Uzstādīšana"
+        },
+        {
+          "key": "10",
+          "value": "Atkārtota pārdošana"
+        },
+        {
+          "key": "13",
+          "value": "Ad hoc"
+        },
+        {
+          "key": "14",
+          "value": "Periodisks"
+        }
+      ]
+    },
+    {
+      "name": "Lithuanian",
+      "languageCode": 12,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 9,
+      "storedCount": 9,
+      "order": "as returned",
+      "body": [
+        {
+          "key": "1",
+          "value": "Pradinė kontrolė"
+        },
+        {
+          "key": "2",
+          "value": "Periodinė kontrolė"
+        },
+        {
+          "key": "3",
+          "value": "Nepaprasta/speciali kontrolė"
+        },
+        {
+          "key": "4",
+          "value": "Saugos vertinimas"
+        },
+        {
+          "key": "7",
+          "value": "Recertifikavimas"
+        },
+        {
+          "key": "9",
+          "value": "Montavimas"
+        },
+        {
+          "key": "10",
+          "value": "Perpardavimas"
+        },
+        {
+          "key": "13",
+          "value": "Ad hoc"
+        },
+        {
+          "key": "14",
+          "value": "Periodinis"
+        }
+      ]
+    },
+    {
+      "name": "Polish",
+      "languageCode": 13,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": 9,
+      "storedCount": 9,
+      "order": "as returned",
+      "body": [
+        {
+          "key": "1",
+          "value": "Kontrola początkowa"
+        },
+        {
+          "key": "2",
+          "value": "Kontrola okresowa"
+        },
+        {
+          "key": "3",
+          "value": "Kontrola nadzwyczajna/specjalna"
+        },
+        {
+          "key": "4",
+          "value": "Ocena bezpieczeństwa"
+        },
+        {
+          "key": "7",
+          "value": "Recertyfikacja"
+        },
+        {
+          "key": "9",
+          "value": "Instalacja"
+        },
+        {
+          "key": "10",
+          "value": "Odprzedaż"
+        },
+        {
+          "key": "13",
+          "value": "Ad hoc"
+        },
+        {
+          "key": "14",
+          "value": "Okresowy"
+        }
+      ]
+    },
+    {
+      "name": "languageCode=14",
+      "languageCode": 14,
+      "status": 400,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": null,
+      "storedCount": null,
+      "order": "as returned",
+      "body": {
+        "memberNames": [
+          "languageCode"
+        ],
+        "errorMessage": "14 invalid language"
+      }
+    },
+    {
+      "name": "languageCode=15",
+      "languageCode": 15,
+      "status": 400,
+      "contentType": "application/json; charset=utf-8",
+      "totalCount": null,
+      "storedCount": null,
+      "order": "as returned",
+      "body": {
+        "memberNames": [
+          "languageCode"
+        ],
+        "errorMessage": "15 invalid language"
+      }
+    }
+  ]
+}

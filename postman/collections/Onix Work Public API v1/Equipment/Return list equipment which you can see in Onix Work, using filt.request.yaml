@@ -1,0 +1,56 @@
+$kind: http-request
+name: Return list equipment which you can see in Onix Work, using filters.
+description: "<u>Result</u>: List of `EquipmentInfo`\r\n        <br/>\r\n        <br/><u>Note</u>:\r\n        <br/>+ To fetch data, use `$page` and `$pageSize` in query string, default pageSize is 100.\r\n        <br/>+ To limit which fields will be returned, use `$select` in query string (e.g: $select=fieldName1,fieldName2).\r\n        "
+url: '{{baseUrl}}/v1/equipment?ImportId=string&CompanyId=1507&LocationId=1507&AreaId=1507&ActiveStatusId=1507&ProductId=1507&ProductNo=string&SerialNumber=string&BatchNo=string&OrderNo=string&CustomerOrderNo=string&ControlCategoryId=1507&ChangedFromUtcDatetime=2006-01-09T21:26:31.155Z&QuantityUsage=1507&Keyword=string'
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: ImportId
+    value: string
+    description: ImportID from the exporting service.
+  - key: CompanyId
+    value: '1507'
+    description: "The system Id of equipment owner.\r\n                        <br/>The value can get from `GET /company`.\r\n                        <br/>Default value (when empty) is logon company."
+  - key: LocationId
+    value: '1507'
+    description: "The location Id of owner company in Onix Work.\r\n                        <br/>The value can get from `GET /company/{companyId}/locations`."
+  - key: AreaId
+    value: '1507'
+    description: "The area id of owner company in Onix Work.\r\n                        <br/>The value can get from `GET /company/{companyId}/areas`."
+  - key: ActiveStatusId
+    value: '1507'
+    description: "The active status of equipment.\r\n                        <br/>Available values: 1, 2, 3, 4. \r\n                        <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;where 1: Active, 2: Inactive, 3: Discarded, 4: Missing."
+  - key: ProductId
+    value: '1507'
+    description: The product id of the equipment in Onix Work.
+  - key: ProductNo
+    value: string
+    description: The product number of the equipment in Onix Work.
+  - key: SerialNumber
+    value: string
+    description: The serial number of the equipment in Onix Work.
+  - key: BatchNo
+    value: string
+    description: The batch number of the equipment in Onix Work.
+  - key: OrderNo
+    value: string
+    description: The order number of the equipment in Onix Work.
+  - key: CustomerOrderNo
+    value: string
+    description: The customer order number of the equipment in Onix Work.
+  - key: ControlCategoryId
+    value: '1507'
+    description: "The Id of control category of the equipment in Onix Work.\r\n                        <br/>The value can get from `GET /company/control-categories`."
+  - key: ChangedFromUtcDatetime
+    value: '2006-01-09T21:26:31.155Z'
+    description: "Query equipment has changed from UTC date time until now. \r\n                            <br/>Note: Only main information of equipment will be keep track. That means when you change the \r\n                            <i>Property, Project, Job, Issues, Documents</i> or <i>Picture</i> of Equipment, the changing is <b>NOT</b> detected.\r\n                            <br/>Format: yyyy.MM.dd HH:mm:ss"
+  - key: QuantityUsage
+    value: '1507'
+    description: "The quantity usage of equipment.\r\n                        <br/>Available values: 0, 1, 2. \r\n                        <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;where 0: Unique, 1: Stock, 2: Consumable"
+  - key: Keyword
+    value: string
+    description: Keyword is a field used to enhance search and filtering of equipment in Onix Work.
+settings: {}
+examples: ./.resources/Return list equipment which you can see in Onix Work, using filt.resources/examples
+order: 1000

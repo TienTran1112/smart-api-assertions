@@ -1,0 +1,166 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v1/orders/transfer-order"
+  method: POST
+  headers:
+    - key: Authorization
+      value: <API Key>
+      description: "Added as a part of security scheme: apikey"
+    - key: Accept
+      value: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "orderId": 4134,
+        "importId": "string",
+        "erpOrderId": "strin",
+        "erpOrderDate": "string",
+        "erpCustomerOrderNo": "str",
+        "workflowStatusId": 5438,
+        "erpCustomerId": "string",
+        "erpCustomerDescription": "string",
+        "erpCustomerAddress": "string",
+        "erpCustomerPostalCode": "string",
+        "erpCustomerWeb": "string",
+        "erpCustomerOrgNumber": "string",
+        "erpCustomerCountryCode": "",
+        "erpCustomerContactId": "string",
+        "erpCustomerContactEmail": "9Ee5sqS0T5pFaZ@pzEQvtgtuRCtbrtnekANiyNjYCMZ.mnlr",
+        "erpCustomerContactFirstName": "strin",
+        "erpCustomerContactLastName": "stri",
+        "erpCustomerContactName": "string",
+        "erpSupplierId": "string",
+        "erpSupplierDescription": "string",
+        "erpSupplierContactId": "string",
+        "erpSupplierContactName": "string",
+        "source": 5258,
+        "createSubEquipment": true,
+        "autoCreateCustomer": false,
+        "autoProcessOnCustomer": true,
+        "orderLines": [
+          {
+            "orderLineImportId": "string",
+            "erpArticleNo": "string",
+            "quantity": 1292,
+            "externalLineNo": "string",
+            "workflowStatusId": 6874,
+            "parentOrderLineImportId": "string",
+            "batchNo": "str",
+            "certificateString": "string",
+            "model": "string",
+            "erpModel": "string",
+            "wll": "string",
+            "comment": "string",
+            "jobComment": "string",
+            "type": "string",
+            "process": 260,
+            "placement": "string",
+            "producer": "string",
+            "items": [
+              {
+                "serialNumber": "string",
+                "batchNo": "string",
+                "ownersEquipmentID": "string",
+                "prodYear": "string",
+                "globalID": "string"
+              },
+              {
+                "serialNumber": "string",
+                "batchNo": "string",
+                "ownersEquipmentID": "string",
+                "prodYear": "string",
+                "globalID": "string"
+              }
+            ],
+            "properties": [
+              {
+                "languageCode": 6113,
+                "description": "stri",
+                "value": "stri"
+              },
+              {
+                "languageCode": 3567,
+                "description": "strin",
+                "value": "string"
+              }
+            ],
+            "formProperties": [
+              {
+                "key": "string",
+                "value": "string"
+              },
+              {
+                "key": "string",
+                "value": "string"
+              }
+            ]
+          },
+          {
+            "orderLineImportId": "string",
+            "erpArticleNo": "string",
+            "quantity": 9504,
+            "externalLineNo": "string",
+            "workflowStatusId": 1470,
+            "parentOrderLineImportId": "string",
+            "batchNo": "string",
+            "certificateString": "string",
+            "model": "string",
+            "erpModel": "string",
+            "wll": "string",
+            "comment": "string",
+            "jobComment": "string",
+            "type": "string",
+            "process": 7177,
+            "placement": "string",
+            "producer": "string",
+            "items": [
+              {
+                "serialNumber": "string",
+                "batchNo": "string",
+                "ownersEquipmentID": "string",
+                "prodYear": "st",
+                "globalID": "string"
+              },
+              {
+                "serialNumber": "string",
+                "batchNo": "string",
+                "ownersEquipmentID": "string",
+                "prodYear": "strin",
+                "globalID": "string"
+              }
+            ],
+            "properties": [
+              {
+                "languageCode": 8243,
+                "description": "string",
+                "value": "string"
+              },
+              {
+                "languageCode": 6686,
+                "description": "string",
+                "value": "string"
+              }
+            ],
+            "formProperties": [
+              {
+                "key": "string",
+                "value": "string"
+              },
+              {
+                "key": "",
+                "value": "string"
+              }
+            ]
+          }
+        ]
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: "1507"
+order: 1000

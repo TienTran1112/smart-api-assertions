@@ -1,0 +1,42 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v1/order-lines"
+  method: POST
+  headers:
+    - key: Authorization
+      value: <API Key>
+      description: "Added as a part of security scheme: apikey"
+    - key: Accept
+      value: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "orderImportId": "string",
+        "orderLineImportId": "st",
+        "erpArticleNo": "string",
+        "quantity": 2029,
+        "externalLineNo": "string",
+        "workflowStatusId": 1789,
+        "parentOrderLineImportId": "string",
+        "batchNo": "string",
+        "certificateString": "string",
+        "model": "string",
+        "erpModel": "string",
+        "wll": "string",
+        "comment": "string",
+        "jobComment": "string",
+        "type": "string",
+        "process": 1420,
+        "placement": "string",
+        "producer": "string"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: "1507"
+order: 1000

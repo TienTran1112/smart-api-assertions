@@ -1,0 +1,31 @@
+$kind: http-request
+name: Return list of picture of product in Onix Work.
+description: "<u>Parameters</u>:\r
+
+  \        <br/><b>productId</b>\r
+
+  \        <br/>- Can use value from `GET /company/products`\r
+
+  \        <br/>\r
+
+  \        <br/><u>Result</u>: a `PictureInfo`\r
+
+  \        <br/>\r
+
+  \        <br/><u>Note</u>:\r
+
+  \        <br/>+ To limit which fields in `PictureInfo` will be returned, use `$select` in query string (e.g: $select=fieldName1,fieldName2).\r
+
+  \        "
+url: "{{baseUrl}}/v1/company/products/:productId/pictures"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: productId
+    value: "1507"
+    disabled: false
+    description: "(Required) "
+settings: {}
+examples: ./.resources/Return list of picture of product in Onix Work-.resources/examples
+order: 23000

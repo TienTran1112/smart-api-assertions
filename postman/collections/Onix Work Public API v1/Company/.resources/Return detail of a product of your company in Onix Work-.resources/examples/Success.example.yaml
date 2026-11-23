@@ -1,0 +1,60 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v1/company/products/:productId?languageCode=1507"
+  method: GET
+  headers:
+    - key: Authorization
+      value: <API Key>
+      description: "Added as a part of security scheme: apikey"
+    - key: Accept
+      value: application/json
+  queryParams:
+    languageCode: "1507"
+  pathVariables:
+    - key: productId
+      value: "1507"
+      disabled: false
+      description: "(Required) "
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "productId": 4511,
+        "importId": "string",
+        "productNo": "string",
+        "statusId": 8122,
+        "status": "string",
+        "active": false,
+        "controlCategoryId": 7799,
+        "controlCategoryDescription": "string",
+        "controlcategoryDescAndComment": "string",
+        "placement": "strin",
+        "type": "string",
+        "model": "string",
+        "description": "string",
+        "wll": "string",
+        "swl": "string",
+        "comment": "string",
+        "dealer": "string",
+        "prodAccTo": "string",
+        "producer": "string",
+        "prodYear": "string",
+        "quantityUsage": 8008,
+        "productGroup": false,
+        "connectedProductGroupId": 4447,
+        "productClassId": 5464,
+        "downloadToOnixInspect": true,
+        "useFromEquipment": false,
+        "testedAccTo": "string",
+        "process": 5322,
+        "jobComment": "string"
+      }
+order: 1000

@@ -1,0 +1,41 @@
+$kind: http-request
+name: Return a location detail of a company in Onix Work.
+description: "<u>Parameters</u>:\r
+
+  \        <br/><b>companyId</b>\r
+
+  \        <br/>- Can use value from `GET /company`\r
+
+  \        <br/><b>locationId</b>\r
+
+  \        <br/>- Can use value from `GET /company/{companyId}/locations`\r
+
+  \        <br/>- Valid value: the location must belong to the company.\r
+
+  \        <br/>\r
+
+  \        <br/><u>Result</u>: a `LocationInfo`\r
+
+  \        <br/>\r
+
+  \        <br/><u>Note</u>:\r
+
+  \        <br/>+ To limit which fields will be returned, use `$select` in query string (e.g: $select=fieldName1,fieldName2).\r
+
+  \        "
+url: "{{baseUrl}}/v1/company/:companyId/locations/:locationId"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: companyId
+    value: "1507"
+    disabled: false
+    description: "(Required) "
+  - key: locationId
+    value: "1507"
+    disabled: false
+    description: "(Required) "
+settings: {}
+examples: ./.resources/Return a location detail of a company in Onix Work-.resources/examples
+order: 13000

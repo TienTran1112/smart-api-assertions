@@ -1,0 +1,40 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v1/order-lines/properties"
+  method: POST
+  headers:
+    - key: Authorization
+      value: <API Key>
+      description: "Added as a part of security scheme: apikey"
+    - key: Accept
+      value: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "orderId": 8386,
+        "orderImportId": "string",
+        "orderLineId": 7988,
+        "orderLineImportId": "string",
+        "properties": [
+          {
+            "description": "string",
+            "languageCode": 3538,
+            "value": "string"
+          },
+          {
+            "description": "string",
+            "languageCode": 3113,
+            "value": "string"
+          }
+        ]
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: "true"
+order: 1000

@@ -2,7 +2,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import { zodOutputFormat } from '@anthropic-ai/sdk/helpers/zod';
 import type { Judge, JudgeCallInfo, JudgeInput, JudgeVerdict } from './judge';
 import { VerdictSchema } from './judge-output.schema';
-import { PROMPT_VERSION, SYSTEM_PROMPT, buildUserMessage } from './prompts/v1';
+import { PROMPT_VERSION, SYSTEM_PROMPT, buildUserMessage } from './prompts/v2';
 
 export type JudgeEffort = 'low' | 'medium' | 'high' | 'xhigh' | 'max';
 
