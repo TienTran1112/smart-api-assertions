@@ -1,18 +1,18 @@
 import { expect, test } from '@onix-work/fixtures/onix-work-api.fixture';
-import { LANGUAGE_CODES_ENV, selectLanguageCases } from './document-type.language-selection';
-import { UNSUPPORTED_LANGUAGE_CODE } from './document-type.test-data';
+import { UNSUPPORTED_LANGUAGE_CODE } from '@onix-work/language/language-code';
+import { selectedLanguages } from '@onix-work/language/language-selection';
 
 /** The languages `npm run test:api` asked for (all when the variable is unset or empty). */
-const LANGUAGE_CASES = selectLanguageCases(process.env[LANGUAGE_CODES_ENV]);
+const LANGUAGES = selectedLanguages();
 
 /**
  * Live. GET rule (plan section 3.1): no expected result, so only status and content type are
  * checked and the body is never compared. The returned data is stored by
  * `npm run save:responses` (save-document-types.spec.ts); this spec never writes it.
- * `npm run test:api` asks which languageCodes to run; see `selectLanguageCases`.
+ * `npm run test:api` asks which languageCodes to run (`@onix-work/language/language-selection`).
  */
 test.describe('GET /v1/company/document-types', { tag: ['@p1', '@live', '@regression'] }, () => {
-  for (const language of LANGUAGE_CASES) {
+  for (const language of LANGUAGES) {
     test(`should return JSON in ${language.languageName} (languageCode=${language.languageCode})`, async ({
       api,
     }) => {

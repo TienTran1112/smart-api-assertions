@@ -1,5 +1,5 @@
 import { resolve } from 'node:path';
-import { DOCUMENT_TYPE_LANGUAGE_CASES, UNSUPPORTED_LANGUAGE_CODE } from './document-type.test-data';
+import { findLanguage, UNSUPPORTED_LANGUAGE_CODE } from '@onix-work/language/language-code';
 
 /**
  * Stored GET data. Written only by `npm run save:responses`
@@ -38,8 +38,7 @@ export const SAVED_LANGUAGE_CODES: number[] = [
 ];
 
 const savedCaseName = (languageCode: number): string =>
-  DOCUMENT_TYPE_LANGUAGE_CASES.find((language) => language.languageCode === languageCode)
-    ?.languageName ??
+  findLanguage(languageCode)?.languageName ??
   (languageCode === UNSUPPORTED_LANGUAGE_CODE ? 'unsupported' : `languageCode=${languageCode}`);
 
 /** The requests that are saved, in file order: default, then each code in SAVED_LANGUAGE_CODES. */
